@@ -6,6 +6,8 @@ import android.view.View;
 
 public class DonationsListActivity extends AppCompatActivity {
 
+
+    //To activity nie działa, wykorzystywany jest tylko layout, a ta klasa jest nieuzywana.
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

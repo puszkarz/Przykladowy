@@ -42,4 +42,21 @@
         android:layout_above="@+id/button3"
         android:layout_centerHorizontal="true" />
 
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="10"
+        android:id="@+id/numericField"
+        android:layout_above="@+id/textOutDB"
+        android:layout_alignEnd="@+id/button" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textField"
+        android:layout_above="@+id/numericField"
+        android:layout_alignParentEnd="true"
+        android:layout_alignStart="@+id/numericField" />
+
 </RelativeLayout>
