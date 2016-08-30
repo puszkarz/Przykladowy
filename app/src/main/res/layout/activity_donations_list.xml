@@ -7,19 +7,20 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.bartek.przykladowy.MainActivity">
+    tools:context="com.example.bartek.przykladowy.DonationsListActivity">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Dzień dobry Panno Suchodolska!!" />
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Poniżej będzie lista donacji"
+        android:id="@+id/textView"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Przyciśnij mnie, a może pokażę Ci listę donacji! :)"
-        android:id="@+id/button"
-        android:onClick="onClick_showDonations"
-        android:layout_centerVertical="true"
-        android:layout_alignParentEnd="true" />
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/textView"></TableLayout>
+
 </RelativeLayout>
