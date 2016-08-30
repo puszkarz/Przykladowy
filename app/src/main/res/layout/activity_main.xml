@@ -22,4 +22,24 @@
         android:onClick="onClick_showDonations"
         android:layout_centerVertical="true"
         android:layout_alignParentEnd="true" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Dodawanie czegoś do bazy"
+        android:id="@+id/button3"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:onClick="onClick_showAnythingDB" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Medium Text"
+        android:id="@+id/textOutDB"
+        android:layout_above="@+id/button3"
+        android:layout_centerHorizontal="true" />
+
 </RelativeLayout>
