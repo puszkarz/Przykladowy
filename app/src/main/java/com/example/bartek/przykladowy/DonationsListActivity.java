@@ -6,15 +6,14 @@ import android.view.View;
 
 public class DonationsListActivity extends AppCompatActivity {
 
-
-    //To activity nie działa, wykorzystywany jest tylko layout, a ta klasa jest nieuzywana.
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_donations_list);
     }
 
-    public void onClick_backToMain(View v) {
-        setContentView(R.layout.activity_main);
-    }
+    // To activity nie działa, zostało stworzone jako współgrające z odpowiednim layoutem,
+    // lecz okazało się, że łatwiej tamten layout użyć z Main activity.
+    // Stąd też klasa ta jest nieuzywana.
+
 }
