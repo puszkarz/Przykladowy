@@ -10,21 +10,24 @@ public class User {
         ARhplus, Arhminus
     }
 
+    private int _id;
     private String _nick;
-    private blood_type _bloodtype;
+    private String _bloodtype; //@TODO ENUM?
 
     //constructors
     public User() {
 
     }
 
-    public User(String nick, blood_type bloodtype) {
+    public User(String nick, String bloodtype) {
         this._nick = nick;
         this._bloodtype = bloodtype;
     }
 
     //setters
-    public void set_bloodtype(blood_type _bloodtype) {
+    public void set_id(int _id) { this._id = _id; }
+
+    public void set_bloodtype(String _bloodtype) {
         this._bloodtype = _bloodtype;
     }
 
@@ -33,7 +36,9 @@ public class User {
     }
 
     //getters
-    public blood_type get_bloodtype() {
+    public int get_id() { return _id; }
+
+    public String get_bloodtype() {
         return _bloodtype;
     }
 

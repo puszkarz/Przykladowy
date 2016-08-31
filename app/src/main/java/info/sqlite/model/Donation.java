@@ -13,24 +13,24 @@ public class Donation {
     }
 
     private int _id; //@TODO primary key? autoincrement?
-    private Date _date;
-    private donation_type _type;
+    private String _date;
+    private String _type; //@TODO enum
     private int _volume;
-    private User _donor; //@TODO user's nick?
-    private Station _station; //@TODO station's name?
+    private int _user_id; //@TODO user's nick?
+    private int _station_id; //@TODO station's name?
 
     //constructors
-    public Donation(){
+    public Donation() {
 
     }
 
-    public Donation(int id, Date date, donation_type type, int volume, User donor, Station station) {
+    public Donation(int id, String date, String type, int volume, int user_id, int station_id) {
         this._id = id;
         this._date = date;
         this._type = type;
         this._volume = volume;
-        this._donor = donor;
-        this._station = station;
+        this._user_id = user_id;
+        this._station_id = station_id;
     }
 
     //setters
@@ -38,11 +38,11 @@ public class Donation {
         this._id = _id;
     }
 
-    public void set_date(Date _date) {
+    public void set_date(String _date) {
         this._date = _date;
     }
 
-    public void set_type(donation_type _type) {
+    public void set_type(String _type) {
         this._type = _type;
     }
 
@@ -50,24 +50,20 @@ public class Donation {
         this._volume = _volume;
     }
 
-    public void set_donor(User _donor) {
-        this._donor = _donor;
-    }
+    public void set_user_id(int _user_id) { this._user_id = _user_id; }
 
-    public void set_station(Station _station) {
-        this._station = _station;
-    }
+    public void set_station_id(int _station_id) { this._station_id = _station_id;}
 
     //getters
     public int get_id() {
         return _id;
     }
 
-    public Date get_date() {
+    public String get_date() {
         return _date;
     }
 
-    public donation_type get_type() {
+    public String get_type() {
         return _type;
     }
 
@@ -75,11 +71,7 @@ public class Donation {
         return _volume;
     }
 
-    public User get_donor() {
-        return _donor;
-    }
+    public int get_user_id() { return _user_id; }
 
-    public Station get_station() {
-        return _station;
-    }
+    public int get_station_id() { return _station_id; }
 }

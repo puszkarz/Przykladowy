@@ -6,6 +6,7 @@ import android.location.Location;
  * Created by magda on 31.08.16.
  */
 public class Station {
+    private int _id;
     private String _name;
     private String _address;
     private int _coordinate_x;
@@ -16,7 +17,8 @@ public class Station {
 
     }
 
-    public Station(String name,String address, int x, int y) {
+    public Station(int id, String name,String address, int x, int y) {
+        this._id = id;
         this._name = name;
         this._address = address;
         this._coordinate_x = x;
@@ -24,6 +26,8 @@ public class Station {
     }
 
     //setters
+    public void set_id(int _id) { this._id = _id; }
+
     public void set_name(String _name) {
         this._name = _name;
     }
@@ -41,6 +45,8 @@ public class Station {
     }
 
     //getters
+    public int get_id() { return _id; }
+
     public String get_name() {
         return _name;
     }
