@@ -133,7 +133,7 @@ public class MainActivity extends AppCompatActivity {
         TextView tv2 = (TextView) findViewById( R.id.stationidfield );
         CharSequence stationid = tv2.getText();
 
-        db.createDonation(new Donation("a", "a" ,0, Integer.parseInt(userid.toString()), Integer.parseInt(stationid.toString())));
+        db.createDonation(new Donation("a", "a", 0, Integer.parseInt(userid.toString()), Integer.parseInt(stationid.toString())));
 
         tv1.setText("Udalo sie 1");
         tv2.setText("Udalo sie 2");
