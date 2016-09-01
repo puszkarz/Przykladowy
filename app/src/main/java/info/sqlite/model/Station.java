@@ -2,9 +2,6 @@ package info.sqlite.model;
 
 import android.location.Location;
 
-/**
- * Created by magda on 31.08.16.
- */
 public class Station {
     private int _id;
     private String _name;

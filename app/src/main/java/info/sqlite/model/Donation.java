@@ -1,10 +1,5 @@
 package info.sqlite.model;
 
-import java.sql.Date;
-
-/**
- * Created by magda on 31.08.16.
- */
 public class Donation {
 
     public enum donation_type {
@@ -13,7 +8,7 @@ public class Donation {
     }
 
     private int _id;
-    private String _date;
+    private String _date; //@TODO date
     private String _type; //@TODO enum
     private int _volume;
     private int _user_id; //@TODO user's nick?
@@ -82,4 +77,10 @@ public class Donation {
     public int get_user_id() { return _user_id; }
 
     public int get_station_id() { return _station_id; }
+
+    public String toString() {
+        return "Donation id: " + Integer.toString(get_id())
+                + ", stID: " + Integer.toString(get_station_id())
+                + ", uID: " + Integer.toString(get_user_id());
+    }
 }

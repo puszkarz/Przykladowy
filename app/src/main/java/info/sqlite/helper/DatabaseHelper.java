@@ -14,9 +14,6 @@ import info.sqlite.model.Donation;
 import info.sqlite.model.Station;
 import info.sqlite.model.User;
 
-/**
- * Created by magda on 31.08.16.
- */
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     // Logcat tag
@@ -139,15 +136,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         Cursor c = db.rawQuery(selectQuery, null);
 
-        if (c != null)
+        Station station = null;
+        if (c != null) {
             c.moveToFirst();
 
-        Station station = new Station();
-        station.set_id(c.getInt(c.getColumnIndex(KEY_ID)));
-        station.set_name((c.getString(c.getColumnIndex(KEY_NAME))));
-        station.set_address(c.getString(c.getColumnIndex(KEY_ADDRESS)));
-        station.set_coordinate_x(c.getInt(c.getColumnIndex(KEY_COORDINATE_X)));
-        station.set_coordinate_y(c.getInt(c.getColumnIndex(KEY_COORDINATE_Y)));
+            station = new Station();
+            station.set_id(c.getInt(c.getColumnIndex(KEY_ID)));
+            station.set_name((c.getString(c.getColumnIndex(KEY_NAME))));
+            station.set_address(c.getString(c.getColumnIndex(KEY_ADDRESS)));
+            station.set_coordinate_x(c.getInt(c.getColumnIndex(KEY_COORDINATE_X)));
+            station.set_coordinate_y(c.getInt(c.getColumnIndex(KEY_COORDINATE_Y)));
+
+            c.close();
+        }
         db.close();
         return station;
     }
@@ -157,7 +158,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
      * getting all the stations
      */
     public List<Station> getAllStations() {
-        List<Station> stations = new ArrayList<Station>();
+        List<Station> stations = new ArrayList<>();
         String selectQuery = "SELECT  * FROM " + TABLE_STATION;
 
         Log.e(LOG, selectQuery);
@@ -179,6 +180,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 stations.add(station);
             } while (c.moveToNext());
         }
+        c.close();
         db.close();
         return stations;
     }
@@ -243,13 +245,18 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         Cursor c = db.rawQuery(selectQuery, null);
 
-        if (c != null)
+        User user = null;
+
+        if (c != null) {
             c.moveToFirst();
 
-        User user = new User();
-        user.set_id(c.getInt(c.getColumnIndex(KEY_ID)));
-        user.set_nick((c.getString(c.getColumnIndex(KEY_NICK))));
-        user.set_bloodtype(c.getString(c.getColumnIndex(KEY_BLOODTYPE)));
+            user = new User();
+            user.set_id(c.getInt(c.getColumnIndex(KEY_ID)));
+            user.set_nick((c.getString(c.getColumnIndex(KEY_NICK))));
+            user.set_bloodtype(c.getString(c.getColumnIndex(KEY_BLOODTYPE)));
+
+            c.close();
+        }
         db.close();
         return user;
     }
@@ -259,7 +266,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
      * getting all the users
      */
     public List<User> getAllUsers() {
-        List<User> users = new ArrayList<User>();
+        List<User> users = new ArrayList<>();
         String selectQuery = "SELECT  * FROM " + TABLE_USER;
 
         Log.e(LOG, selectQuery);
@@ -279,6 +286,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 users.add(user);
             } while (c.moveToNext());
         }
+        c.close();
         db.close();
         return users;
     }
@@ -344,16 +352,21 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         Cursor c = db.rawQuery(selectQuery, null);
 
-        if (c != null)
+        Donation donation = null;
+
+        if (c != null) {
             c.moveToFirst();
 
-        Donation donation = new Donation();
-        donation.set_id(c.getInt(c.getColumnIndex(KEY_ID)));
-        donation.set_date((c.getString(c.getColumnIndex(KEY_DATE))));
-        donation.set_type((c.getString(c.getColumnIndex(KEY_TYPE))));
-        donation.set_volume(c.getInt(c.getColumnIndex(KEY_VOLUME)));
-        donation.set_user_id(c.getInt(c.getColumnIndex(KEY_USER_ID)));
-        donation.set_station_id(c.getInt(c.getColumnIndex(KEY_STATION_ID)));
+            donation = new Donation();
+            donation.set_id(c.getInt(c.getColumnIndex(KEY_ID)));
+            donation.set_date((c.getString(c.getColumnIndex(KEY_DATE))));
+            donation.set_type((c.getString(c.getColumnIndex(KEY_TYPE))));
+            donation.set_volume(c.getInt(c.getColumnIndex(KEY_VOLUME)));
+            donation.set_user_id(c.getInt(c.getColumnIndex(KEY_USER_ID)));
+            donation.set_station_id(c.getInt(c.getColumnIndex(KEY_STATION_ID)));
+
+            c.close();
+        }
         db.close();
         return donation;
     }
@@ -363,7 +376,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
      * getting all the donations
      */
     public List<Donation> getAllDonations() {
-        List<Donation> donations = new ArrayList<Donation>();
+        List<Donation> donations = new ArrayList<>();
         String selectQuery = "SELECT  * FROM " + TABLE_DONATION;
 
         Log.e(LOG, selectQuery);
@@ -386,6 +399,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 donations.add(donation);
             } while (c.moveToNext());
         }
+        c.close();
         db.close();
         return donations;
     }

@@ -27,4 +27,12 @@
         android:layout_centerHorizontal="true"
         android:onClick="onClick_endThisActivity" />
 
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/DLAL_listView"
+        android:layout_below="@+id/text_listD_welcome"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@+id/DLAL_b_backToMain" />
+
 </RelativeLayout>

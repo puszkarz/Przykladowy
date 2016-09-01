@@ -1,8 +1,5 @@
 package info.sqlite.model;
 
-/**
- * Created by magda on 31.08.16.
- */
 public class User {
 
     public enum blood_type {
