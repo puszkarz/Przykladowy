@@ -2,9 +2,16 @@
     <string name="app_name">Blood Donor</string>
 
     <string name="mainA_welcome">It is nice to see you Miss Suchodolska!!</string>
+
     <string name="but_showDonations">Click me to see list of donations! :)</string>
+    <string name="but_showStations">Click me to see list of stations! :)</string>
+
+    <string name="listS_welcome">Stations list is will appear below</string>
+    <string name="but_finishSLA_label">Back</string>
 
     <string name="listD_welcome">Donations list is will appear below</string>
+    <string name="but_finishDLA_label">Back</string>
+
     <string name="but_manage_users">Manage users</string>
     <string name="but_manage_donations">Manage donations</string>
     <string name="but_manage_stations">Manage stations</string>
@@ -20,7 +27,7 @@
     <string name="but_delDonation_label">Delete Donation</string>
     <string name="but_backToMain_label">Back To Main</string>
 
-    <string name="but_finishDLA_label">Back</string>
+
 
     <string name="debugOK">OK</string>
     <string name="debugWrong">Wrong</string>

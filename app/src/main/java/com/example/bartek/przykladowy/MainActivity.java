@@ -25,7 +25,11 @@ public class MainActivity extends AppCompatActivity {
     public void onClick_showDonations(View v) {
         Intent donationsActivity = new Intent(getApplicationContext(), DonationsListActivity.class);
         startActivity(donationsActivity);
-//        setContentView(R.layout.activity_donations_list);
+    }
+
+    public void onClick_showStations(View v) {
+        Intent stationsActivity = new Intent(getApplicationContext(), StationsListActivity.class);
+        startActivity(stationsActivity );
     }
 
     public void onClick_showManageStations(View v) {

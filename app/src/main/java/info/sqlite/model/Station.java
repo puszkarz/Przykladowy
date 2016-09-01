@@ -14,14 +14,14 @@ public class Station {
 
     }
 
-    public Station(String name,String address, int x, int y) {
+    public Station(String name, String address, int x, int y) {
         this._name = name;
         this._address = address;
         this._coordinate_x = x;
         this._coordinate_y = y;
     }
 
-    public Station(int id, String name,String address, int x, int y) {
+    public Station(int id, String name, String address, int x, int y) {
         this._id = id;
         this._name = name;
         this._address = address;
@@ -65,5 +65,11 @@ public class Station {
 
     public int get_coordinate_y() {
         return _coordinate_y;
+    }
+
+    public String toString() {
+        return "Station id: " + Integer.toString(get_id())
+                + ", stName: " + get_name()
+                + ", stAdr: " + get_address();
     }
 }

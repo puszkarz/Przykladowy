@@ -31,9 +31,8 @@
         android:text="@string/but_manage_users"
         android:id="@+id/ML_but_manUsers"
         android:onClick="onClick_showManageUsers"
-        android:layout_below="@+id/ML_but_listDonations"
-        android:layout_alignParentStart="true"
-        android:layout_alignEnd="@+id/ML_but_manStations" />
+        android:layout_below="@+id/ML_but_listStations"
+        android:layout_alignParentStart="true" />
 
     <Button
         android:layout_width="wrap_content"
@@ -49,8 +48,17 @@
         android:layout_height="wrap_content"
         android:text="@string/but_manage_donations"
         android:id="@+id/ML_but_manDonations"
+        android:onClick="onClick_showManageDonations"
         android:layout_below="@+id/ML_but_manStations"
-        android:layout_alignStart="@+id/ML_but_manStations"
-        android:onClick="onClick_showManageDonations" />
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/ML_but_listStations"
+        android:onClick="onClick_showStations"
+        android:text="@string/but_showStations"
+        android:layout_below="@+id/ML_but_listDonations"
+        android:layout_alignParentStart="true" />
 
 </RelativeLayout>
