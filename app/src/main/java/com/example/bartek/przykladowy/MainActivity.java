@@ -1,5 +1,6 @@
 package com.example.bartek.przykladowy;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -22,7 +23,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onClick_showDonations(View v) {
-        setContentView(R.layout.activity_donations_list);
+        Intent donationsActivity = new Intent(getApplicationContext(), DonationsListActivity.class);
+        startActivity(donationsActivity);
+//        setContentView(R.layout.activity_donations_list);
     }
 
     public void onClick_showManageStations(View v) {
