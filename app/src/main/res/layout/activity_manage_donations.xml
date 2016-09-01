@@ -9,57 +9,82 @@
         android:layout_height="wrap_content"
         android:inputType="number"
         android:ems="10"
-        android:id="@+id/useridfield"
+        android:id="@+id/MDL_f_userId"
         android:layout_marginTop="33dp"
-        android:text="user_id"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true" />
 
-    <EditText
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="number"
-        android:ems="10"
-        android:id="@+id/stationidfield"
-        android:layout_below="@+id/useridfield"
-        android:layout_alignStart="@+id/useridfield"
-        android:text="station_id" />
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/enterDonorID"
+        android:id="@+id/MDL_fDesc_userId"
+        android:layout_alignBottom="@+id/MDL_f_userId"
+        android:layout_toStartOf="@+id/MDL_f_userId" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="number"
         android:ems="10"
-        android:id="@+id/idfield"
+        android:id="@+id/MDL_f_stationId"
+        android:layout_below="@+id/MDL_f_userId"
+        android:layout_alignStart="@+id/MDL_f_userId" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/enterStationID"
+        android:id="@+id/MDL_fDesc_stationId"
+        android:layout_alignTop="@+id/MDL_f_stationId"
+        android:layout_toStartOf="@+id/MDL_f_stationId" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="10"
+        android:id="@+id/MDL_f_delStationId"
         android:layout_centerVertical="true"
-        android:layout_alignStart="@+id/stationidfield"
-        android:text="id" />
+        android:layout_alignStart="@+id/MDL_f_stationId" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="ADD DONATION"
-        android:id="@+id/but_addDonation"
-        android:layout_below="@+id/stationidfield"
-        android:layout_alignStart="@+id/stationidfield"
+        android:text="@string/but_addDonation_label"
+        android:id="@+id/MDL_but_addDonation"
+        android:layout_below="@+id/MDL_f_stationId"
+        android:layout_alignStart="@+id/MDL_f_stationId"
         android:onClick="onClick_addDonation" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="DELETE DONATION"
-        android:id="@+id/but_delDonation"
-        android:layout_below="@+id/idfield"
-        android:layout_alignStart="@+id/idfield"
+        android:text="@string/but_delDonation_label"
+        android:id="@+id/MDL_but_delDonation"
+        android:layout_below="@+id/MDL_f_delStationId"
+        android:layout_alignStart="@+id/MDL_f_delStationId"
         android:onClick="onClick_deleteDonation" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="BACK TO MAIN"
-        android:id="@+id/but_donationsToMain"
+        android:text="@string/but_backToMain_label"
+        android:id="@+id/MDL_but_donationsToMain"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="46dp"
         android:onClick="onClick_backToMain" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/enterDonorID"
+        android:id="@+id/MDL_fDesc_delStationId"
+        android:layout_above="@+id/MDL_but_delDonation"
+        android:layout_toStartOf="@+id/MDL_f_delStationId" />
+
 </RelativeLayout>

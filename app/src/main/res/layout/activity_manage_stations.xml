@@ -6,8 +6,8 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/namefield"
-        android:text="name"
+        android:id="@+id/MSL_f_addStationName"
+        android:text="@string/stationNameField_label"
         android:layout_marginTop="59dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
@@ -18,10 +18,10 @@
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="ADD STATION"
-        android:id="@+id/but_addStation"
-        android:layout_below="@+id/namefield"
-        android:layout_alignStart="@+id/namefield"
+        android:text="@string/but_addStation_label"
+        android:id="@+id/MSL_b_addStation"
+        android:layout_below="@+id/MSL_f_addStationName"
+        android:layout_alignStart="@+id/MSL_f_addStationName"
         android:onClick="onClick_addStation" />
 
     <EditText
@@ -29,37 +29,48 @@
         android:layout_height="wrap_content"
         android:inputType="number"
         android:ems="10"
-        android:id="@+id/idfield"
+        android:id="@+id/MSL_f_delStationId"
         android:layout_marginTop="35dp"
-        android:text="id"
-        android:layout_below="@+id/but_addStation"
-        android:layout_alignStart="@+id/but_addStation"
-        android:layout_alignEnd="@+id/namefield" />
+        android:text="@string/stationIdField_label"
+        android:layout_below="@+id/MSL_b_addStation"
+        android:layout_alignStart="@+id/MSL_b_addStation"
+        android:layout_alignEnd="@+id/MSL_f_addStationName" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="DELETE STATION"
-        android:id="@+id/but_delStation"
-        android:layout_below="@+id/idfield"
-        android:layout_alignStart="@+id/idfield"
-        android:onClick="onClick_deleteStation" />
-
-    <TableLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignTop="@+id/but_addStation"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="665dp"></TableLayout>
+        android:id="@+id/MSL_b_delStation"
+        android:onClick="onClick_deleteStation"
+        android:layout_below="@+id/MSL_f_delStationId"
+        android:layout_toEndOf="@+id/MSL_fDesc_delStationID"
+        android:text="@string/but_delStation_label" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="BACK TO MAIN"
-        android:id="@+id/but_stationsToMain"
+        android:text="@string/but_backToMain_label"
+        android:id="@+id/MSL_b_stationsToMain"
+        android:onClick="onClick_backToMain"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="37dp"
-        android:onClick="onClick_backToMain" />
+        android:layout_marginBottom="67dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/enterStationID"
+        android:id="@+id/MSL_fDesc_delStationID"
+        android:layout_alignBottom="@+id/MSL_f_delStationId"
+        android:layout_toStartOf="@+id/MSL_f_delStationId" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/enterStationID"
+        android:id="@+id/MSL_fDesc_addStationID"
+        android:layout_alignBottom="@+id/MSL_f_addStationName"
+        android:layout_alignStart="@+id/MSL_fDesc_delStationID" />
 
 </RelativeLayout>

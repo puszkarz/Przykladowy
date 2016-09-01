@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void onClick_addStation(View v) {
         DatabaseHelper db = new DatabaseHelper(getApplicationContext());
-        TextView tv1 = (TextView) findViewById( R.id.namefield );
+        TextView tv1 = (TextView) findViewById( R.id.MSL_f_addStationName);
         CharSequence name = tv1.getText();
 
         db.createStation(new Station(name.toString(), "", 0, 0));
@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void onClick_deleteStation(View v) {
         DatabaseHelper db = new DatabaseHelper(getApplicationContext());
-        TextView tv1 = (TextView) findViewById( R.id.idfield );
+        TextView tv1 = (TextView) findViewById( R.id.MDL_f_delStationId);
         CharSequence station_id = tv1.getText();
 
         db.deleteStation(Integer.parseInt(station_id.toString()));
@@ -83,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void onClick_addUser(View v) {
         DatabaseHelper db = new DatabaseHelper(getApplicationContext());
-        TextView tv1 = (TextView) findViewById( R.id.namefield );
+        TextView tv1 = (TextView) findViewById( R.id.MSL_f_addStationName);
         CharSequence nick = tv1.getText();
 
         TextView tv2 = (TextView) findViewById( R.id.typefield );
@@ -107,7 +107,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void onClick_deleteUser(View v) {
         DatabaseHelper db = new DatabaseHelper(getApplicationContext());
-        TextView tv1 = (TextView) findViewById( R.id.idfield );
+        TextView tv1 = (TextView) findViewById( R.id.MDL_f_delStationId);
         CharSequence users_id = tv1.getText();
 
         db.deleteUser(Integer.parseInt(users_id.toString()));
@@ -127,10 +127,10 @@ public class MainActivity extends AppCompatActivity {
 
     public void onClick_addDonation(View v) {
         DatabaseHelper db = new DatabaseHelper(getApplicationContext());
-        TextView tv1 = (TextView) findViewById( R.id.useridfield );
+        TextView tv1 = (TextView) findViewById( R.id.MDL_f_userId);
         CharSequence userid = tv1.getText();
 
-        TextView tv2 = (TextView) findViewById( R.id.stationidfield );
+        TextView tv2 = (TextView) findViewById( R.id.MDL_f_stationId);
         CharSequence stationid = tv2.getText();
 
         db.createDonation(new Donation("a", "a", 0, Integer.parseInt(userid.toString()), Integer.parseInt(stationid.toString())));
@@ -153,7 +153,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void onClick_deleteDonation(View v) {
         DatabaseHelper db = new DatabaseHelper(getApplicationContext());
-        TextView tv1 = (TextView) findViewById( R.id.idfield );
+        TextView tv1 = (TextView) findViewById( R.id.MDL_f_delStationId);
         CharSequence donation_id = tv1.getText();
 
         db.deleteDonation(Integer.parseInt(donation_id.toString()));

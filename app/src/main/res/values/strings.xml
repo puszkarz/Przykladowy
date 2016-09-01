@@ -1,7 +1,17 @@
 <resources>
-
     <string name="app_name">Blood Donor</string>
 
     <string name="listD_welcome">Poniżej będzie lista donacji</string>
+
+    <string name="but_addStation_label">Add Station</string>
+    <string name="but_delStation_label">Delete Station</string>
+    <string name="stationIdField_label">Wpisz Station ID</string>
+    <string name="stationNameField_label">Wpisz Station ID</string>
+
+    <string name="enterStationID">Station ID</string>
+    <string name="enterDonorID">Donor ID</string>
+    <string name="but_addDonation_label">Add Donation</string>
+    <string name="but_delDonation_label">Delete Donation</string>
+    <string name="but_backToMain_label">Back To Main</string>
 
 </resources>
