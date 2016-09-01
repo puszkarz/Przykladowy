@@ -12,45 +12,45 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Dzień dobry Panno Suchodolska!!"
-        android:id="@+id/text_mainWelcome" />
+        android:text="@string/mainA_welcome"
+        android:id="@+id/ML_txt_mainWelcome" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Przyciśnij mnie, a może pokażę Ci listę donacji! :)"
-        android:id="@+id/but_listDonations"
+        android:id="@+id/ML_but_listDonations"
         android:onClick="onClick_showDonations"
-        android:layout_below="@+id/text_mainWelcome"
+        android:layout_below="@+id/ML_txt_mainWelcome"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="34dp" />
+        android:layout_marginTop="34dp"
+        android:text="@string/but_showDonations" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="MANAGE USERS"
-        android:id="@+id/but_manUsers"
+        android:text="@string/but_manage_users"
+        android:id="@+id/ML_but_manUsers"
         android:onClick="onClick_showManageUsers"
-        android:layout_below="@+id/but_listDonations"
+        android:layout_below="@+id/ML_but_listDonations"
         android:layout_alignParentStart="true"
-        android:layout_alignEnd="@+id/but_manStations" />
+        android:layout_alignEnd="@+id/ML_but_manStations" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="MANAGE STATIONS"
-        android:id="@+id/but_manStations"
+        android:text="@string/but_manage_stations"
+        android:id="@+id/ML_but_manStations"
         android:onClick="onClick_showManageStations"
-        android:layout_below="@+id/but_manUsers"
+        android:layout_below="@+id/ML_but_manUsers"
         android:layout_alignParentStart="true" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="MANAGE DONATIONS"
-        android:id="@+id/but_manDonations"
-        android:layout_below="@+id/but_manStations"
-        android:layout_alignStart="@+id/but_manStations"
+        android:text="@string/but_manage_donations"
+        android:id="@+id/ML_but_manDonations"
+        android:layout_below="@+id/ML_but_manStations"
+        android:layout_alignStart="@+id/ML_but_manStations"
         android:onClick="onClick_showManageDonations" />
 
 </RelativeLayout>

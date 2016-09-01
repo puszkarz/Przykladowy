@@ -18,7 +18,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="@string/enterDonorID"
+        android:text="@string/donorID_label"
         android:id="@+id/MDL_fDesc_userId"
         android:layout_alignBottom="@+id/MDL_f_userId"
         android:layout_toStartOf="@+id/MDL_f_userId" />
@@ -36,7 +36,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="@string/enterStationID"
+        android:text="@string/stationId_label"
         android:id="@+id/MDL_fDesc_stationId"
         android:layout_alignTop="@+id/MDL_f_stationId"
         android:layout_toStartOf="@+id/MDL_f_stationId" />
@@ -82,7 +82,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="@string/enterDonorID"
+        android:text="@string/donorID_label"
         android:id="@+id/MDL_fDesc_delStationId"
         android:layout_above="@+id/MDL_but_delDonation"
         android:layout_toStartOf="@+id/MDL_f_delStationId" />

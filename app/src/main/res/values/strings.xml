@@ -1,20 +1,29 @@
 <resources>
     <string name="app_name">Blood Donor</string>
 
-    <string name="listD_welcome">Poniżej będzie lista donacji</string>
+    <string name="mainA_welcome">It is nice to see you Miss Suchodolska!!</string>
+    <string name="but_showDonations">Click me to see list of donations! :)</string>
+
+    <string name="listD_welcome">Donations list is will appear below</string>
+    <string name="but_manage_users">Manage users</string>
+    <string name="but_manage_donations">Manage donations</string>
+    <string name="but_manage_stations">Manage stations</string>
+
 
     <string name="but_addStation_label">Add Station</string>
     <string name="but_delStation_label">Delete Station</string>
-    <string name="stationIdField_label">Wpisz Station ID</string>
-    <string name="stationNameField_label">Wpisz Station ID</string>
+    <string name="stationId_label">Station ID</string>
+    <string name="stationName_label">Station Name</string>
 
-    <string name="enterStationID">Station ID</string>
-    <string name="enterDonorID">Donor ID</string>
+    <string name="donorID_label">Donor ID</string>
     <string name="but_addDonation_label">Add Donation</string>
     <string name="but_delDonation_label">Delete Donation</string>
     <string name="but_backToMain_label">Back To Main</string>
+
+    <string name="but_finishDLA_label">Back</string>
 
     <string name="debugOK">OK</string>
     <string name="debugWrong">Wrong</string>
 
 </resources>
+

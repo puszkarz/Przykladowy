@@ -7,12 +7,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/MSL_f_addStationName"
-        android:text="@string/stationNameField_label"
         android:layout_marginTop="59dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
         android:layout_marginStart="122dp"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:inputType="text" />
 
     <Button
         style="?android:attr/buttonStyleSmall"
@@ -31,7 +31,6 @@
         android:ems="10"
         android:id="@+id/MSL_f_delStationId"
         android:layout_marginTop="35dp"
-        android:text="@string/stationIdField_label"
         android:layout_below="@+id/MSL_b_addStation"
         android:layout_alignStart="@+id/MSL_b_addStation"
         android:layout_alignEnd="@+id/MSL_f_addStationName" />
@@ -39,11 +38,11 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="@string/but_delStation_label"
         android:id="@+id/MSL_b_delStation"
         android:onClick="onClick_deleteStation"
         android:layout_below="@+id/MSL_f_delStationId"
-        android:layout_toEndOf="@+id/MSL_fDesc_delStationID"
-        android:text="@string/but_delStation_label" />
+        android:layout_toEndOf="@+id/MSL_fDesc_delStationID" />
 
     <Button
         android:layout_width="wrap_content"
@@ -59,7 +58,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="@string/enterStationID"
+        android:text="@string/stationId_label"
         android:id="@+id/MSL_fDesc_delStationID"
         android:layout_alignBottom="@+id/MSL_f_delStationId"
         android:layout_toStartOf="@+id/MSL_f_delStationId" />
@@ -68,7 +67,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="@string/enterStationID"
+        android:text="@string/stationName_label"
         android:id="@+id/MSL_fDesc_addStationID"
         android:layout_alignBottom="@+id/MSL_f_addStationName"
         android:layout_alignStart="@+id/MSL_fDesc_delStationID" />
