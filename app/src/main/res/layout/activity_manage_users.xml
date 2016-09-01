@@ -30,14 +30,14 @@
         android:ems="10"
         android:id="@+id/idfield"
         android:text="id"
-        android:layout_below="@+id/button8"
-        android:layout_alignStart="@+id/button8" />
+        android:layout_below="@+id/but_addUser"
+        android:layout_alignStart="@+id/but_addUser" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="ADD USER"
-        android:id="@+id/button8"
+        android:id="@+id/but_addUser"
         android:layout_below="@+id/typefield"
         android:layout_alignStart="@+id/typefield"
         android:onClick="onClick_addUser" />
@@ -46,7 +46,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="DELETE USER"
-        android:id="@+id/button9"
+        android:id="@+id/but_delUser"
         android:layout_centerVertical="true"
         android:layout_alignStart="@+id/idfield"
         android:onClick="onClick_deleteUser" />
@@ -55,7 +55,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="BACK TO MAIN"
-        android:id="@+id/button10"
+        android:id="@+id/but_usersToMain"
         android:onClick="onClick_backToMain"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />

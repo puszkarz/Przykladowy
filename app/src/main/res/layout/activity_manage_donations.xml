@@ -39,7 +39,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="ADD DONATION"
-        android:id="@+id/button11"
+        android:id="@+id/but_addDonation"
         android:layout_below="@+id/stationidfield"
         android:layout_alignStart="@+id/stationidfield"
         android:onClick="onClick_addDonation" />
@@ -48,7 +48,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="DELETE DONATION"
-        android:id="@+id/button12"
+        android:id="@+id/but_delDonation"
         android:layout_below="@+id/idfield"
         android:layout_alignStart="@+id/idfield"
         android:onClick="onClick_deleteDonation" />
@@ -57,7 +57,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="BACK TO MAIN"
-        android:id="@+id/button13"
+        android:id="@+id/but_donationsToMain"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="46dp"
