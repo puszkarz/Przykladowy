@@ -9,6 +9,8 @@ import android.widget.TextView;
 import java.util.List;
 
 import info.sqlite.helper.DatabaseHelper;
+import info.sqlite.model.Donation;
+import info.sqlite.model.Station;
 import info.sqlite.model.User;
 
 public class MainActivity extends AppCompatActivity {
@@ -23,8 +25,63 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_donations_list);
     }
 
+    public void onClick_showManageStations(View v) {
+        setContentView(R.layout.activity_manage_stations);
+    }
 
-    public void onClick_showAnythingDB(View v) {
+    public void onClick_showManageUsers(View v) {
+        setContentView(R.layout.activity_manage_users);
+    }
+
+    public void onClick_showManageDonations(View v) {
+        setContentView(R.layout.activity_manage_donations);
+    }
+
+    public void onClick_backToMain(View v) {
+        setContentView(R.layout.activity_main);
+    }
+
+    public void onClick_addStation(View v) {
+        DatabaseHelper db = new DatabaseHelper(getApplicationContext());
+        TextView tv1 = (TextView) findViewById( R.id.namefield );
+        CharSequence name = tv1.getText();
+
+        db.createStation(new Station(name.toString(), "", 0, 0));
+
+        tv1.setText("Udalo sie");
+
+        Log.d("Reading: ", "Reading all stations..");
+        List<Station> stations = db.getAllStations();
+
+        for (Station cn : stations) {
+            String log = "Id: " + cn.get_id() + " ,Name: " + cn.get_name();
+            // Writing Contacts to log
+            Log.d("Name: ", log);
+        }
+
+    }
+
+    public void onClick_deleteStation(View v) {
+        DatabaseHelper db = new DatabaseHelper(getApplicationContext());
+        TextView tv1 = (TextView) findViewById( R.id.idfield );
+        CharSequence station_id = tv1.getText();
+
+        db.deleteStation(Integer.parseInt(station_id.toString()));
+
+        tv1.setText("Udalo sie");
+
+        Log.d("Reading: ", "Reading all stations..");
+        List<Station> stations = db.getAllStations();
+
+        for (Station cn : stations) {
+            String log = "Id: " + cn.get_id() + " ,Name: " + cn.get_name();
+            // Writing Contacts to log
+            Log.d("Name: ", log);
+        }
+
+    }
+
+    public void onClick_addUser(View v) {
         DatabaseHelper db = new DatabaseHelper(getApplicationContext());
         TextView tv1 = (TextView) findViewById( R.id.namefield );
         CharSequence nick = tv1.getText();
@@ -42,6 +99,70 @@ public class MainActivity extends AppCompatActivity {
 
         for (User cn : users) {
             String log = "Id: " + cn.get_id() + " ,Name: " + cn.get_nick();
+            // Writing Contacts to log
+            Log.d("Name: ", log);
+        }
+
+    }
+
+    public void onClick_deleteUser(View v) {
+        DatabaseHelper db = new DatabaseHelper(getApplicationContext());
+        TextView tv1 = (TextView) findViewById( R.id.idfield );
+        CharSequence users_id = tv1.getText();
+
+        db.deleteUser(Integer.parseInt(users_id.toString()));
+
+        tv1.setText("Udalo sie");
+
+        Log.d("Reading: ", "Reading all stations..");
+        List<User> users = db.getAllUsers();
+
+        for (User cn : users) {
+            String log = "Id: " + cn.get_id() + " ,Name: " + cn.get_nick();
+            // Writing Contacts to log
+            Log.d("Name: ", log);
+        }
+
+    }
+
+    public void onClick_addDonation(View v) {
+        DatabaseHelper db = new DatabaseHelper(getApplicationContext());
+        TextView tv1 = (TextView) findViewById( R.id.useridfield );
+        CharSequence userid = tv1.getText();
+
+        TextView tv2 = (TextView) findViewById( R.id.stationidfield );
+        CharSequence stationid = tv2.getText();
+
+        db.createDonation(new Donation("", "" ,0, Integer.parseInt(userid.toString()), Integer.parseInt(stationid.toString())));
+
+        tv1.setText("Udalo sie 1");
+        tv2.setText("Udalo sie 2");
+
+        Log.d("Reading: ", "Reading all stations..");
+        List<Station> stations = db.getAllStations();
+
+        for (Station cn : stations) {
+            String log = "Id: " + cn.get_id() + " ,Name: " + cn.get_name();
+            // Writing Contacts to log
+            Log.d("Name: ", log);
+        }
+
+    }
+
+    public void onClick_deleteDonation(View v) {
+        DatabaseHelper db = new DatabaseHelper(getApplicationContext());
+        TextView tv1 = (TextView) findViewById( R.id.idfield );
+        CharSequence donation_id = tv1.getText();
+
+        db.deleteDonation(Integer.parseInt(donation_id.toString()));
+
+        tv1.setText("Udalo sie");
+
+        Log.d("Reading: ", "Reading all stations..");
+        List<Station> stations = db.getAllStations();
+
+        for (Station cn : stations) {
+            String log = "Id: " + cn.get_id() + " ,Name: " + cn.get_name();
             // Writing Contacts to log
             Log.d("Name: ", log);
         }

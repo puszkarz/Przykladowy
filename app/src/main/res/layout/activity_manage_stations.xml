@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/namefield"
+        android:text="name"
+        android:layout_marginTop="59dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="122dp"
+        android:layout_alignParentEnd="true" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ADD STATION"
+        android:id="@+id/button6"
+        android:onClick="onClick_addStation"
+        android:layout_below="@+id/namefield"
+        android:layout_alignStart="@+id/namefield" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="10"
+        android:id="@+id/idfield"
+        android:layout_marginTop="35dp"
+        android:text="id"
+        android:layout_below="@+id/button6"
+        android:layout_alignStart="@+id/button6"
+        android:layout_alignEnd="@+id/namefield" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="DELETE STATION"
+        android:id="@+id/button7"
+        android:layout_below="@+id/idfield"
+        android:layout_alignStart="@+id/idfield"
+        android:onClick="onClick_deleteStation" />
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignTop="@+id/button6"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="665dp"></TableLayout>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="BACK TO MAIN"
+        android:id="@+id/button5"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="37dp"
+        android:onClick="onClick_backToMain" />
+
+</RelativeLayout>

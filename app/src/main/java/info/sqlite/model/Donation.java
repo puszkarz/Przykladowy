@@ -24,8 +24,7 @@ public class Donation {
 
     }
 
-    public Donation(int id, String date, String type, int volume, int user_id, int station_id) {
-        this._id = id;
+    public Donation(String date, String type, int volume, int user_id, int station_id) {
         this._date = date;
         this._type = type;
         this._volume = volume;

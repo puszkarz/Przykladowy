@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/se">
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="10"
+        android:id="@+id/useridfield"
+        android:layout_marginTop="33dp"
+        android:text="user_id"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="10"
+        android:id="@+id/stationidfield"
+        android:layout_below="@+id/useridfield"
+        android:layout_alignStart="@+id/useridfield"
+        android:text="station_id" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="10"
+        android:id="@+id/idfield"
+        android:layout_centerVertical="true"
+        android:layout_alignStart="@+id/stationidfield"
+        android:text="id" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ADD DONATION"
+        android:id="@+id/button11"
+        android:layout_below="@+id/stationidfield"
+        android:layout_alignStart="@+id/stationidfield"
+        android:onClick="onClick_addDonation" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="DELETE DONATION"
+        android:id="@+id/button12"
+        android:layout_below="@+id/idfield"
+        android:layout_alignStart="@+id/idfield"
+        android:onClick="onClick_deleteDonation" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="BACK TO MAIN"
+        android:id="@+id/button13"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="46dp"
+        android:onClick="onClick_backToMain" />
+</RelativeLayout>

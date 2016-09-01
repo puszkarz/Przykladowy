@@ -17,8 +17,7 @@ public class Station {
 
     }
 
-    public Station(int id, String name,String address, int x, int y) {
-        this._id = id;
+    public Station(String name,String address, int x, int y) {
         this._name = name;
         this._address = address;
         this._coordinate_x = x;
