@@ -14,4 +14,7 @@
     <string name="but_delDonation_label">Delete Donation</string>
     <string name="but_backToMain_label">Back To Main</string>
 
+    <string name="debugOK">OK</string>
+    <string name="debugWrong">Wrong</string>
+
 </resources>
