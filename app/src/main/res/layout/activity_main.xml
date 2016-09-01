@@ -12,7 +12,8 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Dzień dobry Panno Suchodolska!!" />
+        android:text="Dzień dobry Panno Suchodolska!!"
+        android:id="@+id/textView2" />
 
     <Button
         android:layout_width="wrap_content"
@@ -22,4 +23,32 @@
         android:onClick="onClick_showDonations"
         android:layout_centerVertical="true"
         android:layout_alignParentEnd="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/namefield"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="88dp"
+        android:layout_alignParentEnd="true"
+        android:layout_toEndOf="@+id/textView2" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/typefield"
+        android:layout_alignTop="@+id/namefield"
+        android:layout_alignStart="@+id/namefield"
+        android:layout_marginTop="39dp"
+        android:layout_alignEnd="@+id/button" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ADD TO BASE"
+        android:id="@+id/add_DB"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:onClick="onClick_showAnythingDB" />
+
 </RelativeLayout>

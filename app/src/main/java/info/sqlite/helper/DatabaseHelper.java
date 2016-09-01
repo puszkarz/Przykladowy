@@ -56,21 +56,32 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     // Table Create Statements
     // Station table create statement
-    private static final String CREATE_TABLE_STATION = "CREATE TABLE "
-            + TABLE_STATION + "(" + KEY_ID + " INTEGER PRIMARY KEY," + KEY_NAME + " TEXT," + KEY_ADDRESS
-            + " TEXT," + KEY_COORDINATE_X + " INTEGER," + KEY_COORDINATE_Y + " INTEGER,"
+    private static final String CREATE_TABLE_STATION = "CREATE TABLE " + TABLE_STATION
+            + "(" + KEY_ID + " INTEGER PRIMARY KEY,"
+            + KEY_NAME + " TEXT,"
+            + KEY_ADDRESS + " TEXT,"
+            + KEY_COORDINATE_X + " INTEGER,"
+            + KEY_COORDINATE_Y + " INTEGER"
             + ")";
 
     // Tag table create statement
     private static final String CREATE_TABLE_USER = "CREATE TABLE " + TABLE_USER
-            + "(" + KEY_ID + " INTEGER PRIMARY KEY," + KEY_NICK + " TEXT," + KEY_BLOODTYPE + " TEXT,"
+            + "("
+            + KEY_ID + " INTEGER PRIMARY KEY,"
+            + KEY_NICK + " TEXT,"
+            + KEY_BLOODTYPE + " TEXT"
             +  ")";
 
     // todo_tag table create statement
-    private static final String CREATE_TABLE_DONATION = "CREATE TABLE "
-            + TABLE_DONATION + "(" + KEY_ID + " INTEGER PRIMARY KEY,"
-            + KEY_DATE + " DATETIME," + KEY_TYPE + " TEXT," + KEY_VOLUME + " INTEGER,"
-            + KEY_USER_ID + "TEXT," + KEY_STATION_ID + " TEXT" + ")";
+    private static final String CREATE_TABLE_DONATION = "CREATE TABLE " + TABLE_DONATION
+            + "("
+            + KEY_ID + " INTEGER PRIMARY KEY,"
+            + KEY_DATE + " DATETIME,"
+            + KEY_TYPE + " TEXT,"
+            + KEY_VOLUME + " INTEGER,"
+            + KEY_USER_ID + "TEXT,"
+            + KEY_STATION_ID + " TEXT"
+            + ")";
 
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -212,7 +223,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         // insert row
         long user_id = db.insert(TABLE_USER, null, values);
-
+        db.close();
         return user_id;
     }
 
