@@ -12,7 +12,7 @@ public class Donation {
         WHOLE_BLOOD, PLASMA
     }
 
-    private int _id; //@TODO primary key? autoincrement?
+    private int _id;
     private String _date;
     private String _type; //@TODO enum
     private int _volume;
@@ -25,6 +25,15 @@ public class Donation {
     }
 
     public Donation(String date, String type, int volume, int user_id, int station_id) {
+        this._date = date;
+        this._type = type;
+        this._volume = volume;
+        this._user_id = user_id;
+        this._station_id = station_id;
+    }
+
+    public Donation(int id, String date, String type, int volume, int user_id, int station_id) {
+        this._id = id;
         this._date = date;
         this._type = type;
         this._volume = volume;

@@ -98,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
         List<User> users = db.getAllUsers();
 
         for (User cn : users) {
-            String log = "Id: " + cn.get_id() + " ,Name: " + cn.get_nick();
+            String log = "Id: " + cn.get_id() + " ,Nick: " + cn.get_nick();
             // Writing Contacts to log
             Log.d("Name: ", log);
         }
@@ -114,11 +114,11 @@ public class MainActivity extends AppCompatActivity {
 
         tv1.setText("Udalo sie");
 
-        Log.d("Reading: ", "Reading all stations..");
+        Log.d("Reading: ", "Reading all users..");
         List<User> users = db.getAllUsers();
 
         for (User cn : users) {
-            String log = "Id: " + cn.get_id() + " ,Name: " + cn.get_nick();
+            String log = "Id: " + cn.get_id() + " ,Nick: " + cn.get_nick();
             // Writing Contacts to log
             Log.d("Name: ", log);
         }
@@ -133,19 +133,21 @@ public class MainActivity extends AppCompatActivity {
         TextView tv2 = (TextView) findViewById( R.id.stationidfield );
         CharSequence stationid = tv2.getText();
 
-        db.createDonation(new Donation("", "" ,0, Integer.parseInt(userid.toString()), Integer.parseInt(stationid.toString())));
+        db.createDonation(new Donation("a", "a" ,0, Integer.parseInt(userid.toString()), Integer.parseInt(stationid.toString())));
 
         tv1.setText("Udalo sie 1");
         tv2.setText("Udalo sie 2");
 
-        Log.d("Reading: ", "Reading all stations..");
-        List<Station> stations = db.getAllStations();
+        Log.d("Reading: ", "Reading all donations..");
+        List<Donation> donations = db.getAllDonations();
 
-        for (Station cn : stations) {
-            String log = "Id: " + cn.get_id() + " ,Name: " + cn.get_name();
+        for (Donation cn : donations) {
+            String log = "Id: " + cn.get_id() + " , St id: " + cn.get_station_id() + " , Us id: " + cn.get_user_id();
             // Writing Contacts to log
             Log.d("Name: ", log);
         }
+
+        Log.e("Donation Count", "donation count " + db.getDonationsCount());
 
     }
 
@@ -158,11 +160,11 @@ public class MainActivity extends AppCompatActivity {
 
         tv1.setText("Udalo sie");
 
-        Log.d("Reading: ", "Reading all stations..");
-        List<Station> stations = db.getAllStations();
+        Log.d("Reading: ", "Reading all donations..");
+        List<Donation> donations = db.getAllDonations();
 
-        for (Station cn : stations) {
-            String log = "Id: " + cn.get_id() + " ,Name: " + cn.get_name();
+        for (Donation cn : donations) {
+            String log = "Id: " + cn.get_id() + " , St id: " + cn.get_station_id() + " , Us id: " + cn.get_user_id();
             // Writing Contacts to log
             Log.d("Name: ", log);
         }

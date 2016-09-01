@@ -76,11 +76,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String CREATE_TABLE_DONATION = "CREATE TABLE " + TABLE_DONATION
             + "("
             + KEY_ID + " INTEGER PRIMARY KEY,"
-            + KEY_DATE + " DATETIME,"
+            + KEY_DATE + " TEXT,"
             + KEY_TYPE + " TEXT,"
             + KEY_VOLUME + " INTEGER,"
-            + KEY_USER_ID + "TEXT,"
-            + KEY_STATION_ID + " TEXT"
+            + KEY_USER_ID + " INTEGER,"
+            + KEY_STATION_ID + " INTEGER"
             + ")";
 
     public DatabaseHelper(Context context) {
@@ -122,7 +122,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         // insert row
         long station_id = db.insert(TABLE_STATION, null, values);
-
+        db.close();
         return station_id;
     }
 
@@ -148,7 +148,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         station.set_address(c.getString(c.getColumnIndex(KEY_ADDRESS)));
         station.set_coordinate_x(c.getInt(c.getColumnIndex(KEY_COORDINATE_X)));
         station.set_coordinate_y(c.getInt(c.getColumnIndex(KEY_COORDINATE_Y)));
-
+        db.close();
         return station;
     }
 
@@ -179,7 +179,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 stations.add(station);
             } while (c.moveToNext());
         }
-
+        db.close();
         return stations;
     }
 
@@ -196,8 +196,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(KEY_COORDINATE_Y, station.get_coordinate_y());
 
         // updating row
-        return db.update(TABLE_STATION, values, KEY_ID + " = ?",
+        int ret = db.update(TABLE_STATION, values, KEY_ID + " = ?",
                 new String[] { String.valueOf(station.get_id()) });
+        db.close();
+        return ret;
     }
 
     /**
@@ -207,6 +209,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(TABLE_STATION, KEY_ID + " = ?",
                 new String[] { String.valueOf(station_id) });
+        db.close();
     }
 
     // ------------------------ "user" table methods ----------------//
@@ -247,7 +250,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         user.set_id(c.getInt(c.getColumnIndex(KEY_ID)));
         user.set_nick((c.getString(c.getColumnIndex(KEY_NICK))));
         user.set_bloodtype(c.getString(c.getColumnIndex(KEY_BLOODTYPE)));
-
+        db.close();
         return user;
     }
 
@@ -276,7 +279,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 users.add(user);
             } while (c.moveToNext());
         }
-
+        db.close();
         return users;
     }
 
@@ -291,8 +294,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(KEY_TYPE, String.valueOf(user.get_bloodtype()));
 
         // updating row
-        return db.update(TABLE_USER, values, KEY_ID + " = ?",
+        int ret = db.update(TABLE_USER, values, KEY_ID + " = ?",
                 new String[] { String.valueOf(user.get_id()) });
+        db.close();
+        return ret;
     }
 
     /**
@@ -302,6 +307,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(TABLE_USER, KEY_ID + " = ?",
                 new String[] { String.valueOf(user_id) });
+        db.close();
     }
 
     // ------------------------ "donation" table methods ----------------//
@@ -321,7 +327,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         // insert row
         long donation_id = db.insert(TABLE_DONATION, null, values);
-
+        db.close();
         return donation_id;
     }
 
@@ -348,7 +354,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         donation.set_volume(c.getInt(c.getColumnIndex(KEY_VOLUME)));
         donation.set_user_id(c.getInt(c.getColumnIndex(KEY_USER_ID)));
         donation.set_station_id(c.getInt(c.getColumnIndex(KEY_STATION_ID)));
-
+        db.close();
         return donation;
     }
 
@@ -380,7 +386,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 donations.add(donation);
             } while (c.moveToNext());
         }
-
+        db.close();
         return donations;
     }
 
@@ -398,8 +404,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(KEY_STATION_ID, donation.get_station_id());
 
         // updating row
-        return db.update(TABLE_DONATION, values, KEY_ID + " = ?",
+        int ret = db.update(TABLE_DONATION, values, KEY_ID + " = ?",
                 new String[] { String.valueOf(donation.get_id()) });
+        db.close();
+        return ret;
     }
 
     /**
@@ -409,6 +417,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(TABLE_DONATION, KEY_ID + " = ?",
                 new String[] { String.valueOf(donation_id) });
+    }
+
+    // Getting donations Count
+    public int getDonationsCount() {
+        String countQuery = "SELECT  * FROM " + TABLE_DONATION;
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(countQuery, null);
+
+        int ret = cursor.getCount();
+        cursor.close();
+        return ret;
     }
 
 

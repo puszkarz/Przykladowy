@@ -24,6 +24,12 @@ public class User {
         this._bloodtype = bloodtype;
     }
 
+    public User(int id, String nick, String bloodtype) {
+        this._id = id;
+        this._nick = nick;
+        this._bloodtype = bloodtype;
+    }
+
     //setters
     public void set_id(int _id) { this._id = _id; }
 
