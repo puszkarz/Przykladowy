@@ -10,6 +10,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import info.sqlite.helper.DatabaseHelper;
+import info.sqlite.model.BloodType;
 import info.sqlite.model.Donation;
 import info.sqlite.model.Station;
 import info.sqlite.model.User;
@@ -20,6 +21,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        DatabaseHelper db = new DatabaseHelper(getApplicationContext());
+        logListBloodTypes(db);
     }
 
     public void onClick_showDonations(View v) {
@@ -130,13 +133,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     // Writing Stations to Log
-
     private void logListStations(DatabaseHelper db) {
         Log.d("Reading: ", "Reading all stations..");
         List<Station> stations = db.getAllStations();
         for (Station cn : stations) {
             String log = "Id: " + cn.get_id() + " ,Name: " + cn.get_name();
-            Log.d("Name: ", log); // Writing Contacts to log
+            Log.d("Name: ", log);
         }
     }
 
@@ -146,7 +148,6 @@ public class MainActivity extends AppCompatActivity {
         List<User> users = db.getAllUsers();
         for (User cn : users) {
             String log = "Id: " + cn.get_id() + " ,Nick: " + cn.get_nick();
-            // Writing Contacts to log
             Log.d("Name: ", log);
         }
     }
@@ -157,9 +158,18 @@ public class MainActivity extends AppCompatActivity {
         List<Donation> donations = db.getAllDonations();
         for (Donation cn : donations) {
             String log = "Id: " + cn.get_id() + " , St id: " + cn.get_station_id() + " , Us id: " + cn.get_user_id();
-
             Log.d("Name: ", log);
         }
         Log.e("Donation Count", "donation count " + db.getDonationsCount());
+    }
+
+    // Writing BloodTypes to Log
+    private void logListBloodTypes(DatabaseHelper db) {
+        Log.d("Reading: ", "Reading all stations..");
+        List<BloodType> bts = db.getAllBloodTypes();
+        for (BloodType bt : bts) {
+            String log = bt.toString();
+            Log.d("BloodType: ", log);
+        }
     }
 }

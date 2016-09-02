@@ -2,11 +2,6 @@ package info.sqlite.model;
 
 public class User {
 
-    public enum blood_type {
-        //@TODO complete types
-        ARhplus, Arhminus
-    }
-
     private int _id;
     private String _nick;
     private int _bloodTypeID;
@@ -17,12 +12,6 @@ public class User {
     }
 
     public User(String nick, int bloodTypeID) {
-        this._nick = nick;
-        this._bloodTypeID = bloodTypeID;
-    }
-
-    public User(int id, String nick, int bloodTypeID) {
-        this._id = id;
         this._nick = nick;
         this._bloodTypeID = bloodTypeID;
     }
@@ -48,4 +37,5 @@ public class User {
     public String get_nick() {
         return _nick;
     }
+
 }

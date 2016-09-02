@@ -14,21 +14,11 @@ public class Donation {
     private int _user_id; //@TODO user's nick?
     private int _station_id; //@TODO station's name?
 
-    //constructors
     public Donation() {
 
     }
 
     public Donation(String date, String type, int volume, int user_id, int station_id) {
-        this._date = date;
-        this._type = type;
-        this._volume = volume;
-        this._user_id = user_id;
-        this._station_id = station_id;
-    }
-
-    public Donation(int id, String date, String type, int volume, int user_id, int station_id) {
-        this._id = id;
         this._date = date;
         this._type = type;
         this._volume = volume;

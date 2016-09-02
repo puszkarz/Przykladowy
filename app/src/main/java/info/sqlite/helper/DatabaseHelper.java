@@ -14,6 +14,7 @@ import info.sqlite.intermediary.BloodTypeSQL;
 import info.sqlite.intermediary.DonationSQL;
 import info.sqlite.intermediary.StationSQL;
 import info.sqlite.intermediary.UserSQL;
+import info.sqlite.model.BloodType;
 import info.sqlite.model.Donation;
 import info.sqlite.model.Station;
 import info.sqlite.model.User;
@@ -24,7 +25,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String LOG = "DatabaseHelper";
 
     // Database Version
-    private static final int DATABASE_VERSION = 4;
+    private static final int DATABASE_VERSION = 6;
 
     // Database Name
     private static final String DATABASE_NAME = "Donations_List";
@@ -40,7 +41,18 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(UserSQL.createTable());
         db.execSQL(DonationSQL.createTable());
         db.execSQL(BloodTypeSQL.createTable());
-//        initBloodTypes();
+        initBloodTypes(db);
+    }
+
+    public void initBloodTypes(SQLiteDatabase db) {
+        insertBloodTypeDB(db, new BloodType(0,0,0));
+        insertBloodTypeDB(db, new BloodType(0,0,1));
+        insertBloodTypeDB(db, new BloodType(0,1,0));
+        insertBloodTypeDB(db, new BloodType(0,1,1));
+        insertBloodTypeDB(db, new BloodType(1,0,0));
+        insertBloodTypeDB(db, new BloodType(1,0,1));
+        insertBloodTypeDB(db, new BloodType(1,1,0));
+        insertBloodTypeDB(db, new BloodType(1,1,1));
     }
 
     @Override
@@ -52,6 +64,31 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + BloodTypeSQL.getTableName());
         // create new tables
         onCreate(db);
+    }
+
+    // ------------------------ "bloodType" table methods ----------------//
+    public long insertBloodTypeDB(SQLiteDatabase db, BloodType bloodType) {
+        ContentValues values = BloodTypeSQL.toContentValue(bloodType);
+        return db.insert(BloodTypeSQL.getTableName(), null, values);
+    }
+
+    /** Getting all the blood types */
+    public List<BloodType> getAllBloodTypes() {
+        List<BloodType> bts = new ArrayList<>();
+        String selectQuery = BloodTypeSQL.getSelectAllQuery();
+        Log.e(LOG, selectQuery);
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor c = db.rawQuery(selectQuery, null);
+        // looping through all rows and adding to list
+        if (c.moveToFirst()) {
+            do {
+                BloodType bt = BloodTypeSQL.getBloodType(c);
+                bts.add(bt);
+            } while (c.moveToNext());
+        }
+        c.close();
+        db.close();
+        return bts;
     }
 
 
@@ -115,6 +152,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 StationSQL.getKeyId() + " = " + String.valueOf(station_id), null);
         db.close();
     }
+
+
 
 
     // ------------------------ "user" table methods ----------------//
