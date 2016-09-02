@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
 
         if (tv1 != null) {
             CharSequence name = tv1.getText();
-            db.createStation(new Station(name.toString(), "", 0, 0));
+            db.insertStation(new Station(name.toString(), "", 0, 0));
 
             tv1.setText(R.string.debugOK);
             logListStations(db);
@@ -81,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
         if (tv1 != null && tv2 != null) {
             CharSequence nick = tv1.getText();
             CharSequence type = tv2.getText();
-            db.createUser(new User(nick.toString(), type.toString()));
+            db.insertUser(new User(nick.toString(), Integer.parseInt(type.toString())));
 
             tv1.setText(R.string.debugOK);
             tv2.setText(R.string.debugOK);
@@ -108,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
         if (tv1 != null && tv2 != null) {
             CharSequence userId = tv1.getText();
             CharSequence stationId = tv2.getText();
-            db.createDonation(new Donation("a", "a", 0, Integer.parseInt(userId.toString()), Integer.parseInt(stationId.toString())));
+            db.insertDonation(new Donation("a", "a", 0, Integer.parseInt(userId.toString()), Integer.parseInt(stationId.toString())));
 
             tv1.setText(R.string.debugOK);
             tv2.setText(R.string.debugOK);

@@ -9,29 +9,29 @@ public class User {
 
     private int _id;
     private String _nick;
-    private String _bloodtype; //@TODO ENUM?
+    private int _bloodTypeID;
 
     //constructors
     public User() {
 
     }
 
-    public User(String nick, String bloodtype) {
+    public User(String nick, int bloodTypeID) {
         this._nick = nick;
-        this._bloodtype = bloodtype;
+        this._bloodTypeID = bloodTypeID;
     }
 
-    public User(int id, String nick, String bloodtype) {
+    public User(int id, String nick, int bloodTypeID) {
         this._id = id;
         this._nick = nick;
-        this._bloodtype = bloodtype;
+        this._bloodTypeID = bloodTypeID;
     }
 
     //setters
     public void set_id(int _id) { this._id = _id; }
 
-    public void set_bloodtype(String _bloodtype) {
-        this._bloodtype = _bloodtype;
+    public void set_bloodTypeID(int _bloodTypeID) {
+        this._bloodTypeID = _bloodTypeID;
     }
 
     public void set_nick(String _nick) {
@@ -41,8 +41,8 @@ public class User {
     //getters
     public int get_id() { return _id; }
 
-    public String get_bloodtype() {
-        return _bloodtype;
+    public int get_bloodTypeID() {
+        return _bloodTypeID;
     }
 
     public String get_nick() {

@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import info.sqlite.helper.DatabaseHelper;
-import info.sqlite.model.Donation;
 import info.sqlite.model.Station;
 
 public class StationsListActivity extends AppCompatActivity {
