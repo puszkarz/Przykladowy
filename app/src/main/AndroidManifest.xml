@@ -16,7 +16,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".DonationsListActivity" />
-        <activity android:name=".StationsListActivity"></activity>
+        <activity android:name=".FirstLoginActivity" />
+        <activity android:name=".StationsListActivity"/>
     </application>
 
 </manifest>

@@ -15,7 +15,7 @@ public class UserSQL {
     // USER Table - column names
     private static final String KEY_ID = "id";
     private static final String KEY_NICK = "_nick";
-    private static final String KEY_BLOOD_TYPE_ID = "_bloodTypeID";
+    private static final String KEY_BLOOD_TYPE = "_bloodType";
 
     // User table create statement
     public static String createTable() {
@@ -23,16 +23,14 @@ public class UserSQL {
                 + "("
                 + KEY_ID + " INTEGER PRIMARY KEY,"
                 + KEY_NICK + " TEXT NOT NULL,"
-                + KEY_BLOOD_TYPE_ID + " INTEGER NOT NULL,"
-                + " FOREIGN KEY (" + KEY_BLOOD_TYPE_ID + ") REFERENCES "
-                + BloodTypeSQL.getTableName() + "(" + BloodTypeSQL.getKeyId() + ")"
+                + KEY_BLOOD_TYPE + " TEXT NOT NULL,"
                 +  ")";
     }
 
     public static ContentValues toContentValue(User user) {
         ContentValues values = new ContentValues();
         values.put(KEY_NICK, user.get_nick());
-        values.put(KEY_BLOOD_TYPE_ID, String.valueOf(user.get_bloodTypeID()));
+        values.put(KEY_BLOOD_TYPE, String.valueOf(user.get_bloodType()));
         return values;
     }
 
@@ -40,7 +38,7 @@ public class UserSQL {
         User user = new User();
         user.set_id(c.getInt(c.getColumnIndex(KEY_ID)));
         user.set_nick((c.getString(c.getColumnIndex(KEY_NICK))));
-        user.set_bloodTypeID(c.getInt(c.getColumnIndex(KEY_BLOOD_TYPE_ID)));
+        user.set_bloodType(c.getString(c.getColumnIndex(KEY_BLOOD_TYPE)));
         return user;
     }
 

@@ -220,6 +220,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.close();
     }
 
+    /** Getting users Count */
+    public int getUsersCount() {
+        String countQuery = UserSQL.getSelectAllQuery();
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(countQuery, null);
+        int ret = cursor.getCount();
+        cursor.close();
+        return ret;
+    }
+
 
     // ------------------------ "donation" table methods ----------------//
 

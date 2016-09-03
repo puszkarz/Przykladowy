@@ -20,8 +20,17 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
         DatabaseHelper db = new DatabaseHelper(getApplicationContext());
+        int noUser = db.getUsersCount();
+        if (noUser > 0)
+            setContentView(R.layout.activity_main);
+        else
+        {
+            Intent firstActivity = new Intent(getApplicationContext(), FirstLoginActivity.class);
+            startActivity(firstActivity);
+        }
+
+
         logListBloodTypes(db);
     }
 
@@ -131,6 +140,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
+
 
     // Writing Stations to Log
     private void logListStations(DatabaseHelper db) {
