@@ -5,6 +5,7 @@
 
     <string name="but_showDonations">Click me to see list of donations! :)</string>
     <string name="but_showStations">Click me to see list of stations! :)</string>
+    <string name="but_showMaps">Click me to see a map! :)</string>
 
     <string name="listS_welcome">Stations list is will appear below</string>
     <string name="but_finishSLA_label">Back</string>
@@ -28,9 +29,9 @@
     <string name="but_backToMain_label">Back To Main</string>
 
 
-
     <string name="debugOK">OK</string>
     <string name="debugWrong">Wrong</string>
+    <string name="title_activity_maps">Map</string>
 
 </resources>
 

@@ -4,7 +4,6 @@ import android.content.ContentValues;
 import android.database.Cursor;
 
 import info.sqlite.model.BloodType;
-import info.sqlite.model.User;
 
 /**
  * Set of methods supporting SQLite access for Blood Type Table

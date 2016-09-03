@@ -31,7 +31,7 @@
         android:text="@string/but_manage_users"
         android:id="@+id/ML_but_manUsers"
         android:onClick="onClick_showManageUsers"
-        android:layout_below="@+id/ML_but_listStations"
+        android:layout_below="@+id/ML_but_showMaps"
         android:layout_alignParentStart="true" />
 
     <Button
@@ -59,6 +59,15 @@
         android:onClick="onClick_showStations"
         android:text="@string/but_showStations"
         android:layout_below="@+id/ML_but_listDonations"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/ML_but_showMaps"
+        android:onClick="onClick_showMaps"
+        android:text="@string/but_showMaps"
+        android:layout_below="@+id/ML_but_listStations"
         android:layout_alignParentStart="true" />
 
 </RelativeLayout>

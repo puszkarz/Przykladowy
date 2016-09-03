@@ -35,6 +35,11 @@ public class MainActivity extends AppCompatActivity {
         startActivity(stationsActivity );
     }
 
+    public void onClick_showMaps(View v) {
+        Intent mapsActivity = new Intent(getApplicationContext(), MapsActivity.class);
+        startActivity(mapsActivity);
+    }
+
     public void onClick_showManageStations(View v) {
         setContentView(R.layout.activity_manage_stations);
     }
