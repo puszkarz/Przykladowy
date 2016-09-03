@@ -92,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
         if (tv1 != null && tv2 != null) {
             CharSequence nick = tv1.getText();
             CharSequence type = tv2.getText();
-            db.insertUser(new User(nick.toString(), Integer.parseInt(type.toString())));
+            db.insertUser(new User(nick.toString(), type.toString()));
 
             tv1.setText(R.string.debugOK);
             tv2.setText(R.string.debugOK);

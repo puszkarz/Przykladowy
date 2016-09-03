@@ -23,7 +23,7 @@ public class UserSQL {
                 + "("
                 + KEY_ID + " INTEGER PRIMARY KEY,"
                 + KEY_NICK + " TEXT NOT NULL,"
-                + KEY_BLOOD_TYPE_ID + " TEXT NOT NULL,"
+                + KEY_BLOOD_TYPE_ID + " TEXT NOT NULL"
                 +  ")";
     }
 

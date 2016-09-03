@@ -28,9 +28,12 @@
     <string name="but_backToMain_label">Back To Main</string>
 
     <string name="but_bloodTypesPopUp_label">Select Blood Type</string>
-    <string name="userNick_label">User's nick</string>
+    <string name="userNick_label">Nick</string>
     <string name="but_addUser_label">Add User</string>
 
+
+    <string name="debugOK">OK</string>
+    <string name="debugWrong">Wrong</string>
 
     <string name="APlus">A+</string>
     <string name="AMinus">A-</string>
