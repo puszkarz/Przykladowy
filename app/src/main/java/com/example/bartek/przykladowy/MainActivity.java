@@ -10,7 +10,6 @@ import android.widget.TextView;
 import java.util.List;
 
 import info.sqlite.helper.DatabaseHelper;
-import info.sqlite.model.BloodType;
 import info.sqlite.model.Donation;
 import info.sqlite.model.Station;
 import info.sqlite.model.User;
@@ -20,9 +19,18 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
         DatabaseHelper db = new DatabaseHelper(getApplicationContext());
-        logListBloodTypes(db);
+        int noUser = db.getUsersCount();
+        if (noUser > 0)
+            setContentView(R.layout.activity_main);
+        else
+        {
+            Intent firstActivity = new Intent(getApplicationContext(), FirstLoginActivity.class);
+            startActivity(firstActivity);
+        }
+
+
+
     }
 
     public void onClick_showDonations(View v) {
@@ -132,6 +140,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+
     // Writing Stations to Log
     private void logListStations(DatabaseHelper db) {
         Log.d("Reading: ", "Reading all stations..");
@@ -163,13 +172,4 @@ public class MainActivity extends AppCompatActivity {
         Log.e("Donation Count", "donation count " + db.getDonationsCount());
     }
 
-    // Writing BloodTypes to Log
-    private void logListBloodTypes(DatabaseHelper db) {
-        Log.d("Reading: ", "Reading all stations..");
-        List<BloodType> bts = db.getAllBloodTypes();
-        for (BloodType bt : bts) {
-            String log = bt.toString();
-            Log.d("BloodType: ", log);
-        }
-    }
 }
