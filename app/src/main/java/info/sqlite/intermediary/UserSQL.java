@@ -23,9 +23,7 @@ public class UserSQL {
                 + "("
                 + KEY_ID + " INTEGER PRIMARY KEY,"
                 + KEY_NICK + " TEXT NOT NULL,"
-                + KEY_BLOOD_TYPE_ID + " INTEGER NOT NULL,"
-                + " FOREIGN KEY (" + KEY_BLOOD_TYPE_ID + ") REFERENCES "
-                + BloodTypeSQL.getTableName() + "(" + BloodTypeSQL.getKeyId() + ")"
+                + KEY_BLOOD_TYPE_ID + " TEXT NOT NULL"
                 +  ")";
     }
 
@@ -40,7 +38,7 @@ public class UserSQL {
         User user = new User();
         user.set_id(c.getInt(c.getColumnIndex(KEY_ID)));
         user.set_nick((c.getString(c.getColumnIndex(KEY_NICK))));
-        user.set_bloodTypeID(c.getInt(c.getColumnIndex(KEY_BLOOD_TYPE_ID)));
+        user.set_bloodTypeID(c.getString(c.getColumnIndex(KEY_BLOOD_TYPE_ID)));
         return user;
     }
 

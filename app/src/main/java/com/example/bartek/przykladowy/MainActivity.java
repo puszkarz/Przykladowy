@@ -4,13 +4,15 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
 import java.util.List;
 
 import info.sqlite.helper.DatabaseHelper;
-import info.sqlite.model.BloodType;
 import info.sqlite.model.Donation;
 import info.sqlite.model.Station;
 import info.sqlite.model.User;
@@ -20,9 +22,51 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
         DatabaseHelper db = new DatabaseHelper(getApplicationContext());
-        logListBloodTypes(db);
+        int noUser = db.getUsersCount();
+        logListUsers(db);
+        if (noUser > 0)
+            setContentView(R.layout.activity_main);
+        else
+        {
+            Intent firstActivity = new Intent(getApplicationContext(), FirstLoginActivity.class);
+            startActivity(firstActivity);
+        }
+
+        logListUsers(db);
+
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.actionbar_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.show_donations:
+                Intent donationsActivity = new Intent(getApplicationContext(), DonationsListActivity.class);
+                startActivity(donationsActivity);
+                return true;
+            case R.id.show_stations:
+                Intent stationsActivity = new Intent(getApplicationContext(), StationsListActivity.class);
+                startActivity(stationsActivity);
+                return true;
+            case R.id.manage_donations:
+                setContentView(R.layout.activity_manage_donations);
+                return true;
+            case R.id.manage_stations:
+                setContentView(R.layout.activity_manage_stations);
+                return true;
+            case R.id.manage_users:
+                setContentView(R.layout.activity_manage_users);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     public void onClick_showDonations(View v) {
@@ -89,7 +133,7 @@ public class MainActivity extends AppCompatActivity {
         if (tv1 != null && tv2 != null) {
             CharSequence nick = tv1.getText();
             CharSequence type = tv2.getText();
-            db.insertUser(new User(nick.toString(), Integer.parseInt(type.toString())));
+            db.insertUser(new User(nick.toString(), type.toString()));
 
             tv1.setText(R.string.debugOK);
             tv2.setText(R.string.debugOK);
@@ -137,6 +181,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+
     // Writing Stations to Log
     private void logListStations(DatabaseHelper db) {
         Log.d("Reading: ", "Reading all stations..");
@@ -152,7 +197,7 @@ public class MainActivity extends AppCompatActivity {
         Log.d("Reading: ", "Reading all users..");
         List<User> users = db.getAllUsers();
         for (User cn : users) {
-            String log = "Id: " + cn.get_id() + " ,Nick: " + cn.get_nick();
+            String log = "Id: " + cn.get_id() + " ,Nick: " + cn.get_nick() + "Blood type:" + cn.get_bloodTypeID();
             Log.d("Name: ", log);
         }
     }
@@ -168,13 +213,4 @@ public class MainActivity extends AppCompatActivity {
         Log.e("Donation Count", "donation count " + db.getDonationsCount());
     }
 
-    // Writing BloodTypes to Log
-    private void logListBloodTypes(DatabaseHelper db) {
-        Log.d("Reading: ", "Reading all stations..");
-        List<BloodType> bts = db.getAllBloodTypes();
-        for (BloodType bt : bts) {
-            String log = bt.toString();
-            Log.d("BloodType: ", log);
-        }
-    }
 }
