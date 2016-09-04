@@ -80,7 +80,7 @@ public class FirstLoginActivity extends AppCompatActivity implements PopupMenu.O
         TextView tv1 = (TextView) findViewById( R.id.FLL_f_addNick);
 
         if (tv1 != null && !_bloodType.equalsIgnoreCase("")) {
-            CharSequence nisdck = tv1.getText();
+            CharSequence nick = tv1.getText();
             db.insertUser(new User(nick.toString(), _bloodType));
 
             tv1.setText(R.string.debugOK);

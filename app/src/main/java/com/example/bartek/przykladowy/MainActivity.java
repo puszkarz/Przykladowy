@@ -21,7 +21,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         DatabaseHelper db = new DatabaseHelper(getApplicationContext());
         int noUser = db.getUsersCount();
-        logListUsers(db);
         if (noUser > 0)
             setContentView(R.layout.activity_main);
         else
@@ -157,7 +156,7 @@ public class MainActivity extends AppCompatActivity {
         Log.d("Reading: ", "Reading all users..");
         List<User> users = db.getAllUsers();
         for (User cn : users) {
-            String log = "Id: " + cn.get_id() + " ,Nick: " + cn.get_nick() + "Blood type:" + cn.get_bloodTypeID();
+            String log = "Id: " + cn.get_id() + " , Nick: " + cn.get_nick() + ", Blood type: " + cn.get_bloodType();
             Log.d("Name: ", log);
         }
     }
