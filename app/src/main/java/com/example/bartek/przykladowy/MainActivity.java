@@ -50,6 +50,20 @@ public class MainActivity extends AppCompatActivity {
             case R.id.show_donations:
                 Intent donationsActivity = new Intent(getApplicationContext(), DonationsListActivity.class);
                 startActivity(donationsActivity);
+                return true;
+            case R.id.show_stations:
+                Intent stationsActivity = new Intent(getApplicationContext(), StationsListActivity.class);
+                startActivity(stationsActivity);
+                return true;
+            case R.id.manage_donations:
+                setContentView(R.layout.activity_manage_donations);
+                return true;
+            case R.id.manage_stations:
+                setContentView(R.layout.activity_manage_stations);
+                return true;
+            case R.id.manage_users:
+                setContentView(R.layout.activity_manage_users);
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
