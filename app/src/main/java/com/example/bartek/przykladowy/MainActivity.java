@@ -4,6 +4,9 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
@@ -32,6 +35,24 @@ public class MainActivity extends AppCompatActivity {
 
         logListUsers(db);
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.actionbar_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.show_donations:
+                Intent donationsActivity = new Intent(getApplicationContext(), DonationsListActivity.class);
+                startActivity(donationsActivity);
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     public void onClick_showDonations(View v) {
