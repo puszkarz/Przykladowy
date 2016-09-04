@@ -1,5 +1,6 @@
 package com.example.bartek.przykladowy;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.PopupMenu;
@@ -17,7 +18,7 @@ import info.sqlite.model.User;
  */
 public class FirstLoginActivity extends AppCompatActivity implements PopupMenu.OnMenuItemClickListener {
 
-    private String _bloodType;
+    private String _bloodType = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,12 +79,17 @@ public class FirstLoginActivity extends AppCompatActivity implements PopupMenu.O
         DatabaseHelper db = new DatabaseHelper(getApplicationContext());
         TextView tv1 = (TextView) findViewById( R.id.FLL_f_addNick);
 
-        if (tv1 != null) {
-            CharSequence nick = tv1.getText();
+        if (tv1 != null && !_bloodType.equalsIgnoreCase("")) {
+            CharSequence nisdck = tv1.getText();
             db.insertUser(new User(nick.toString(), _bloodType));
 
             tv1.setText(R.string.debugOK);
 
         }
+
+        Intent mainActivity = new Intent(getApplicationContext(), MainActivity.class);
+        startActivity(mainActivity);
+        finish(); //@TODO - czy ta aktywność się zamyka?
+
     }
 }
