@@ -32,9 +32,9 @@ import java.net.URLEncoder;
 
 public class GeocodingTask extends AsyncTask<URL, Void, String> {
 
-    private static final String LOG_TAG = "Log MarkerTask";
-    private static final String geoUrl = "https://maps.googleapis.com/maps/api/geocode/json?";
-    private static final String serverKey = "AIzaSyAXsltmnu0OEc_UMgthhZ7BDiiajeVD_JI";
+    private static final String LOG_TAG = "GeoLoc: ";
+    private static final String GEO_URL = "https://maps.googleapis.com/maps/api/geocode/json?";
+    private static final String SERVER_KEY = "AIzaSyAXsltmnu0OEc_UMgthhZ7BDiiajeVD_JI";
 
     private GoogleMap mMap;
 
@@ -96,15 +96,15 @@ public class GeocodingTask extends AsyncTask<URL, Void, String> {
     static URL genGeocodingQuery(String address) {
         String addressEnc = null;
         try {
-            Log.d("GeoLoc: ", "Query address " + address);
+            Log.d(LOG_TAG, "Query address " + address);
             addressEnc = URLEncoder.encode(address, "UTF-8"); //Zamiast "UTF-8" mogłoby być java.nio.charset.StandardCharsets.UTF_8.toString()
-            Log.d("GeoLoc: ", "Encoded address: " + addressEnc);
+            Log.d(LOG_TAG, "Encoded address: " + addressEnc);
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace(); //TODO: exception handling
         }
         URL urlQuery = null;
         try {
-            urlQuery = new URL(geoUrl + "address=" + addressEnc + "&key=" + serverKey);
+            urlQuery = new URL(GEO_URL + "address=" + addressEnc + "&key=" + SERVER_KEY);
         } catch (MalformedURLException e) {
             e.printStackTrace(); //TODO: exception handling
         }
