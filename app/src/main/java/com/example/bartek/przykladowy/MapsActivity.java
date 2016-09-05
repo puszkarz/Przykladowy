@@ -1,23 +1,15 @@
 package com.example.bartek.przykladowy;
 
-import android.*;
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.location.Location;
-import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.util.Log;
 
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
-import java.net.URLEncoder;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -33,10 +25,6 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback,
         GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener,
@@ -46,16 +34,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private GoogleApiClient mGoogleApiClient;
     private Location mLastLocation;
 
-    static String geoUrl = "https://maps.googleapis.com/maps/api/geocode/json?";
-    static String serverKey = "AIzaSyAXsltmnu0OEc_UMgthhZ7BDiiajeVD_JI";
-//        pomocne linki
-//        http://stackoverflow.com/questions/29724192/using-json-for-android-maps-api-markers-not-showing-up
-//        https://maps.googleapis.com/maps/api/geocode/json?address=Winnetka&key=AIzaSyAXsltmnu0OEc_UMgthhZ7BDiiajeVD_JI
-//        https://maps.googleapis.com/maps/api/geocode/json?address=Czerwonego+Krzyza+5,+Wroclaw&region=pl&key=AIzaSyAXsltmnu0OEc_UMgthhZ7BDiiajeVD_JI
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         // Create an instance of GoogleAPIClient.
         if (mGoogleApiClient == null) {
             mGoogleApiClient = new GoogleApiClient.Builder(this)
@@ -67,31 +47,19 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
+
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-        String address = "Czerwonego Krzyza 5/9, 50-345 Wroclaw"; //        String address = "Czerwonego Krzyża 5/9, 50-345 Wrocław";
-        String addressEnc = null;
-        try {
-            Log.d("Trying 1: ", address);
-            Log.d("Trying 2: ", java.nio.charset.StandardCharsets.UTF_8.toString());
-            addressEnc = URLEncoder.encode(address, "UTF-8");
-            Log.d("Trying 3: ", addressEnc);
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
+    }
 
-        String geoQuery = geoUrl + "address=" + addressEnc + "&key=" + serverKey;
-
-        try {
-            Log.d("Trying URL: ", geoQuery);
-            URL urlQuery = new URL(geoQuery);
-            new MarkerTask().execute(urlQuery);
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
+    /** Marking several addresses on map */
+    void markAddressOnMap(String address) {
+        URL urlQuery = GeocodingTask.genGeocodingQuery(address);
+        Log.d("Geocoding API: ", "Trying URL: " + urlQuery.toString());
+        new GeocodingTask(mMap).execute(urlQuery);
     }
 
     /**
@@ -106,10 +74,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-        // Add a marker in Sydney and move the camera
-//        LatLng sydney = new LatLng(-34, 151);
-//        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-//        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        // Marking one address on map
+        String address = "Czerwonego Krzyza 5/9, 50-345 Wroclaw";
+        markAddressOnMap(address);
     }
 
     @Override
@@ -126,24 +93,25 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     @Override
     public void onConnected(Bundle connectionHint) {
-        Log.d("Location 0: ", "Polaczylem sie, ale pytam o permission");
+        Log.d("Location: ", "Polaczylem sie, ale pytam o permission");
         if (ActivityCompat.checkSelfPermission(this,
                 android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
                 ActivityCompat.checkSelfPermission(this,
                         android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             Log.d("Location 0a: ", "Pragne zgody!");
-            // Ostatni argument jest intem i jest dziwna, ale musi być MY_PERMISSIONS_REQUEST_READ_CONTACTS);
+            // Ostatni argument jest intem i jest dziwny, ale musi być, w przykładzie stała o nazwie MY_PERMISSIONS_REQUEST_READ_CONTACTS);
             ActivityCompat.requestPermissions(this,
                     new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, 5);
             ActivityCompat.requestPermissions(this,
                     new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 7);
         }
-//        if (mRequestingLocationUpdates) {
+
         startLocationUpdates();
-//        }
+
         mLastLocation = LocationServices.FusedLocationApi.getLastLocation(
                 mGoogleApiClient);
-        Log.d("Location 1: ", "On connect: Uzyskalem lokalizację.");
+
+        Log.d("Location: ", "On connect: Uzyskalem lokalizację.");
         addPosMarker();
     }
 
@@ -193,57 +161,4 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         Log.d("Location: ", "onConnectionFailed :(");
     }
 
-    private class MarkerTask extends AsyncTask<URL, Void, String> {
-
-        private static final String LOG_TAG = "Log MarkerTask";
-
-        // Invoked by execute() method of this object
-        @Override
-        protected String doInBackground(URL... urls) {
-            HttpURLConnection conn = null;
-            final StringBuilder json = new StringBuilder();
-            try {
-                // Connect to the web service
-                // URL url = new URL(urls);
-                URL url = urls[0];
-                conn = (HttpURLConnection) url.openConnection();
-                InputStreamReader in = new InputStreamReader(conn.getInputStream());
-                // Read the JSON data into the StringBuilder
-                int read;
-                char[] buff = new char[1024];
-                while ((read = in.read(buff)) != -1) {
-                    json.append(buff, 0, read);
-                }
-            } catch (IOException e) {
-                Log.e(LOG_TAG, "Error connecting to service", e);
-                // throw new IOException("Error connecting to service", e); //uncaught
-            } finally {
-                if (conn != null) {
-                    conn.disconnect();
-                }
-            }
-            return json.toString();
-        }
-
-        // Executed after the complete execution of doInBackground() method
-        @Override
-        protected void onPostExecute(String json) {
-            try {
-                JSONObject jsonObj = new JSONObject(json);
-                JSONObject res = jsonObj.getJSONArray("results").getJSONObject(0);
-                JSONObject loc = res.getJSONObject("geometry").getJSONObject("location");
-                LatLng latLng = new LatLng(loc.getDouble("lat"), loc.getDouble("lng"));
-                String formattedAddress = res.getString("formatted_address");
-                CameraPosition cameraPosition = new CameraPosition.Builder()
-                        .target(latLng).zoom(13).build();
-                mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
-                mMap.addMarker(new MarkerOptions()
-                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE))
-                        .title(formattedAddress)
-                        .position(latLng));
-            } catch (JSONException e) {
-                Log.e(LOG_TAG, "Error processing JSON", e);
-            }
-        }
-    }
 }

@@ -55,9 +55,9 @@
         android:layout_height="wrap_content"
         android:text="@string/but_addDonation_label"
         android:id="@+id/MDL_but_addDonation"
-        android:layout_below="@+id/MDL_f_stationId"
-        android:layout_alignStart="@+id/MDL_f_stationId"
-        android:onClick="onClick_addDonation" />
+        android:onClick="onClick_addDonation"
+        android:layout_above="@+id/MDL_fDesc_delStationId"
+        android:layout_toEndOf="@+id/MDL_fDesc_delStationId" />
 
     <Button
         android:layout_width="wrap_content"
@@ -76,7 +76,7 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="46dp"
-        android:onClick="onClick_backToMain" />
+        android:onClick="onClick_endThisActivity" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -86,5 +86,14 @@
         android:id="@+id/MDL_fDesc_delStationId"
         android:layout_above="@+id/MDL_but_delDonation"
         android:layout_toStartOf="@+id/MDL_f_delStationId" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/but_pickDate_label"
+        android:id="@+id/MDL_but_pickDate"
+        android:layout_below="@+id/MDL_f_stationId"
+        android:layout_alignStart="@+id/MDL_f_stationId" />
 
 </RelativeLayout>

@@ -2,17 +2,12 @@ package info.sqlite.model;
 
 public class Donation {
 
-    public enum donation_type {
-        //@TODO complete types
-        WHOLE_BLOOD, PLASMA
-    }
-
     private int _id;
     private String _date; //@TODO date
-    private String _type; //@TODO enum
+    private String _type;
     private int _volume;
-    private int _user_id; //@TODO user's nick?
-    private int _station_id; //@TODO station's name?
+    private int _user_id;
+    private int _station_id;
 
     public Donation() {
 

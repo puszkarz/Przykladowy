@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import java.util.Calendar;
 import java.util.List;
 
 import info.sqlite.helper.DatabaseHelper;
@@ -56,7 +57,8 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(stationsActivity);
                 return true;
             case R.id.manage_donations:
-                setContentView(R.layout.activity_manage_donations);
+                Intent manageDonationsActivity = new Intent(getApplicationContext(), ManageDonationsActivity.class);
+                startActivity(manageDonationsActivity);
                 return true;
             case R.id.manage_stations:
                 setContentView(R.layout.activity_manage_stations);
@@ -153,34 +155,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void onClick_addDonation(View v) {
-        DatabaseHelper db = new DatabaseHelper(getApplicationContext());
-        TextView tv1 = (TextView) findViewById( R.id.MDL_f_userId);
-        TextView tv2 = (TextView) findViewById( R.id.MDL_f_stationId);
-        if (tv1 != null && tv2 != null) {
-            CharSequence userId = tv1.getText();
-            CharSequence stationId = tv2.getText();
-            db.insertDonation(new Donation("a", "a", 0, Integer.parseInt(userId.toString()), Integer.parseInt(stationId.toString())));
-
-            tv1.setText(R.string.debugOK);
-            tv2.setText(R.string.debugOK);
-            logListDonations(db);
-        }
-    }
-
-    public void onClick_deleteDonation(View v) {
-        DatabaseHelper db = new DatabaseHelper(getApplicationContext());
-        TextView tv1 = (TextView) findViewById( R.id.MDL_f_delStationId);
-        if (tv1 != null) {
-            CharSequence donation_id = tv1.getText();
-            db.deleteDonation(Integer.parseInt(donation_id.toString()));
-
-            tv1.setText(R.string.debugOK);
-            logListDonations(db);
-        }
-
-    }
-
 
     // Writing Stations to Log
     private void logListStations(DatabaseHelper db) {
@@ -202,15 +176,5 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    // Writing Donations to Log
-    private void logListDonations(DatabaseHelper db) {
-        Log.d("Reading: ", "Reading all donations..");
-        List<Donation> donations = db.getAllDonations();
-        for (Donation cn : donations) {
-            String log = "Id: " + cn.get_id() + " , St id: " + cn.get_station_id() + " , Us id: " + cn.get_user_id();
-            Log.d("Name: ", log);
-        }
-        Log.e("Donation Count", "donation count " + db.getDonationsCount());
-    }
 
 }
