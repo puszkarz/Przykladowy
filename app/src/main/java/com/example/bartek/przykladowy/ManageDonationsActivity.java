@@ -1,6 +1,9 @@
 package com.example.bartek.przykladowy;
 
+import android.app.AlarmManager;
 import android.app.DatePickerDialog;
+import android.app.PendingIntent;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -53,6 +56,19 @@ public class ManageDonationsActivity extends AppCompatActivity{
 
 
     public void onClick_addDonation(View v) {
+        Calendar calendar = Calendar.getInstance();
+        //calendar.set(_year, _month+1, _day);
+        calendar.set(2016, 9, 5);
+        calendar.set(Calendar.HOUR_OF_DAY, 19);
+        calendar.set(Calendar.MINUTE, 10);
+        calendar.set(Calendar.SECOND, 30);
+
+        Intent intent = new Intent(getApplicationContext(), NotificationReciver.class);
+        PendingIntent pendingIntent= PendingIntent.getBroadcast(getApplicationContext(), 100, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+        alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
+
+
         DatabaseHelper db = new DatabaseHelper(getApplicationContext());
         TextView tv1 = (TextView) findViewById( R.id.MDL_f_userId);
         TextView tv2 = (TextView) findViewById( R.id.MDL_f_stationId);
