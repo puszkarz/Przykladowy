@@ -1,4 +1,4 @@
-package com.example.bartek.przykladowy;
+package edu.blooddonor;
 
 import android.app.AlarmManager;
 import android.app.DatePickerDialog;
@@ -17,9 +17,6 @@ import java.util.List;
 import info.sqlite.helper.DatabaseHelper;
 import info.sqlite.model.Donation;
 
-/**
- * Created by magda on 05.09.16.
- */
 public class ManageDonationsActivity extends AppCompatActivity{
     Calendar calendar = Calendar.getInstance();
     int _year = 0;
@@ -39,10 +36,10 @@ public class ManageDonationsActivity extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_manage_donations);
+        setContentView(edu.blooddonor.R.layout.activity_manage_donations);
 
 
-        Button dateButton = (Button)findViewById(R.id.MDL_but_pickDate);
+        Button dateButton = (Button)findViewById(edu.blooddonor.R.id.MDL_but_pickDate);
         dateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -70,16 +67,16 @@ public class ManageDonationsActivity extends AppCompatActivity{
 
 
         DatabaseHelper db = new DatabaseHelper(getApplicationContext());
-        TextView tv1 = (TextView) findViewById( R.id.MDL_f_userId);
-        TextView tv2 = (TextView) findViewById( R.id.MDL_f_stationId);
+        TextView tv1 = (TextView) findViewById( edu.blooddonor.R.id.MDL_f_userId);
+        TextView tv2 = (TextView) findViewById( edu.blooddonor.R.id.MDL_f_stationId);
         if (tv1 != null && tv2 != null &&  _year != 0 && _month != 0 && _day !=0) {
             CharSequence userId = tv1.getText();
             CharSequence stationId = tv2.getText();
             String dateInString = _year + "/" + _month + "/" + _day;
             db.insertDonation(new Donation(dateInString, "type", 0, Integer.parseInt(userId.toString()), Integer.parseInt(stationId.toString())));
 
-            tv1.setText(R.string.debugOK);
-            tv2.setText(R.string.debugOK);
+            tv1.setText(edu.blooddonor.R.string.debugOK);
+            tv2.setText(edu.blooddonor.R.string.debugOK);
             logListDonations(db);
         }
     }
@@ -97,12 +94,12 @@ public class ManageDonationsActivity extends AppCompatActivity{
 
     public void onClick_deleteDonation(View v) {
         DatabaseHelper db = new DatabaseHelper(getApplicationContext());
-        TextView tv1 = (TextView) findViewById( R.id.MDL_f_delStationId);
+        TextView tv1 = (TextView) findViewById( edu.blooddonor.R.id.MDL_f_delStationId);
         if (tv1 != null) {
             CharSequence donation_id = tv1.getText();
             db.deleteDonation(Integer.parseInt(donation_id.toString()));
 
-            tv1.setText(R.string.debugOK);
+            tv1.setText(edu.blooddonor.R.string.debugOK);
             logListDonations(db);
         }
 

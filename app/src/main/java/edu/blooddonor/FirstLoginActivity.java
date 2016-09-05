@@ -1,4 +1,4 @@
-package com.example.bartek.przykladowy;
+package edu.blooddonor;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,9 +13,6 @@ import android.widget.Toast;
 import info.sqlite.helper.DatabaseHelper;
 import info.sqlite.model.User;
 
-/**
- * Created by magda on 03.09.16.
- */
 public class FirstLoginActivity extends AppCompatActivity implements PopupMenu.OnMenuItemClickListener {
 
     private String _bloodType = "";
@@ -23,14 +20,14 @@ public class FirstLoginActivity extends AppCompatActivity implements PopupMenu.O
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_first_login);
+        setContentView(edu.blooddonor.R.layout.activity_first_login);
     }
 
     public void onClick_showPopUpBloodTypes(View v) {
         PopupMenu popup = new PopupMenu(this, v);
         popup.setOnMenuItemClickListener(FirstLoginActivity.this);
         MenuInflater inflater = popup.getMenuInflater();
-        inflater.inflate(R.menu.bloodtype_menu, popup.getMenu());
+        inflater.inflate(edu.blooddonor.R.menu.bloodtype_menu, popup.getMenu());
         popup.show();
 
     }
@@ -38,35 +35,35 @@ public class FirstLoginActivity extends AppCompatActivity implements PopupMenu.O
     @Override
     public boolean onMenuItemClick(MenuItem item) {
         switch (item.getItemId()){
-            case R.id.APlus:
+            case edu.blooddonor.R.id.APlus:
                 Toast.makeText(getBaseContext(), "You selected A+", Toast.LENGTH_SHORT).show();
                 _bloodType = "A+";
                 return true;
-            case R.id.AMinus:
+            case edu.blooddonor.R.id.AMinus:
                 Toast.makeText(getBaseContext(), "You selected A-", Toast.LENGTH_SHORT).show();
                 _bloodType = "A-";
                 return true;
-            case R.id.BPlus:
+            case edu.blooddonor.R.id.BPlus:
                 Toast.makeText(getBaseContext(), "You selected B+", Toast.LENGTH_SHORT).show();
                 _bloodType = "B+";
                 return true;
-            case R.id.BMinus:
+            case edu.blooddonor.R.id.BMinus:
                 Toast.makeText(getBaseContext(), "You selected B-", Toast.LENGTH_SHORT).show();
                 _bloodType = "B-";
                 return true;
-            case R.id.ABPlus:
+            case edu.blooddonor.R.id.ABPlus:
                 Toast.makeText(getBaseContext(), "You selected AB+", Toast.LENGTH_SHORT).show();
                 _bloodType = "AB+";
                 return true;
-            case R.id.ABMinus:
+            case edu.blooddonor.R.id.ABMinus:
                 Toast.makeText(getBaseContext(), "You selected AB-", Toast.LENGTH_SHORT).show();
                 _bloodType = "AB-";
                 return true;
-            case R.id.ZeroPlus:
+            case edu.blooddonor.R.id.ZeroPlus:
                 Toast.makeText(getBaseContext(), "You selected 0+", Toast.LENGTH_SHORT).show();
                 _bloodType = "0+";
                 return true;
-            case R.id.ZeroMinus:
+            case edu.blooddonor.R.id.ZeroMinus:
                 Toast.makeText(getBaseContext(), "You selected 0-", Toast.LENGTH_SHORT).show();
                 _bloodType = "0-";
                 return true;
@@ -77,13 +74,13 @@ public class FirstLoginActivity extends AppCompatActivity implements PopupMenu.O
 
     public void onClick_addUser(View v){
         DatabaseHelper db = new DatabaseHelper(getApplicationContext());
-        TextView tv1 = (TextView) findViewById( R.id.FLL_f_addNick);
+        TextView tv1 = (TextView) findViewById( edu.blooddonor.R.id.FLL_f_addNick);
 
         if (tv1 != null && !_bloodType.equalsIgnoreCase("")) {
             CharSequence nick = tv1.getText();
             db.insertUser(new User(nick.toString(), _bloodType));
 
-            tv1.setText(R.string.debugOK);
+            tv1.setText(edu.blooddonor.R.string.debugOK);
 
         }
 

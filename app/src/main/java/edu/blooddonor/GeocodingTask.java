@@ -1,4 +1,4 @@
-package com.example.bartek.przykladowy;
+package edu.blooddonor;
 
 import android.os.AsyncTask;
 import android.util.Log;

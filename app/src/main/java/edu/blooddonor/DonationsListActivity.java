@@ -1,4 +1,4 @@
-package com.example.bartek.przykladowy;
+package edu.blooddonor;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -17,7 +17,7 @@ public class DonationsListActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_donations_list);
+        setContentView(edu.blooddonor.R.layout.activity_donations_list);
         presentAllDonatons();
     }
 
@@ -26,7 +26,7 @@ public class DonationsListActivity extends AppCompatActivity {
         DatabaseHelper db = new DatabaseHelper(getApplicationContext());
         List<Donation> donations = db.getAllDonations();
 
-        ListView myListView = (ListView) findViewById(R.id.DLAL_listView);
+        ListView myListView = (ListView) findViewById(edu.blooddonor.R.id.DLAL_listView);
         ArrayAdapter<String> listViewAdapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_list_item_1, donListToString(donations));
         if (myListView != null) {
