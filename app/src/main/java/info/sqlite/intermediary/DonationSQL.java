@@ -26,7 +26,7 @@ public class DonationSQL {
         return "CREATE TABLE " + TABLE_DONATION
                 + "("
                 + KEY_ID + " INTEGER PRIMARY KEY,"
-                + KEY_DATE + " TEXT,"
+                + KEY_DATE + " DAYTIME,"
                 + KEY_TYPE + " TEXT,"
                 + KEY_VOLUME + " INTEGER,"
                 + KEY_USER_ID + " INTEGER NOT NULL,"

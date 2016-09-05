@@ -43,6 +43,7 @@
     <string name="ABMinus">AB-</string>
     <string name="ZeroPlus">0+</string>
     <string name="ZeroMinus">0-</string>
+    <string name="but_pickDate_label">Pick date</string>
 
 </resources>
 

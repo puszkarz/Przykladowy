@@ -18,6 +18,8 @@
         <activity android:name=".DonationsListActivity" />
         <activity android:name=".FirstLoginActivity" />
         <activity android:name=".StationsListActivity"/>
+        <activity android:name=".ManageDonationsActivity"/>
+
     </application>
 
 </manifest>
