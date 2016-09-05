@@ -15,20 +15,33 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLEncoder;
 
-public class MarkerTask extends AsyncTask<URL, Void, String> {
+//useful links
+//http://stackoverflow.com/questions/29724192/using-json-for-android-maps-api-markers-not-showing-up
+//https://maps.googleapis.com/maps/api/geocode/json?address=Winnetka&key=AIzaSyAXsltmnu0OEc_UMgthhZ7BDiiajeVD_JI
+//https://maps.googleapis.com/maps/api/geocode/json?address=Czerwonego+Krzyza+5,+Wroclaw&region=pl&key=AIzaSyAXsltmnu0OEc_UMgthhZ7BDiiajeVD_JI
+
+/**
+ * Geocoding task sends queries to Google Maps Geocoding API and retrives points coordinates basing on addresses.
+ */
+
+public class GeocodingTask extends AsyncTask<URL, Void, String> {
 
     private static final String LOG_TAG = "Log MarkerTask";
+    private static final String geoUrl = "https://maps.googleapis.com/maps/api/geocode/json?";
+    private static final String serverKey = "AIzaSyAXsltmnu0OEc_UMgthhZ7BDiiajeVD_JI";
 
     private GoogleMap mMap;
 
-    public MarkerTask(GoogleMap mMap)
+    public GeocodingTask(GoogleMap mMap)
     {
         this.mMap = mMap;
     }
-
 
     // Invoked by execute() method of this object
     @Override
@@ -78,4 +91,24 @@ public class MarkerTask extends AsyncTask<URL, Void, String> {
             Log.e(LOG_TAG, "Error processing JSON", e);
         }
     }
+
+    /** Generation of query to Google Maps Geocoding API basing on address */
+    static URL genGeocodingQuery(String address) {
+        String addressEnc = null;
+        try {
+            Log.d("GeoLoc: ", "Query address " + address);
+            addressEnc = URLEncoder.encode(address, "UTF-8"); //Zamiast "UTF-8" mogłoby być java.nio.charset.StandardCharsets.UTF_8.toString()
+            Log.d("GeoLoc: ", "Encoded address: " + addressEnc);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace(); //TODO: exception handling
+        }
+        URL urlQuery = null;
+        try {
+            urlQuery = new URL(geoUrl + "address=" + addressEnc + "&key=" + serverKey);
+        } catch (MalformedURLException e) {
+            e.printStackTrace(); //TODO: exception handling
+        }
+        return urlQuery; //TODO: null handling
+    }
+
 }
