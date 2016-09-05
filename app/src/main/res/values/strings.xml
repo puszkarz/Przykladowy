@@ -28,10 +28,23 @@
     <string name="but_delDonation_label">Delete Donation</string>
     <string name="but_backToMain_label">Back To Main</string>
 
+    <string name="but_bloodTypesPopUp_label">Select Blood Type</string>
+    <string name="userNick_label">Nick</string>
+    <string name="but_addUser_label">Add User</string>
 
     <string name="debugOK">OK</string>
     <string name="debugWrong">Wrong</string>
     <string name="title_activity_maps">Map</string>
+
+    <string name="APlus">A+</string>
+    <string name="AMinus">A-</string>
+    <string name="BPlus">B+</string>
+    <string name="BMinus">B-</string>
+    <string name="ABPlus">AB+</string>
+    <string name="ABMinus">AB-</string>
+    <string name="ZeroPlus">0+</string>
+    <string name="ZeroMinus">0-</string>
+    <string name="but_pickDate_label">Pick date</string>
 
 </resources>
 

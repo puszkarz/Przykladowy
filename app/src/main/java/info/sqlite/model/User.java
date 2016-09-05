@@ -4,14 +4,14 @@ public class User {
 
     private int _id;
     private String _nick;
-    private int _bloodTypeID;
+    private String _bloodTypeID;
 
     //constructors
     public User() {
 
     }
 
-    public User(String nick, int bloodTypeID) {
+    public User(String nick, String bloodTypeID) {
         this._nick = nick;
         this._bloodTypeID = bloodTypeID;
     }
@@ -19,7 +19,7 @@ public class User {
     //setters
     public void set_id(int _id) { this._id = _id; }
 
-    public void set_bloodTypeID(int _bloodTypeID) {
+    public void set_bloodTypeID(String _bloodTypeID) {
         this._bloodTypeID = _bloodTypeID;
     }
 
@@ -30,7 +30,7 @@ public class User {
     //getters
     public int get_id() { return _id; }
 
-    public int get_bloodTypeID() {
+    public String get_bloodTypeID() {
         return _bloodTypeID;
     }
 

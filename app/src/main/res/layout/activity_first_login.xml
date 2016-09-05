@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="151dp"
+        android:onClick="onClick_showPopUpBloodTypes"
+        android:text="@string/but_bloodTypesPopUp_label"
+        android:id="@+id/FLL_but_selectBloodType"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/FAL_b_addUser"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="88dp"
+        android:text="@string/but_addUser_label"
+        android:onClick="onClick_addUser" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/FLL_f_addNick"
+        android:layout_alignBottom="@+id/FLL_but_selectBloodType"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="69dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/userNick_label"
+        android:id="@+id/textView"
+        android:layout_alignBottom="@+id/FLL_f_addNick"
+        android:layout_toStartOf="@+id/FLL_f_addNick" />
+</RelativeLayout>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/APlus"
+        android:title="@string/APlus"
+        />
+    <item
+        android:id="@+id/AMinus"
+        android:title="@string/AMinus"
+        />
+    <item
+        android:id="@+id/BPlus"
+        android:title="@string/BPlus"
+        />
+    <item
+        android:id="@+id/BMinus"
+        android:title="@string/BMinus"
+        />
+    <item
+        android:id="@+id/ABPlus"
+        android:title="@string/ABPlus"
+        />
+    <item
+        android:id="@+id/ABMinus"
+        android:title="@string/ABMinus"
+        />
+    <item
+        android:id="@+id/ZeroPlus"
+        android:title="@string/ZeroPlus"
+        />
+    <item
+        android:id="@+id/ZeroMinus"
+        android:title="@string/ZeroMinus"
+        />
+
+</menu>
