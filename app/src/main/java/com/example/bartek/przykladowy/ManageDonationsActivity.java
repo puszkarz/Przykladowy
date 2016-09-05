@@ -19,13 +19,20 @@ import info.sqlite.model.Donation;
  */
 public class ManageDonationsActivity extends AppCompatActivity{
     Calendar calendar = Calendar.getInstance();
+    int _year = 0;
+    int _month = 0;
+    int _day = 0;
 
     DatePickerDialog.OnDateSetListener listener = new DatePickerDialog.OnDateSetListener(){
         @Override
-        public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-            Toast.makeText(getBaseContext(), "Selected date:" + monthOfYear + "/" + dayOfMonth + "/" + year, Toast.LENGTH_LONG).show();
+        public void onDateSet(DatePicker view, int year, int month, int day) {
+            Toast.makeText(getBaseContext(), "Selected date:" + month + "/" + day + "/" + year, Toast.LENGTH_LONG).show();
+            _year = year;
+            _month = month;
+            _day = day;
         }
     };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,10 +56,11 @@ public class ManageDonationsActivity extends AppCompatActivity{
         DatabaseHelper db = new DatabaseHelper(getApplicationContext());
         TextView tv1 = (TextView) findViewById( R.id.MDL_f_userId);
         TextView tv2 = (TextView) findViewById( R.id.MDL_f_stationId);
-        if (tv1 != null && tv2 != null) {
+        if (tv1 != null && tv2 != null &&  _year != 0 && _month != 0 && _day !=0) {
             CharSequence userId = tv1.getText();
             CharSequence stationId = tv2.getText();
-            db.insertDonation(new Donation("a", "a", 0, Integer.parseInt(userId.toString()), Integer.parseInt(stationId.toString())));
+            String dateInString = _year + "/" + _month + "/" + _day;
+            db.insertDonation(new Donation(dateInString, "type", 0, Integer.parseInt(userId.toString()), Integer.parseInt(stationId.toString())));
 
             tv1.setText(R.string.debugOK);
             tv2.setText(R.string.debugOK);
@@ -65,7 +73,7 @@ public class ManageDonationsActivity extends AppCompatActivity{
         Log.d("Reading: ", "Reading all donations..");
         List<Donation> donations = db.getAllDonations();
         for (Donation cn : donations) {
-            String log = "Id: " + cn.get_id() + " , St id: " + cn.get_station_id() + " , Us id: " + cn.get_user_id();
+            String log = "Id: " + cn.get_id() + " , St id: " + cn.get_station_id() + " , Us id: " + cn.get_user_id() + " , Date: " + cn.get_date();
             Log.d("Name: ", log);
         }
         Log.e("Donation Count", "donation count " + db.getDonationsCount());
