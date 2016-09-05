@@ -1,6 +1,5 @@
 package com.example.bartek.przykladowy;
 
-import android.*;
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.location.Location;
@@ -55,7 +54,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         // Create an instance of GoogleAPIClient.
         if (mGoogleApiClient == null) {
             mGoogleApiClient = new GoogleApiClient.Builder(this)
@@ -67,31 +65,37 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
+
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-        String address = "Czerwonego Krzyza 5/9, 50-345 Wroclaw"; //        String address = "Czerwonego Krzyża 5/9, 50-345 Wrocław";
-        String addressEnc = null;
-        try {
-            Log.d("Trying 1: ", address);
-            Log.d("Trying 2: ", java.nio.charset.StandardCharsets.UTF_8.toString());
-            addressEnc = URLEncoder.encode(address, "UTF-8");
-            Log.d("Trying 3: ", addressEnc);
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
+    }
 
-        String geoQuery = geoUrl + "address=" + addressEnc + "&key=" + serverKey;
-
+    /** Marking several addresses on map */
+    void markAddressOnMap(String address) {
+        String geoQuery = genGeoLocQuery(address);
         try {
             Log.d("Trying URL: ", geoQuery);
             URL urlQuery = new URL(geoQuery);
             new MarkerTask().execute(urlQuery);
         } catch (MalformedURLException e) {
-            e.printStackTrace();
+            e.printStackTrace(); //TODO: exception handling
         }
+    }
+
+    /** Generation of geoloc query to Google API basing on address */
+    String genGeoLocQuery(String address) {
+        String addressEnc = null;
+        try {
+            Log.d("GeoLoc: ", "Query address " + address);
+            addressEnc = URLEncoder.encode(address, "UTF-8"); //Zamiast "UTF-8" mogłoby być java.nio.charset.StandardCharsets.UTF_8.toString()
+            Log.d("GeoLoc: ", "Encoded address: " + addressEnc);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace(); //TODO: exception handling
+        }
+        return geoUrl + "address=" + addressEnc + "&key=" + serverKey;
     }
 
     /**
@@ -106,10 +110,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-        // Add a marker in Sydney and move the camera
-//        LatLng sydney = new LatLng(-34, 151);
-//        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-//        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        // Marking one address on map
+        String address = "Czerwonego Krzyza 5/9, 50-345 Wroclaw";
+        markAddressOnMap(address);
     }
 
     @Override
