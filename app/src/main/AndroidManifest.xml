@@ -20,7 +20,7 @@
         <activity android:name=".FirstLoginActivity" />
         <activity android:name=".StationsListActivity"/>
         <activity android:name=".ManageDonationsActivity"/>
-        <receiver android:name=".NotificationReciver"/>
+        <receiver android:name=".NotificationReceiver"/>
 
     </application>
 
