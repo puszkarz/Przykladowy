@@ -16,8 +16,8 @@ public class StationSQL {
     private static final String KEY_ID = "id";
     private static final String KEY_NAME = "_name";
     private static final String KEY_ADDRESS = "_address";
-    private static final String KEY_COORDINATE_X = "_coordinate_x";
-    private static final String KEY_COORDINATE_Y = "_coordinate_y";
+    private static final String KEY_LATITUDE = "_latitude";
+    private static final String KEY_LONGITUDE = "_longitude";
 
     // Station table create statement
     public static String createTable() {
@@ -25,35 +25,35 @@ public class StationSQL {
                 + "(" + KEY_ID + " INTEGER PRIMARY KEY,"
                 + KEY_NAME + " TEXT NOT NULL ,"
                 + KEY_ADDRESS + " TEXT NOT NULL,"
-                + KEY_COORDINATE_X + " INTEGER,"
-                + KEY_COORDINATE_Y + " INTEGER"
+                + KEY_LATITUDE + " REAL NOT NULL,"
+                + KEY_LONGITUDE + " REAL NOT NULL"
                 + ")";
     }
 
     public static ContentValues toContentValue(Station station) {
         ContentValues values = new ContentValues();
+        // Assumption that it is used only at initialization of database, so KEY_ID is omitted
         values.put(KEY_NAME, station.get_name());
         values.put(KEY_ADDRESS, station.get_address());
-        values.put(KEY_COORDINATE_X, station.get_coordinate_x());
-        values.put(KEY_COORDINATE_Y, station.get_coordinate_y());
+        values.put(KEY_LATITUDE, station.get_latitude());
+        values.put(KEY_LONGITUDE, station.get_longitude());
         return values;
     }
 
     public static Station getStation(Cursor c) {
-        Station station = new Station();
-        station.set_id(c.getInt(c.getColumnIndex(KEY_ID)));
-        station.set_name((c.getString(c.getColumnIndex(KEY_NAME))));
-        station.set_address(c.getString(c.getColumnIndex(KEY_ADDRESS)));
-        station.set_coordinate_x(c.getInt(c.getColumnIndex(KEY_COORDINATE_X)));
-        station.set_coordinate_y(c.getInt(c.getColumnIndex(KEY_COORDINATE_Y)));
-        return station;
+        return new Station(
+                c.getInt(c.getColumnIndex(KEY_ID)),
+                c.getString(c.getColumnIndex(KEY_NAME)),
+                c.getString(c.getColumnIndex(KEY_ADDRESS)),
+                c.getDouble(c.getColumnIndex(KEY_LATITUDE)),
+                c.getDouble(c.getColumnIndex(KEY_LONGITUDE)));
     }
 
     public static String getSelectAllQuery() {
         return "SELECT  * FROM " + TABLE_STATION;
     }
 
-    public static String getSelectSingleQuery(long station_id) {
+    public static String getSelectSingleQuery(int station_id) {
         return "SELECT  * FROM " + TABLE_STATION + " WHERE "
                 + KEY_ID + " = " + station_id;
     }

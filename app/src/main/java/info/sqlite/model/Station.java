@@ -1,23 +1,22 @@
 package info.sqlite.model;
 
-import android.location.Location;
-
 public class Station {
     private int _id;
     private String _name;
     private String _address;
-    private int _coordinate_x;
-    private int _coordinate_y;
+    private double _latitude;
+    private double _longitude;
 
-    public Station() {
-
-    }
-
-    public Station(String name, String address, int x, int y) {
+    public Station(String name, String address, double x, double y) {
         this._name = name;
         this._address = address;
-        this._coordinate_x = x;
-        this._coordinate_y = y;
+        this._latitude = x;
+        this._longitude = y;
+    }
+
+    public Station(int id, String name, String address, double x, double y) {
+        this(name, address, x, y);
+        this._id = id;
     }
 
     //setters
@@ -31,12 +30,12 @@ public class Station {
         this._address = _address;
     }
 
-    public void set_coordinate_x(int _coordinate_x) {
-        this._coordinate_x = _coordinate_x;
+    public void set_latitude(double _latitude) {
+        this._latitude = _latitude;
     }
 
-    public void set_coordinate_y(int _coordinate_y) {
-        this._coordinate_y = _coordinate_y;
+    public void set_longitude(double _longitude) {
+        this._longitude = _longitude;
     }
 
     //getters
@@ -50,17 +49,20 @@ public class Station {
         return _address;
     }
 
-    public int get_coordinate_x() {
-        return _coordinate_x;
+    public double get_latitude() {
+        return _latitude;
     }
 
-    public int get_coordinate_y() {
-        return _coordinate_y;
+    public double get_longitude() {
+        return _longitude;
     }
 
     public String toString() {
-        return "Station id: " + Integer.toString(get_id())
-                + ", stName: " + get_name()
-                + ", stAdr: " + get_address();
+//        return get_name();
+        return "St.id: " + Integer.toString(get_id())
+                + ", n: " + get_name()
+                + ", a: " + get_address()
+                + ", lat: " + get_latitude()
+                + ", long: " + get_longitude();
     }
 }

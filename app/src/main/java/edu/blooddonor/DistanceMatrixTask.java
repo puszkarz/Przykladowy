@@ -14,7 +14,12 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import info.sqlite.helper.DatabaseHelper;
 import info.sqlite.model.Station;
@@ -27,7 +32,7 @@ public class DistanceMatrixTask extends AsyncTask<String, Void, String> {
 
     private Context context;
     private ListView distStationsListView;
-    private List<Station> stations;
+    private ArrayList<Station> stations;
 
     // run in Activity as DistanceMatrixTask(targetListView, getApplicationContext());
     public DistanceMatrixTask(ListView targetListView, Context context) {
@@ -70,30 +75,37 @@ public class DistanceMatrixTask extends AsyncTask<String, Void, String> {
 
     @Override
     protected void onPostExecute(String json) {
-        ArrayList<String> distances = getDistanceFromJSON(json);
+        Map<Station, Double> distanceMap = getDistanceFromJSON(json);
         ArrayAdapter<String> listViewAdapter = new ArrayAdapter<>(context,
-                android.R.layout.simple_list_item_1, statListToString(stations, distances));
+                android.R.layout.simple_list_item_1, statListToString(distanceMap));
         if (distStationsListView != null) {
             distStationsListView.setAdapter(listViewAdapter);
         }
     }
 
-    private static ArrayList<String> getDistanceFromJSON(String json) {
-        ArrayList<String> out = new ArrayList<>();
+    private static Map<Station, Double> getDistanceFromJSON(String json) {
+        Map<Station, Double> distanceMap = new HashMap<Station, Double>();
         //TODO: Decode JSON response
 //        for (Station st : stations) {
 //            out.add(st.toString());
 //        }
-        return out;
+        return distanceMap;
     }
 
-    private static ArrayList<String> statListToString(List<Station> stations, ArrayList<String> distance) {
-        //TODO: zrobić jako mapę!
-        ArrayList<String> out = new ArrayList<>();
-        int idx = 0;
-        for (Station st : stations) {
-            out.add(st.toString() + distance.get(idx));
-            idx++;
+    private static List<String> statListToString(Map<Station, Double> distanceMap) {
+        // Sort by the distance
+        List<Map.Entry<Station, Double>> listStatDist =
+                new LinkedList<Map.Entry<Station, Double>>( distanceMap.entrySet() );
+        Collections.sort( listStatDist,
+            new Comparator<Map.Entry<Station, Double>>() {
+                public int compare( Map.Entry<Station, Double> o1, Map.Entry<Station, Double> o2 ) {
+                    return (o1.getValue()).compareTo( o2.getValue() );
+                }
+            } );
+        // Make list of strings
+        List<String> out = new ArrayList<>();
+        for (Map.Entry<Station, Double> entry : listStatDist) {
+            out.add(entry.getKey().toString() + " km, " + entry.getValue());
         }
         return out;
     }
@@ -102,8 +114,8 @@ public class DistanceMatrixTask extends AsyncTask<String, Void, String> {
     //        origins=41.43206,-81.38992|-33.86748,151.20699
     //        &destinations=40.6905615,-73.9976592|40.6905615,-73.9976592
     //        &key=YOUR_API_KEY
-
     private static URL genDistanceMatrixQuery(String address) {
+        //TODO: uwzględnić listę stacji i lokalizację
         String addressEnc = null;
         try {
             Log.d(LOG_TAG, "Query address " + address);
@@ -118,6 +130,7 @@ public class DistanceMatrixTask extends AsyncTask<String, Void, String> {
                     "origins=" + addressEnc +
                     "&destinations=" + addressEnc +
                     "&key=" + SERVER_KEY);
+            Log.d(LOG_TAG, "URL generated: " + urlQuery.toString());
         } catch (MalformedURLException e) {
             e.printStackTrace(); //TODO: exception handling
         }

@@ -23,7 +23,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String LOG = "DatabaseHelper";
 
     // Database Version
-    private static final int DATABASE_VERSION = 15;
+    private static final int DATABASE_VERSION = 16;
 
     // Database Name
     private static final String DATABASE_NAME = "Donations_List";
@@ -50,6 +50,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
+
     // ------------------------ "station" table methods ----------------//
     /** Inserting a station */
     public long insertStation(Station station) {
@@ -60,7 +61,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     /** Get a single station */
-    public Station getStation(long station_id) {
+    public Station getStation(int station_id) {
         SQLiteDatabase db = this.getReadableDatabase();
         String selectQuery = StationSQL.getSelectSingleQuery(station_id);
         Log.e(LOG, selectQuery);
@@ -76,8 +77,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     /** getting all the stations */
-    public List<Station> getAllStations() {
-        List<Station> stations = new ArrayList<>();
+    public ArrayList<Station> getAllStations() {
+        ArrayList<Station> stations = new ArrayList<>();
         String selectQuery = StationSQL.getSelectAllQuery();
         Log.e(LOG, selectQuery);
         SQLiteDatabase db = this.getReadableDatabase();
@@ -93,16 +94,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return stations;
     }
 
-    /** Updating a station */
-    public int updateStation(Station station) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues values = StationSQL.toContentValue(station);
-        int ret = db.update(StationSQL.getTableName(), values,
-                StationSQL.getKeyId() + " = " + String.valueOf(station.get_id()), null);
-        db.close();
-        return ret;
-    }
-
     /** Deleting a station */
     public void deleteStation(long station_id) {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -112,10 +103,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
 
-
-
     // ------------------------ "user" table methods ----------------//
-
     /** Creating a user */
     public long insertUser(User user) {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -190,7 +178,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 
     // ------------------------ "donation" table methods ----------------//
-
     /** Inserting a donation */
     public long insertDonation(Donation donation) {
         SQLiteDatabase db = this.getWritableDatabase();

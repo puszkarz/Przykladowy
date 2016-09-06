@@ -106,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
 
         if (tv1 != null) {
             CharSequence name = tv1.getText();
-            db.insertStation(new Station(name.toString(), "", 0, 0));
+            db.insertStation(new Station(name.toString(), "adres", 0.0, 0.0));
 
             tv1.setText(edu.blooddonor.R.string.debugOK);
             logListStations(db);
