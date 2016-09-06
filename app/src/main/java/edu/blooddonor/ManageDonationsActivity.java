@@ -14,8 +14,8 @@ import android.widget.DatePicker;
 import java.util.Calendar;
 import java.util.List;
 
-import info.sqlite.helper.DatabaseHelper;
-import info.sqlite.model.Donation;
+import edu.blooddonor.sqliteDB.DatabaseHelper;
+import edu.blooddonor.model.Donation;
 
 public class ManageDonationsActivity extends AppCompatActivity{
     Calendar calendar = Calendar.getInstance();

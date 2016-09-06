@@ -1,14 +1,14 @@
-package info.sqlite.intermediary;
+package edu.blooddonor.sqliteDB;
 
 import android.content.ContentValues;
 import android.database.Cursor;
 
-import info.sqlite.model.Station;
+import edu.blooddonor.model.Station;
 
 /**
  * Set of methods supporting SQLite access for Station model
  */
-public abstract class StationSQL {
+abstract class StationSQL {
 
     private static final String TABLE_STATION = "stations";
 

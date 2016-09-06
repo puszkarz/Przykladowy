@@ -10,8 +10,8 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import info.sqlite.helper.DatabaseHelper;
-import info.sqlite.model.User;
+import edu.blooddonor.sqliteDB.DatabaseHelper;
+import edu.blooddonor.model.User;
 
 public class FirstLoginActivity extends AppCompatActivity implements PopupMenu.OnMenuItemClickListener {
 

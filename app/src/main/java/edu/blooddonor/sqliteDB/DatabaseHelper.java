@@ -1,4 +1,4 @@
-package info.sqlite.helper;
+package edu.blooddonor.sqliteDB;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -10,12 +10,9 @@ import android.util.Log;
 import java.util.ArrayList;
 import java.util.List;
 
-import info.sqlite.intermediary.DonationSQL;
-import info.sqlite.intermediary.StationSQL;
-import info.sqlite.intermediary.UserSQL;
-import info.sqlite.model.Donation;
-import info.sqlite.model.Station;
-import info.sqlite.model.User;
+import edu.blooddonor.model.Donation;
+import edu.blooddonor.model.Station;
+import edu.blooddonor.model.User;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
@@ -23,7 +20,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String LOG = "DatabaseHelper";
 
     // Database Version
-    private static final int DATABASE_VERSION = 18;
+    private static final int DATABASE_VERSION = 19;
 
     // Database Name
     private static final String DATABASE_NAME = "Donations_List";

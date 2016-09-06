@@ -9,8 +9,8 @@ import android.widget.ListView;
 import java.util.ArrayList;
 import java.util.List;
 
-import info.sqlite.helper.DatabaseHelper;
-import info.sqlite.model.Station;
+import edu.blooddonor.sqliteDB.DatabaseHelper;
+import edu.blooddonor.model.Station;
 
 public class StationsListActivity extends AppCompatActivity {
 

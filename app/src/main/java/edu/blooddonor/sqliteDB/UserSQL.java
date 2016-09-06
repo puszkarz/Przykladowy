@@ -1,14 +1,14 @@
-package info.sqlite.intermediary;
+package edu.blooddonor.sqliteDB;
 
 import android.content.ContentValues;
 import android.database.Cursor;
 
-import info.sqlite.model.User;
+import edu.blooddonor.model.User;
 
 /**
  * Set of methods supporting SQLite access for User model
  */
-public abstract class UserSQL {
+abstract class UserSQL {
 
     private static final String TABLE_USER = "users";
 

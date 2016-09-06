@@ -1,11 +1,11 @@
-package info.sqlite.helper;
+package edu.blooddonor.sqliteDB;
 
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import java.util.ArrayList;
 
-import info.sqlite.model.Station;
+import edu.blooddonor.model.Station;
 
 /**
  * Methods adding initial content to database.

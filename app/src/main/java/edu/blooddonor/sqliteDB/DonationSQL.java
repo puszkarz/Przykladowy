@@ -1,14 +1,14 @@
-package info.sqlite.intermediary;
+package edu.blooddonor.sqliteDB;
 
 import android.content.ContentValues;
 import android.database.Cursor;
 
-import info.sqlite.model.Donation;
+import edu.blooddonor.model.Donation;
 
 /**
  * Set of methods supporting SQLite access for Donation model
  */
-public abstract class DonationSQL {
+abstract class DonationSQL {
 
     // Table Name
     private static final String TABLE_DONATION = "donations";

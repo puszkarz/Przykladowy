@@ -8,11 +8,9 @@ import android.widget.ListView;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -21,8 +19,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import info.sqlite.helper.DatabaseHelper;
-import info.sqlite.model.Station;
+import edu.blooddonor.sqliteDB.DatabaseHelper;
+import edu.blooddonor.model.Station;
 
 import com.google.android.gms.maps.model.LatLng;
 

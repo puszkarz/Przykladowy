@@ -9,8 +9,8 @@ import android.widget.ListView;
 import java.util.ArrayList;
 import java.util.List;
 
-import info.sqlite.helper.DatabaseHelper;
-import info.sqlite.model.Donation;
+import edu.blooddonor.sqliteDB.DatabaseHelper;
+import edu.blooddonor.model.Donation;
 
 public class DonationsListActivity extends AppCompatActivity {
 

@@ -25,8 +25,8 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-import info.sqlite.helper.DatabaseHelper;
-import info.sqlite.model.Station;
+import edu.blooddonor.sqliteDB.DatabaseHelper;
+import edu.blooddonor.model.Station;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback,
         GoogleApiClient.ConnectionCallbacks,

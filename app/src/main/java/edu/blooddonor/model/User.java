@@ -1,4 +1,4 @@
-package info.sqlite.model;
+package edu.blooddonor.model;
 
 public class User {
 
