@@ -12,8 +12,8 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import edu.blooddonor.geoAPI.DistanceListActivity;
-import edu.blooddonor.geoAPI.MapsActivity;
+//import edu.blooddonor.geoAPI.DistanceListActivity;
+//import edu.blooddonor.geoAPI.MapsActivity;
 import edu.blooddonor.sqliteDB.DatabaseHelper;
 import edu.blooddonor.model.Station;
 import edu.blooddonor.model.User;
@@ -31,7 +31,8 @@ public class MainActivity extends AppCompatActivity {
             Intent firstActivity = new Intent(getApplicationContext(), FirstLoginActivity.class);
             startActivity(firstActivity);
         }
-        else {
+        noUser = db.getUsersCount();
+        if (noUser > 0) {
             TextView textView = (TextView) findViewById(R.id.ML_txt_mainWelcome);
             User user = db.getUser(1);
             textView.setText("Welcome " + user.get_nick() + "!");
@@ -59,14 +60,14 @@ public class MainActivity extends AppCompatActivity {
                 activity = new Intent(getApplicationContext(), StationsListActivity.class);
                 startActivity(activity);
                 return true;
-            case R.id.show_map:
+/*            case R.id.show_map:
                 activity = new Intent(getApplicationContext(), MapsActivity.class);
                 startActivity(activity);
                 return true;
             case R.id.show_distance:
                 activity = new Intent(getApplicationContext(), DistanceListActivity.class);
                 startActivity(activity);
-                return true;
+                return true;*/
             case edu.blooddonor.R.id.manage_donations:
                 activity = new Intent(getApplicationContext(), ManageDonationsActivity.class);
                 startActivity(activity);

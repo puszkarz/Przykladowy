@@ -3,7 +3,7 @@ package edu.blooddonor.model;
 public class Donation {
 
     private int _id;
-    private String _date; //@TODO date
+    private String _date;
     private String _type;
     private int _volume;
     private int _blood_volume;

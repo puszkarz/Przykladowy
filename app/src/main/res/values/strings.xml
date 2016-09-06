@@ -53,6 +53,7 @@
     <string name="but_blood_cells">Blood cells</string>
     <string name="but_red_cells">Red cells</string>
     <string name="but_white_cells">White cells</string>
+    <string name="volume_label">Volume</string>
 
 </resources>
 
