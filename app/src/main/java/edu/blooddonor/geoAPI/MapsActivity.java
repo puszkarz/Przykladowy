@@ -1,4 +1,4 @@
-package edu.blooddonor;
+package edu.blooddonor.geoAPI;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
@@ -29,6 +29,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener,
         LocationListener {
+
+    private static final String LOG_TAG = "MapsActivity: ";
+    private static final String HERE_TXT = "You are here!";
 
     private GoogleMap mMap;
     private GoogleApiClient mGoogleApiClient;
@@ -93,12 +96,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     @Override
     public void onConnected(Bundle connectionHint) {
-        Log.d("Location: ", "Polaczylem sie, ale pytam o permission");
+        Log.d(LOG_TAG, "Polaczylem sie, ale pytam o permission");
         if (ActivityCompat.checkSelfPermission(this,
                 android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
                 ActivityCompat.checkSelfPermission(this,
                         android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            Log.d("Location 0a: ", "Pragne zgody!");
+            Log.d(LOG_TAG, "Pragne zgody!");
             // Ostatni argument jest intem i jest dziwny, ale musi być, w przykładzie stała o nazwie MY_PERMISSIONS_REQUEST_READ_CONTACTS);
             ActivityCompat.requestPermissions(this,
                     new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, 5);
@@ -112,7 +115,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 mGoogleApiClient);
 
         Log.d("Location: ", "On connect: Uzyskalem lokalizację.");
-        addPosMarker();
+        if (mLastLocation != null) {
+            Log.d(LOG_TAG, "Nie jest nullem! :)");
+            addPosMarker(new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude()),
+                    HERE_TXT);
+        } else {
+            Log.d(LOG_TAG, "Location jest nullem :(");
+        }
+
     }
 
     protected void startLocationUpdates() {
@@ -121,7 +131,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mLocationRequest.setFastestInterval(5000);
         mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            Log.d("Location 0a: ", "Pragne zgody w startLocationUpdates!");
+            Log.d(LOG_TAG, "Pragne zgody w startLocationUpdates!");
             return;
         }
         LocationServices.FusedLocationApi.requestLocationUpdates(
@@ -131,24 +141,23 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onLocationChanged(Location location) {
         mLastLocation  = location;
-        Log.d("Location:", "onLocationChanged.");
-        addPosMarker();
+        Log.d(LOG_TAG, "Location has changed, adding new marker.");
+        if (mLastLocation != null) {
+            addPosMarker(new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude()),
+                    HERE_TXT);
+        } else {
+            Log.d(LOG_TAG, "Location jest nullem :(");
+        }
     }
 
-    public void addPosMarker() {
-        if (mLastLocation != null) {
-            Log.d("Location: ", "Nie jest nullem! :)");
-            LatLng latLng = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
+    public void addPosMarker(LatLng latLng, String title) {
             CameraPosition cameraPosition = new CameraPosition.Builder()
                     .target(latLng).zoom(13).build();
             mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
             mMap.addMarker(new MarkerOptions()
                     .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_CYAN))
-                    .title("You are here!")
+                    .title(title)
                     .position(latLng));
-        } else {
-            Log.d("Location: ", "Location jest nullem :(");
-        }
     }
 
     @Override
@@ -158,7 +167,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-        Log.d("Location: ", "onConnectionFailed :(");
+        Log.d(LOG_TAG, "onConnectionFailed :(");
     }
 
 }

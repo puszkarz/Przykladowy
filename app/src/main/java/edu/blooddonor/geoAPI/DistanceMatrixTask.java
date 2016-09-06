@@ -1,4 +1,4 @@
-package edu.blooddonor;
+package edu.blooddonor.geoAPI;
 
 import android.content.Context;
 import android.os.AsyncTask;

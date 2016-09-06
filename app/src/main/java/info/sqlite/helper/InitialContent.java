@@ -15,6 +15,7 @@ abstract class InitialContent {
     private static final String LOG_TAG = "InitContent: ";
 
     public static void stationsInit(SQLiteDatabase db) {
+
         ArrayList<Station> statList = new ArrayList<>();
 
         //Wrocław i Legnica
@@ -30,6 +31,7 @@ abstract class InitialContent {
                 "ul. Nowogrodzka 59, 02-005 Warszawa"));
 
 
+        //TODO: Get lat and long from Google Geocoding API
         for (Station st : statList) {
             st.set_latitude(0.0);
             st.set_longitude(0.0);

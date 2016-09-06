@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import edu.blooddonor.geoAPI.MapsActivity;
 import info.sqlite.helper.DatabaseHelper;
 import info.sqlite.model.Station;
 import info.sqlite.model.User;
