@@ -26,14 +26,16 @@ public class MainActivity extends AppCompatActivity {
         DatabaseHelper db = new DatabaseHelper(getApplicationContext());
         int noUser = db.getUsersCount();
         logListUsers(db);
-        if (noUser > 0)
-            setContentView(edu.blooddonor.R.layout.activity_main);
-        else
-        {
+        setContentView(R.layout.activity_main);
+        if (noUser == 0 ) {
             Intent firstActivity = new Intent(getApplicationContext(), FirstLoginActivity.class);
             startActivity(firstActivity);
         }
-
+        else {
+            TextView textView = (TextView) findViewById(R.id.ML_txt_mainWelcome);
+            User user = db.getUser(1);
+            textView.setText("Welcome " + user.get_nick() + "!");
+        }
         logListUsers(db);
 
     }
@@ -69,38 +71,6 @@ public class MainActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
-    }
-
-    public void onClick_showDonations(View v) {
-        Intent donationsActivity = new Intent(getApplicationContext(), DonationsListActivity.class);
-        startActivity(donationsActivity);
-    }
-
-    public void onClick_showStations(View v) {
-        Intent stationsActivity = new Intent(getApplicationContext(), StationsListActivity.class);
-        startActivity(stationsActivity );
-    }
-
-    public void onClick_showDistList(View v) {
-        Intent distActivity = new Intent(getApplicationContext(), DistanceListActivity.class);
-        startActivity(distActivity);
-    }
-
-    public void onClick_showMaps(View v) {
-        Intent mapsActivity = new Intent(getApplicationContext(), MapsActivity.class);
-        startActivity(mapsActivity);
-    }
-
-    public void onClick_showManageStations(View v) {
-        setContentView(edu.blooddonor.R.layout.activity_manage_stations);
-    }
-
-    public void onClick_showManageUsers(View v) {
-        setContentView(edu.blooddonor.R.layout.activity_manage_users);
-    }
-
-    public void onClick_showManageDonations(View v) {
-        setContentView(edu.blooddonor.R.layout.activity_manage_donations);
     }
 
     public void onClick_backToMain(View v) {
@@ -176,7 +146,7 @@ public class MainActivity extends AppCompatActivity {
         Log.d("Reading: ", "Reading all users..");
         List<User> users = db.getAllUsers();
         for (User cn : users) {
-            String log = "Id: " + cn.get_id() + " ,Nick: " + cn.get_nick() + "Blood type:" + cn.get_bloodTypeID();
+            String log = "Id: " + cn.get_id() + " ,Nick: " + cn.get_nick() + " ,Blood type:" + cn.get_bloodType();
             Log.d("Name: ", log);
         }
     }

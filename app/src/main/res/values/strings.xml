@@ -1,8 +1,6 @@
 <resources>
     <string name="app_name">Blood Donor</string>
 
-    <string name="mainA_welcome">It is nice to see you Miss Suchodolska!!</string>
-
     <string name="but_showDonations">Click me to see list of donations! :)</string>
     <string name="but_showStations">Click me to see list of stations! :)</string>
     <string name="but_showMaps">Click me to see a map! :)</string>
@@ -48,6 +46,13 @@
     <string name="ZeroMinus">0-</string>
     <string name="but_pickDate_label">Pick date</string>
     <string name="but_showDistList">Show distance list</string>
+
+    <string name="but_pickDonationType_label">Donation type</string>
+    <string name="but_whole_blood">Whole blood</string>
+    <string name="but_blood_plasma">Blood plasma</string>
+    <string name="but_blood_cells">Blood cells</string>
+    <string name="but_red_cells">Red cells</string>
+    <string name="but_white_cells">White cells</string>
 
 </resources>
 

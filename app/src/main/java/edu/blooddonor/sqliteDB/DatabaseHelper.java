@@ -20,7 +20,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String LOG = "DatabaseHelper";
 
     // Database Version
-    private static final int DATABASE_VERSION = 22;
+    private static final int DATABASE_VERSION = 25;
 
     // Database Name
     private static final String DATABASE_NAME = "Donations_List";
@@ -48,7 +48,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         // create new tables
         onCreate(db);
     }
-
 
     // ------------------------ "station" table methods ----------------//
     /** Inserting a station */

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/whole_blood"
+        android:title="@string/but_whole_blood"
+        />
+    <item
+        android:id="@+id/blood_plasma"
+        android:title="@string/but_blood_plasma"
+        />
+    <item
+        android:id="@+id/blood_cells"
+        android:title="@string/but_blood_cells"
+        />
+    <item
+        android:id="@+id/red_cells"
+        android:title="@string/but_red_cells"
+        />
+    <item
+        android:id="@+id/white_cells"
+        android:title="@string/but_white_cells"
+        />
+</menu>

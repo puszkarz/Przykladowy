@@ -27,10 +27,9 @@
         </activity>
         <activity android:name=".DonationsListActivity" />
         <activity android:name=".FirstLoginActivity" />
-        <activity android:name=".StationsListActivity" />
-        <activity android:name=".ManageDonationsActivity" />
-
-        <receiver android:name=".NotificationReciver" />
+        <activity android:name=".StationsListActivity"/>
+        <activity android:name=".ManageDonationsActivity"/>
+        <receiver android:name=".NotificationReceiver"/>
 
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
@@ -47,7 +46,9 @@
         <activity
             android:name=".geoAPI.MapsActivity"
             android:label="@string/title_activity_maps" />
-        <activity android:name=".geoAPI.DistanceListActivity"></activity>
+
+        <activity android:name=".geoAPI.DistanceListActivity" />
+
     </application>
 
 </manifest>
