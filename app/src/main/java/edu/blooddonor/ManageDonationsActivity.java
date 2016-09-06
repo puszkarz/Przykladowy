@@ -135,8 +135,8 @@ public class ManageDonationsActivity extends AppCompatActivity implements androi
         DatabaseHelper db = new DatabaseHelper(getApplicationContext());
         TextView tv_volume = (TextView) findViewById( R.id.MDL_but_addVolume);
         TextView tv_stationId = (TextView) findViewById( edu.blooddonor.R.id.MDL_f_stationId);
-        if (tv_volume != null &&  tv_stationId != null &&  _year != 0
-                && _month != 0 && _day !=0 && _donationsType.equals("")) {
+        if ((tv_volume != null) && (tv_stationId != null) && (_year != 0)
+                && (_month != 0) && (_day != 0) && !_donationsType.equals("")) {
             CharSequence volume = tv_volume.getText();
             CharSequence stationId =  tv_stationId.getText();
             String dateInString = _year + "/" + _month + "/" + _day;
