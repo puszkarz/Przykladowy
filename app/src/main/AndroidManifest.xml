@@ -9,7 +9,8 @@
     -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <user-permission android:name="com.android.alarm.permission.SET_ALARM"/>
+
+    <user-permission android:name="com.android.alarm.permission.SET_ALARM" />
 
     <application
         android:allowBackup="true"
@@ -20,14 +21,16 @@
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity android:name=".DonationsListActivity" />
         <activity android:name=".FirstLoginActivity" />
-        <activity android:name=".StationsListActivity"/>
-        <activity android:name=".ManageDonationsActivity"/>
-        <receiver android:name=".NotificationReciver"/>
+        <activity android:name=".StationsListActivity" />
+        <activity android:name=".ManageDonationsActivity" />
+
+        <receiver android:name=".NotificationReciver" />
 
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
@@ -44,6 +47,7 @@
         <activity
             android:name=".geoAPI.MapsActivity"
             android:label="@string/title_activity_maps" />
+        <activity android:name=".geoAPI.DistanceListActivity"></activity>
     </application>
 
 </manifest>

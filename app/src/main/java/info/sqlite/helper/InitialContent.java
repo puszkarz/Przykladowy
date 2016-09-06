@@ -31,7 +31,7 @@ abstract class InitialContent {
                 "ul. Nowogrodzka 59, 02-005 Warszawa"));
 
 
-        //TODO: Get lat and long from Google Geocoding API
+        //TODO: Get lat and long from Google Geocoding API -> use changed GeoTask
         for (Station st : statList) {
             st.set_latitude(0.0);
             st.set_longitude(0.0);

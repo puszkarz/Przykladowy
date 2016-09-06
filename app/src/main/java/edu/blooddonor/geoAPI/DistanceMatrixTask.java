@@ -24,7 +24,9 @@ import java.util.Map;
 import info.sqlite.helper.DatabaseHelper;
 import info.sqlite.model.Station;
 
-public class DistanceMatrixTask extends AsyncTask<String, Void, String> {
+import com.google.android.gms.maps.model.LatLng;
+
+public class DistanceMatrixTask extends AsyncTask<LatLng, Void, String> {
 
     private static final String LOG_TAG = "DistMatrix: ";
     private static final String DIST_MATRIX_URL = "https://maps.googleapis.com/maps/api/distancematrix/json?";
@@ -46,14 +48,15 @@ public class DistanceMatrixTask extends AsyncTask<String, Void, String> {
         stations = db.getAllStations();
     }
 
+    // Only one address is allowed
     @Override
-    protected String doInBackground(String... addresses) {
+    protected String doInBackground(LatLng... logLats) {
         HttpURLConnection conn = null;
         final StringBuilder json = new StringBuilder();
         try {
             // Connect to the web service
             // URL url = new URL(urls);
-            URL url = genDistanceMatrixQuery(addresses[0]);
+            URL url = genDistanceMatrixQuery(logLats[0]);
             conn = (HttpURLConnection) url.openConnection();
             InputStreamReader in = new InputStreamReader(conn.getInputStream());
             // Read the JSON data into the StringBuilder
@@ -114,21 +117,21 @@ public class DistanceMatrixTask extends AsyncTask<String, Void, String> {
     //        origins=41.43206,-81.38992|-33.86748,151.20699
     //        &destinations=40.6905615,-73.9976592|40.6905615,-73.9976592
     //        &key=YOUR_API_KEY
-    private static URL genDistanceMatrixQuery(String address) {
+    private static URL genDistanceMatrixQuery(LatLng latLng) {
         //TODO: uwzględnić listę stacji i lokalizację
-        String addressEnc = null;
-        try {
-            Log.d(LOG_TAG, "Query address " + address);
-            addressEnc = URLEncoder.encode(address, "UTF-8"); //Zamiast "UTF-8" mogłoby być java.nio.charset.StandardCharsets.UTF_8.toString()
-            Log.d(LOG_TAG, "Encoded address: " + addressEnc);
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace(); //TODO: exception handling
-        }
+//        String addressEnc = null;
+//        try {
+//            Log.d(LOG_TAG, "Query address " + address);
+//            addressEnc = URLEncoder.encode(address, "UTF-8"); //Zamiast "UTF-8" mogłoby być java.nio.charset.StandardCharsets.UTF_8.toString()
+//            Log.d(LOG_TAG, "Encoded address: " + addressEnc);
+//        } catch (UnsupportedEncodingException e) {
+//            e.printStackTrace(); //TODO: exception handling
+//        }
         URL urlQuery = null;
         try {
             urlQuery = new URL(DIST_MATRIX_URL +
-                    "origins=" + addressEnc +
-                    "&destinations=" + addressEnc +
+                    "origins=" + latLng +
+                    "&destinations=" + latLng +
                     "&key=" + SERVER_KEY);
             Log.d(LOG_TAG, "URL generated: " + urlQuery.toString());
         } catch (MalformedURLException e) {

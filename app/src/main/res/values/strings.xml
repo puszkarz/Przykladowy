@@ -7,6 +7,8 @@
     <string name="but_showStations">Click me to see list of stations! :)</string>
     <string name="but_showMaps">Click me to see a map! :)</string>
 
+    <string name="listDist_welcome">Distance to Stations list is will appear below</string>
+
     <string name="listS_welcome">Stations list is will appear below</string>
     <string name="but_finishSLA_label">Back</string>
 
