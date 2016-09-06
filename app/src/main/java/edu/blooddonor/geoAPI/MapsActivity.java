@@ -9,7 +9,7 @@ import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.util.Log;
 
-import java.net.URL;
+import java.util.List;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -24,6 +24,9 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+
+import info.sqlite.helper.DatabaseHelper;
+import info.sqlite.model.Station;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback,
         GoogleApiClient.ConnectionCallbacks,
@@ -58,13 +61,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     }
 
-    /** Marking several addresses on map */
-    void markAddressOnMap(String address) {
-        URL urlQuery = GeocodingTask.genGeocodingQuery(address);
-        Log.d("Geocoding API: ", "Trying URL: " + urlQuery.toString());
-        new GeocodingTask(mMap).execute(urlQuery);
-    }
-
     /**
      * Manipulates the map once available.
      * This callback is triggered when the map is ready to be used.
@@ -77,9 +73,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-        // Marking one address on map
-        String address = "Czerwonego Krzyza 5/9, 50-345 Wroclaw";
-        markAddressOnMap(address);
+        DatabaseHelper db = new DatabaseHelper(getApplicationContext());
+        List<Station> stations = db.getAllStations();
+        // Marking several addresses on map
+        // TODO: pass a list
+        for (Station st : stations) {
+            new GeocodingTask(mMap).execute(st.get_address());
+        }
     }
 
     @Override

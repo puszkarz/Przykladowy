@@ -30,7 +30,7 @@ import java.net.URLEncoder;
  * Geocoding task sends queries to Google Maps Geocoding API and retrives points coordinates basing on addresses.
  */
 
-public class GeocodingTask extends AsyncTask<URL, Void, String> {
+public class GeocodingTask extends AsyncTask<String, Void, String> {
 
     private static final String LOG_TAG = "GeoLoc: ";
     private static final String GEO_URL = "https://maps.googleapis.com/maps/api/geocode/json?";
@@ -44,14 +44,15 @@ public class GeocodingTask extends AsyncTask<URL, Void, String> {
     }
 
     // Invoked by execute() method of this object
+    // Only one address is allowed
     @Override
-    protected String doInBackground(URL... urls) {
+    protected String doInBackground(String... addresses) {
         HttpURLConnection conn = null;
         final StringBuilder json = new StringBuilder();
         try {
             // Connect to the web service
-            // URL url = new URL(urls);
-            URL url = urls[0];
+            URL url = GeocodingTask.genGeocodingQuery(addresses[0]);
+
             conn = (HttpURLConnection) url.openConnection();
             InputStreamReader in = new InputStreamReader(conn.getInputStream());
             // Read the JSON data into the StringBuilder
@@ -93,7 +94,7 @@ public class GeocodingTask extends AsyncTask<URL, Void, String> {
     }
 
     /** Generation of query to Google Maps Geocoding API basing on address */
-    static URL genGeocodingQuery(String address) {
+    private static URL genGeocodingQuery(String address) {
         String addressEnc = null;
         try {
             Log.d(LOG_TAG, "Query address " + address);
