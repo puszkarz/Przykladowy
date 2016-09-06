@@ -120,10 +120,6 @@ public class FirstLoginActivity extends AppCompatActivity implements PopupMenu.O
             tv1.setText(R.string.debugOK);
 
         }
-
-        Intent mainActivity = new Intent(getApplicationContext(), MainActivity.class);
-        startActivity(mainActivity);
-        finish(); //@TODO - czy ta aktywność się zamyka?
-
+        finish();
     }
 }

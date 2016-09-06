@@ -24,10 +24,9 @@ public class MainActivity extends AppCompatActivity {
         DatabaseHelper db = new DatabaseHelper(getApplicationContext());
         int noUser = db.getUsersCount();
         logListUsers(db);
-        if (noUser > 0)
+        setContentView(R.layout.activity_main);
+        if (noUser == 0 ) {
             setContentView(R.layout.activity_main);
-        else
-        {
             Intent firstActivity = new Intent(getApplicationContext(), FirstLoginActivity.class);
             startActivity(firstActivity);
         }
