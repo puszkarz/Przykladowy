@@ -49,15 +49,13 @@ public class ManageDonationsActivity extends AppCompatActivity{
                 new DatePickerDialog(ManageDonationsActivity.this,listener,calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show();
             }
         });
-
-
     }
 
 
 
     public void onClick_addDonation(View v) {
         Calendar calendar = Calendar.getInstance();
-        //calendar.set(_year, _month+1, _day);
+        calendar.set(_year, _month+1, _day);
         calendar.set(Calendar.HOUR_OF_DAY, 8);
         calendar.set(Calendar.MINUTE, 35);
         calendar.set(Calendar.SECOND, 0);
@@ -80,6 +78,10 @@ public class ManageDonationsActivity extends AppCompatActivity{
             tv1.setText(R.string.debugOK);
             tv2.setText(R.string.debugOK);
             logListDonations(db);
+
+            _year = 0;
+            _month = 0;
+            _day = 0;
         }
     }
 

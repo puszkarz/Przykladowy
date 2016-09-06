@@ -10,11 +10,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
-import java.util.Calendar;
 import java.util.List;
 
 import info.sqlite.helper.DatabaseHelper;
-import info.sqlite.model.Donation;
 import info.sqlite.model.Station;
 import info.sqlite.model.User;
 
@@ -166,7 +164,7 @@ public class MainActivity extends AppCompatActivity {
         Log.d("Reading: ", "Reading all users..");
         List<User> users = db.getAllUsers();
         for (User cn : users) {
-            String log = "Id: " + cn.get_id() + " ,Nick: " + cn.get_nick() + "Blood type:" + cn.get_bloodTypeID();
+            String log = "Id: " + cn.get_id() + " ,Nick: " + cn.get_nick() + "Blood type:" + cn.get_bloodType();
             Log.d("Name: ", log);
         }
     }
