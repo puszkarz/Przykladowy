@@ -7,6 +7,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.*;
 import android.widget.DatePicker;
@@ -51,7 +54,38 @@ public class ManageDonationsActivity extends AppCompatActivity{
         });
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.actionbar_menu, menu);
+        return true;
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.show_donations:
+                Intent donationsActivity = new Intent(getApplicationContext(), DonationsListActivity.class);
+                startActivity(donationsActivity);
+                return true;
+            case R.id.show_stations:
+                Intent stationsActivity = new Intent(getApplicationContext(), StationsListActivity.class);
+                startActivity(stationsActivity);
+                return true;
+            case R.id.manage_donations:
+                Intent manageDonationsActivity = new Intent(getApplicationContext(), ManageDonationsActivity.class);
+                startActivity(manageDonationsActivity);
+                return true;
+            case R.id.manage_stations:
+                setContentView(R.layout.activity_manage_stations);
+                return true;
+            case R.id.manage_users:
+                setContentView(R.layout.activity_manage_users);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
 
     public void onClick_addDonation(View v) {
         Calendar calendar = Calendar.getInstance();

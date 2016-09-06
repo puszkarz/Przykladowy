@@ -31,7 +31,6 @@ public class MainActivity extends AppCompatActivity {
             Intent firstActivity = new Intent(getApplicationContext(), FirstLoginActivity.class);
             startActivity(firstActivity);
         }
-
         logListUsers(db);
 
     }
@@ -67,28 +66,6 @@ public class MainActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
-    }
-
-    public void onClick_showDonations(View v) {
-        Intent donationsActivity = new Intent(getApplicationContext(), DonationsListActivity.class);
-        startActivity(donationsActivity);
-    }
-
-    public void onClick_showStations(View v) {
-        Intent stationsActivity = new Intent(getApplicationContext(), StationsListActivity.class);
-        startActivity(stationsActivity );
-    }
-
-    public void onClick_showManageStations(View v) {
-        setContentView(R.layout.activity_manage_stations);
-    }
-
-    public void onClick_showManageUsers(View v) {
-        setContentView(R.layout.activity_manage_users);
-    }
-
-    public void onClick_showManageDonations(View v) {
-        setContentView(R.layout.activity_manage_donations);
     }
 
     public void onClick_backToMain(View v) {
@@ -164,7 +141,7 @@ public class MainActivity extends AppCompatActivity {
         Log.d("Reading: ", "Reading all users..");
         List<User> users = db.getAllUsers();
         for (User cn : users) {
-            String log = "Id: " + cn.get_id() + " ,Nick: " + cn.get_nick() + "Blood type:" + cn.get_bloodType();
+            String log = "Id: " + cn.get_id() + " ,Nick: " + cn.get_nick() + " ,Blood type:" + cn.get_bloodType();
             Log.d("Name: ", log);
         }
     }
