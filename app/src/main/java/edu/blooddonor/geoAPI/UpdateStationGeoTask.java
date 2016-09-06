@@ -13,7 +13,7 @@ import java.net.URL;
 import edu.blooddonor.model.Station;
 import edu.blooddonor.sqliteDB.DatabaseHelper;
 
-public class UpdateStationGeoTask extends AsyncTask<Void, Void, String> {
+class UpdateStationGeoTask extends AsyncTask<Void, Void, String> {
 
     private static String LOG_TAG = "UpdateStatGeo: ";
 

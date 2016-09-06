@@ -47,7 +47,8 @@ public class DistanceListActivity extends AppCompatActivity implements
         DatabaseHelper db = new DatabaseHelper(getApplicationContext());
         List<Station> stations =  db.getAllStations();
         for (Station st : stations) {
-            new UpdateStationGeoTask(st, db);
+            Log.d(LOG_TAG, st.toString());
+            new UpdateStationGeoTask(st, db).execute();
         }
     }
 
