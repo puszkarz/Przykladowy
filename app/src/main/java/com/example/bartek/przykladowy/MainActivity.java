@@ -31,6 +31,9 @@ public class MainActivity extends AppCompatActivity {
             startActivity(firstActivity);
         }
         logListUsers(db);
+        TextView textView = (TextView) findViewById(R.id.ML_txt_mainWelcome);
+        User user = db.getUser(1);
+        textView.setText("Welcome " + user.get_nick() + "!");
 
     }
 
