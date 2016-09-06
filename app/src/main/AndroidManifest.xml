@@ -29,6 +29,7 @@
         <activity android:name=".FirstLoginActivity" />
         <activity android:name=".StationsListActivity"/>
         <activity android:name=".ManageDonationsActivity"/>
+        <activity android:name=".SettingsActivity" />
         <receiver android:name=".NotificationReceiver"/>
 
         <!--
