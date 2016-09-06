@@ -64,6 +64,7 @@ class DistanceMatrixTask extends AsyncTask<LatLng, Void, Map<Station, String>> {
             final StringBuilder json = new StringBuilder();
             try {
                 // Connect to the web service
+                Log.d(LOG_TAG, "Processing: " + entry.getValue().toString());
                 conn = (HttpURLConnection) entry.getValue().openConnection();
                 InputStreamReader in = new InputStreamReader(conn.getInputStream());
                 // Read the JSON data into the StringBuilder
@@ -91,6 +92,7 @@ class DistanceMatrixTask extends AsyncTask<LatLng, Void, Map<Station, String>> {
         for (Map.Entry<Station, String> entry : jsonMap.entrySet()) {
             Integer distance = GeocodingQuery.getDistanceFromJSON(entry.getValue());
             if (distance!=null) {
+                Log.d(LOG_TAG, "Found: " + distance.toString() + " " + entry.getKey().toString());
                 distanceMap.put(entry.getKey(), distance);
             }
         }
@@ -114,7 +116,7 @@ class DistanceMatrixTask extends AsyncTask<LatLng, Void, Map<Station, String>> {
         // Make list of strings
         List<String> out = new ArrayList<>();
         for (Map.Entry<Station, Integer> entry : listStatDist) {
-            out.add(entry.getKey().toString() + " m, " + entry.getValue().toString());
+            out.add(entry.getKey().toString() + ", " + entry.getValue().toString());
         }
         return out;
     }

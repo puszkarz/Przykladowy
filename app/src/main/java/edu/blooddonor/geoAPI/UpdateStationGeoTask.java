@@ -29,7 +29,6 @@ class UpdateStationGeoTask extends AsyncTask<Void, Void, String> {
 
     @Override
     protected void onPreExecute () {
-        Log.d(LOG_TAG, "URLAsync preExec: " + station.toString());
         if (!station.isWellDefined()) {
             Log.d(LOG_TAG, "Station not well defined. Updating. Stat: " + station.toString());
             url = GeocodingQuery.genGeocodingQuery(station.get_address());
@@ -64,12 +63,20 @@ class UpdateStationGeoTask extends AsyncTask<Void, Void, String> {
     // Executed after the complete execution of doInBackground() method
     @Override
     protected void onPostExecute(String json) {
-        LatLng latLng = GeocodingQuery.getLatLngFromJSON(json);
-        if (latLng != null) {
-            station.set_latitude(latLng.latitude);
-            station.set_longitude(latLng.longitude);
-            db.updateStation(station);
-            Log.d(LOG_TAG, "Station updated: " + station.toString());
+        if (json != null) {
+            if (!json.equals("")) {
+                Log.d(LOG_TAG, "JSON not null: " + json + " koniec. ");
+                LatLng latLng = GeocodingQuery.getLatLngFromJSON(json);
+                if (latLng != null) {
+                    station.set_latitude(latLng.latitude);
+                    station.set_longitude(latLng.longitude);
+                    db.updateStation(station);
+                    Log.d(LOG_TAG, "Station updated: " + station.toString());
+                } else {
+                    Log.e(LOG_TAG, "Wrong JSON output for Station " + station.toString());
+                }
+            }
         }
+
     }
 }

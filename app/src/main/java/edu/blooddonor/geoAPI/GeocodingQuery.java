@@ -24,6 +24,7 @@ abstract class GeocodingQuery {
 
     public static LatLng getLatLngFromJSON(String json) {
         try {
+            Log.d(LOG_TAG, "JSON jest taki: " + json);
             JSONObject jsonObj = new JSONObject(json);
             JSONObject res = jsonObj.getJSONArray("results").getJSONObject(0);
             JSONObject loc = res.getJSONObject("geometry").getJSONObject("location");

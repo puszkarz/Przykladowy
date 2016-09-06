@@ -70,7 +70,7 @@ public class StationsListActivity extends AppCompatActivity {
         }
     }
 
-    ArrayList<String> statListToString(List<Station> stations) {
+    private static ArrayList<String> statListToString(List<Station> stations) {
         ArrayList<String> out = new ArrayList<>();
         for (Station st : stations) {
             out.add(st.toString());
