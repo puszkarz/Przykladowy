@@ -9,7 +9,6 @@ import android.widget.ListView;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -24,18 +23,18 @@ import edu.blooddonor.model.Station;
 
 import com.google.android.gms.maps.model.LatLng;
 
-class DistanceMatrixTask extends AsyncTask<LatLng, Void, String> {
+class DistanceMatrixTask extends AsyncTask<LatLng, Void, Map<Station, String>> {
 
     private static final String LOG_TAG = "DistMatrix: ";
 
     private Context context;
     private ListView distStationsListView;
-    private ArrayList<Station> stations;
+    ArrayList<Station> stations;
 
-    // run in Activity as DistanceMatrixTask(targetListView, getApplicationContext());
-    public DistanceMatrixTask(ListView targetListView, Context context) {
-        distStationsListView = targetListView;
-        this.context = context;
+
+    public DistanceMatrixTask(ListView _targetListView, Context _context) {
+        distStationsListView = _targetListView;
+        this.context = _context;
     }
 
     @Override
@@ -44,37 +43,57 @@ class DistanceMatrixTask extends AsyncTask<LatLng, Void, String> {
         stations = db.getAllStations();
     }
 
-    // Only one address is allowed
+    // Only one LatLng is allowed
     @Override
-    protected String doInBackground(LatLng... logLats) {
-        HttpURLConnection conn = null;
-        final StringBuilder json = new StringBuilder();
-        try {
-            // Connect to the web service
-            // URL url = new URL(urls);
-            URL url = GeocodingQuery.genDistanceMatrixQuery(logLats[0]);
-            conn = (HttpURLConnection) url.openConnection();
-            InputStreamReader in = new InputStreamReader(conn.getInputStream());
-            // Read the JSON data into the StringBuilder
-            int read;
-            char[] buff = new char[1024];
-            while ((read = in.read(buff)) != -1) {
-                json.append(buff, 0, read);
-            }
-        } catch (IOException e) {
-            Log.e(LOG_TAG, "Error connecting to service", e);
-            // throw new IOException("Error connecting to service", e); //uncaught
-        } finally {
-            if (conn != null) {
-                conn.disconnect();
+    protected Map<Station, String> doInBackground(LatLng... userLatLngs) {
+
+        Map<Station, URL> urlMap = new HashMap<>();
+
+        for (Station st : stations) {
+            URL url = GeocodingQuery.genDistanceMatrixQuery(st, userLatLngs[0]);
+            if (url != null) {
+                urlMap.put(st, url);
+                Log.d(LOG_TAG, "urlMap added: " + url.toString());
             }
         }
-        return json.toString();
+
+        Map<Station, String> jsonMap = new HashMap<>();
+
+        for (Map.Entry<Station, URL> entry : urlMap.entrySet()) {
+            HttpURLConnection conn = null;
+            final StringBuilder json = new StringBuilder();
+            try {
+                // Connect to the web service
+                conn = (HttpURLConnection) entry.getValue().openConnection();
+                InputStreamReader in = new InputStreamReader(conn.getInputStream());
+                // Read the JSON data into the StringBuilder
+                int read;
+                char[] buff = new char[1024];
+                while ((read = in.read(buff)) != -1) {
+                    json.append(buff, 0, read);
+                }
+            } catch (IOException e) {
+                Log.e(LOG_TAG, "Error connecting to service", e);
+                // throw new IOException("Error connecting to service", e); //uncaught
+            } finally {
+                if (conn != null) {
+                    conn.disconnect();
+                }
+            }
+            jsonMap.put(entry.getKey(), json.toString());
+        }
+        return jsonMap;
     }
 
     @Override
-    protected void onPostExecute(String json) {
-        Map<Station, Double> distanceMap = GeocodingQuery.getDistanceFromJSON(json);
+    protected void onPostExecute(Map<Station, String> jsonMap) {
+        Map<Station, Integer> distanceMap = new HashMap<>();
+        for (Map.Entry<Station, String> entry : jsonMap.entrySet()) {
+            Integer distance = GeocodingQuery.getDistanceFromJSON(entry.getValue());
+            if (distance!=null) {
+                distanceMap.put(entry.getKey(), distance);
+            }
+        }
         ArrayAdapter<String> listViewAdapter = new ArrayAdapter<>(context,
                 android.R.layout.simple_list_item_1, statListToString(distanceMap));
         if (distStationsListView != null) {
@@ -82,20 +101,20 @@ class DistanceMatrixTask extends AsyncTask<LatLng, Void, String> {
         }
     }
 
-    private static List<String> statListToString(Map<Station, Double> distanceMap) {
+    private static List<String> statListToString(Map<Station, Integer> distanceMap) {
         // Sort by the distance
-        List<Map.Entry<Station, Double>> listStatDist =
-                new LinkedList<Map.Entry<Station, Double>>( distanceMap.entrySet() );
+        List<Map.Entry<Station, Integer>> listStatDist =
+                new LinkedList<>( distanceMap.entrySet() );
         Collections.sort( listStatDist,
-                new Comparator<Map.Entry<Station, Double>>() {
-                    public int compare( Map.Entry<Station, Double> o1, Map.Entry<Station, Double> o2 ) {
+                new Comparator<Map.Entry<Station, Integer>>() {
+                    public int compare( Map.Entry<Station, Integer> o1, Map.Entry<Station, Integer> o2 ) {
                         return (o1.getValue()).compareTo( o2.getValue() );
                     }
                 } );
         // Make list of strings
         List<String> out = new ArrayList<>();
-        for (Map.Entry<Station, Double> entry : listStatDist) {
-            out.add(entry.getKey().toString() + " km, " + entry.getValue());
+        for (Map.Entry<Station, Integer> entry : listStatDist) {
+            out.add(entry.getKey().toString() + " m, " + entry.getValue().toString());
         }
         return out;
     }

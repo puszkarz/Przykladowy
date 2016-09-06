@@ -11,8 +11,6 @@ import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
-import java.util.HashMap;
-import java.util.Map;
 
 import edu.blooddonor.model.Station;
 
@@ -30,6 +28,43 @@ abstract class GeocodingQuery {
             JSONObject res = jsonObj.getJSONArray("results").getJSONObject(0);
             JSONObject loc = res.getJSONObject("geometry").getJSONObject("location");
             return new LatLng(loc.getDouble("lat"), loc.getDouble("lng"));
+        } catch (JSONException e) {
+            Log.e(LOG_TAG, "Error processing JSON", e);
+            return null;
+        }
+    }
+
+
+    public static Integer getDistanceFromJSON(String json) {
+        try {
+            JSONObject jsonObj = new JSONObject(json);
+            JSONObject rows = jsonObj.getJSONArray("rows").getJSONObject(0);
+            JSONObject elements = rows.getJSONArray("elements").getJSONObject(0);
+            return elements.getJSONObject("distance").getInt("value");
+        } catch (JSONException e) {
+            Log.e(LOG_TAG, "Error processing JSON", e);
+            return null;
+        }
+    }
+
+    public static String getDistanceTxtFromJSON(String json) {
+        try {
+            JSONObject jsonObj = new JSONObject(json);
+            JSONObject rows = jsonObj.getJSONArray("rows").getJSONObject(0);
+            JSONObject elements = rows.getJSONArray("elements").getJSONObject(0);
+            return elements.getJSONObject("distance").getString("text");
+        } catch (JSONException e) {
+            Log.e(LOG_TAG, "Error processing JSON", e);
+            return null;
+        }
+    }
+
+    public static String getDurationFromJSON(String json) {
+        try {
+            JSONObject jsonObj = new JSONObject(json);
+            JSONObject rows = jsonObj.getJSONArray("rows").getJSONObject(0);
+            JSONObject elements = rows.getJSONArray("elements").getJSONObject(0);
+            return elements.getJSONObject("duration").getString("text");
         } catch (JSONException e) {
             Log.e(LOG_TAG, "Error processing JSON", e);
             return null;
@@ -61,34 +96,37 @@ abstract class GeocodingQuery {
         return urlQuery; //TODO: null handling
     }
 
-    public static Map<Station, Double> getDistanceFromJSON(String json) {
-        Map<Station, Double> distanceMap = new HashMap<Station, Double>();
-        //TODO: Decode JSON response
-//        for (Station st : stations) {
-//            out.add(st.toString());
-//        }
-        return distanceMap;
-    }
+
+
+
 
     //        https://maps.googleapis.com/maps/api/distancematrix/json?
     //        origins=41.43206,-81.38992|-33.86748,151.20699
     //        &destinations=40.6905615,-73.9976592|40.6905615,-73.9976592
     //        &key=YOUR_API_KEY
-    public static URL genDistanceMatrixQuery(LatLng latLng) {
-        //TODO: uwzględnić listę stacji i lokalizację
-//        String addressEnc = null;
-//        try {
-//            Log.d(LOG_TAG, "Query address " + address);
-//            addressEnc = URLEncoder.encode(address, "UTF-8"); //Zamiast "UTF-8" mogłoby być java.nio.charset.StandardCharsets.UTF_8.toString()
-//            Log.d(LOG_TAG, "Encoded address: " + addressEnc);
-//        } catch (UnsupportedEncodingException e) {
-//            e.printStackTrace(); //TODO: exception handling
-//        }
+    public static URL genDistanceMatrixQuery(Station station, LatLng userLatLng) {
+
+        if (!station.isWellDefined()) {
+            return null;
+        }
+
+        String stLatLngString =
+                Double.toString(station.get_latitude()) + "," + Double.toString(station.get_longitude());
+        String userLatLngString =
+                Double.toString(userLatLng.latitude) + "," + Double.toString(userLatLng.longitude);
+
+        try {
+            stLatLngString = URLEncoder.encode(stLatLngString, "UTF-8");
+            userLatLngString = URLEncoder.encode(userLatLngString, "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace(); //TODO: exception handling
+        }
+
         URL urlQuery = null;
         try {
             urlQuery = new URL(DIST_MATRIX_URL +
-                    "origins=" + latLng +
-                    "&destinations=" + latLng +
+                    "origins=" + userLatLngString +
+                    "&destinations=" + stLatLngString +
                     "&key=" + SERVER_KEY);
             Log.d(LOG_TAG, "URL generated: " + urlQuery.toString());
         } catch (MalformedURLException e) {

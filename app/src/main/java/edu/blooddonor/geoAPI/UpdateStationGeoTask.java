@@ -27,6 +27,7 @@ class UpdateStationGeoTask extends AsyncTask<Void, Void, String> {
         this.url = null;
     }
 
+    @Override
     protected void onPreExecute () {
         Log.e(LOG_TAG, "URLAsync preExec: " + station.toString());
         if (!station.isWellDefined()) {
