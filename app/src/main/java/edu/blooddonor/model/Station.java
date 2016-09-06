@@ -33,6 +33,11 @@ public class Station {
                 && _latitude != NOT_A_COORDINATE && _longitude != NOT_A_COORDINATE;
     }
 
+    public void set_latLongAsNone() {
+        this._longitude = NOT_A_COORDINATE;
+        this._latitude = NOT_A_COORDINATE;
+    }
+
     //setters
     public void set_id(int _id) { this._id = _id; }
 

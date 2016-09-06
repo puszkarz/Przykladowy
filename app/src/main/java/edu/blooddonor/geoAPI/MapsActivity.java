@@ -78,7 +78,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         // Marking several addresses on map
         // TODO: pass a list
         for (Station st : stations) {
-            new GeocodingTask(mMap).execute(st.get_address());
+            new MapMarkAddressTask(mMap).execute(st.get_address());
         }
     }
 

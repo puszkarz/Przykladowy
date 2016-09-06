@@ -27,8 +27,6 @@ import com.google.android.gms.maps.model.LatLng;
 class DistanceMatrixTask extends AsyncTask<LatLng, Void, String> {
 
     private static final String LOG_TAG = "DistMatrix: ";
-    private static final String DIST_MATRIX_URL = "https://maps.googleapis.com/maps/api/distancematrix/json?";
-    private static final String SERVER_KEY = "AIzaSyAXsltmnu0OEc_UMgthhZ7BDiiajeVD_JI";
 
     private Context context;
     private ListView distStationsListView;
@@ -54,7 +52,7 @@ class DistanceMatrixTask extends AsyncTask<LatLng, Void, String> {
         try {
             // Connect to the web service
             // URL url = new URL(urls);
-            URL url = genDistanceMatrixQuery(logLats[0]);
+            URL url = GeocodingQuery.genDistanceMatrixQuery(logLats[0]);
             conn = (HttpURLConnection) url.openConnection();
             InputStreamReader in = new InputStreamReader(conn.getInputStream());
             // Read the JSON data into the StringBuilder
@@ -76,7 +74,7 @@ class DistanceMatrixTask extends AsyncTask<LatLng, Void, String> {
 
     @Override
     protected void onPostExecute(String json) {
-        Map<Station, Double> distanceMap = getDistanceFromJSON(json);
+        Map<Station, Double> distanceMap = GeocodingQuery.getDistanceFromJSON(json);
         ArrayAdapter<String> listViewAdapter = new ArrayAdapter<>(context,
                 android.R.layout.simple_list_item_1, statListToString(distanceMap));
         if (distStationsListView != null) {
@@ -84,25 +82,16 @@ class DistanceMatrixTask extends AsyncTask<LatLng, Void, String> {
         }
     }
 
-    private static Map<Station, Double> getDistanceFromJSON(String json) {
-        Map<Station, Double> distanceMap = new HashMap<Station, Double>();
-        //TODO: Decode JSON response
-//        for (Station st : stations) {
-//            out.add(st.toString());
-//        }
-        return distanceMap;
-    }
-
     private static List<String> statListToString(Map<Station, Double> distanceMap) {
         // Sort by the distance
         List<Map.Entry<Station, Double>> listStatDist =
                 new LinkedList<Map.Entry<Station, Double>>( distanceMap.entrySet() );
         Collections.sort( listStatDist,
-            new Comparator<Map.Entry<Station, Double>>() {
-                public int compare( Map.Entry<Station, Double> o1, Map.Entry<Station, Double> o2 ) {
-                    return (o1.getValue()).compareTo( o2.getValue() );
-                }
-            } );
+                new Comparator<Map.Entry<Station, Double>>() {
+                    public int compare( Map.Entry<Station, Double> o1, Map.Entry<Station, Double> o2 ) {
+                        return (o1.getValue()).compareTo( o2.getValue() );
+                    }
+                } );
         // Make list of strings
         List<String> out = new ArrayList<>();
         for (Map.Entry<Station, Double> entry : listStatDist) {
@@ -111,30 +100,4 @@ class DistanceMatrixTask extends AsyncTask<LatLng, Void, String> {
         return out;
     }
 
-    //        https://maps.googleapis.com/maps/api/distancematrix/json?
-    //        origins=41.43206,-81.38992|-33.86748,151.20699
-    //        &destinations=40.6905615,-73.9976592|40.6905615,-73.9976592
-    //        &key=YOUR_API_KEY
-    private static URL genDistanceMatrixQuery(LatLng latLng) {
-        //TODO: uwzględnić listę stacji i lokalizację
-//        String addressEnc = null;
-//        try {
-//            Log.d(LOG_TAG, "Query address " + address);
-//            addressEnc = URLEncoder.encode(address, "UTF-8"); //Zamiast "UTF-8" mogłoby być java.nio.charset.StandardCharsets.UTF_8.toString()
-//            Log.d(LOG_TAG, "Encoded address: " + addressEnc);
-//        } catch (UnsupportedEncodingException e) {
-//            e.printStackTrace(); //TODO: exception handling
-//        }
-        URL urlQuery = null;
-        try {
-            urlQuery = new URL(DIST_MATRIX_URL +
-                    "origins=" + latLng +
-                    "&destinations=" + latLng +
-                    "&key=" + SERVER_KEY);
-            Log.d(LOG_TAG, "URL generated: " + urlQuery.toString());
-        } catch (MalformedURLException e) {
-            e.printStackTrace(); //TODO: exception handling
-        }
-        return urlQuery; //TODO: null handling
-    }
 }

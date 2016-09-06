@@ -20,7 +20,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String LOG = "DatabaseHelper";
 
     // Database Version
-    private static final int DATABASE_VERSION = 19;
+    private static final int DATABASE_VERSION = 22;
 
     // Database Name
     private static final String DATABASE_NAME = "Donations_List";
@@ -96,6 +96,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         c.close();
         db.close();
         return stations;
+    }
+
+    /** Updating a station */
+    public int updateStation(Station station) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = StationSQL.toContentValue(station);
+        // updating row
+        int ret = db.update(StationSQL.getTableName(), values, UserSQL.getKeyId() + " = ?",
+                new String[] { String.valueOf(station.get_id()) });
+        db.close();
+        return ret;
     }
 
     /** Deleting a station */

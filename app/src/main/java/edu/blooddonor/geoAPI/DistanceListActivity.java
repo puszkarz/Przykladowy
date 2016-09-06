@@ -17,7 +17,11 @@ import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.model.LatLng;
 
+import java.util.List;
+
 import edu.blooddonor.R;
+import edu.blooddonor.model.Station;
+import edu.blooddonor.sqliteDB.DatabaseHelper;
 
 public class DistanceListActivity extends AppCompatActivity implements
         LocationListener,
@@ -40,6 +44,11 @@ public class DistanceListActivity extends AppCompatActivity implements
         }
         super.onCreate(savedInstanceState);
         setContentView(edu.blooddonor.R.layout.activity_distance_list);
+        DatabaseHelper db = new DatabaseHelper(getApplicationContext());
+        List<Station> stations =  db.getAllStations();
+        for (Station st : stations) {
+            new UpdateStationGeoTask(st, db);
+        }
     }
 
     @Override
