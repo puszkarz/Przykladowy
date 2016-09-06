@@ -1,15 +1,24 @@
 package info.sqlite.model;
 
 public class Station {
+
+    private static double NOT_A_COORDINATE = 1000.0;
+
     private int _id;
     private String _name;
     private String _address;
     private double _latitude;
     private double _longitude;
 
-    public Station(String name, String address, double x, double y) {
+    public Station(String name, String address) {
         this._name = name;
         this._address = address;
+        this._latitude = NOT_A_COORDINATE;
+        this._longitude = NOT_A_COORDINATE;
+    }
+
+    public Station(String name, String address, double x, double y) {
+        this(name, address);
         this._latitude = x;
         this._longitude = y;
     }
@@ -17,6 +26,11 @@ public class Station {
     public Station(int id, String name, String address, double x, double y) {
         this(name, address, x, y);
         this._id = id;
+    }
+
+    public boolean isWellDefined() {
+        return _name != null && _address != null
+                && _latitude != NOT_A_COORDINATE && _longitude != NOT_A_COORDINATE;
     }
 
     //setters

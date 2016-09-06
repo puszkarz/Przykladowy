@@ -23,7 +23,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String LOG = "DatabaseHelper";
 
     // Database Version
-    private static final int DATABASE_VERSION = 16;
+    private static final int DATABASE_VERSION = 18;
 
     // Database Name
     private static final String DATABASE_NAME = "Donations_List";
@@ -38,6 +38,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(StationSQL.createTable());
         db.execSQL(UserSQL.createTable());
         db.execSQL(DonationSQL.createTable());
+
+        InitialContent.stationsInit(db);
     }
 
     @Override
@@ -55,9 +57,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     /** Inserting a station */
     public long insertStation(Station station) {
         SQLiteDatabase db = this.getWritableDatabase();
-        long station_id = db.insert(StationSQL.getTableName(), null, StationSQL.toContentValue(station));
+        long out = insertStation(db, station);
         db.close();
-        return station_id;
+        return out;
+    }
+
+    /** Inserting a station (static) */
+    public static long insertStation(SQLiteDatabase db, Station station) {
+        return db.insert(StationSQL.getTableName(), null, StationSQL.toContentValue(station));
     }
 
     /** Get a single station */
