@@ -8,7 +8,7 @@ import info.sqlite.model.Station;
 /**
  * Set of methods supporting SQLite access for Station model
  */
-public class StationSQL {
+public abstract class StationSQL {
 
     private static final String TABLE_STATION = "stations";
 

@@ -8,7 +8,7 @@ import info.sqlite.model.User;
 /**
  * Set of methods supporting SQLite access for User model
  */
-public class UserSQL {
+public abstract class UserSQL {
 
     private static final String TABLE_USER = "users";
 

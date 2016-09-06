@@ -8,7 +8,7 @@ import info.sqlite.model.Donation;
 /**
  * Set of methods supporting SQLite access for Donation model
  */
-public class DonationSQL {
+public abstract class DonationSQL {
 
     // Table Name
     private static final String TABLE_DONATION = "donations";
