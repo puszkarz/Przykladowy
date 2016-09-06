@@ -29,9 +29,9 @@ class UpdateStationGeoTask extends AsyncTask<Void, Void, String> {
 
     @Override
     protected void onPreExecute () {
-        Log.e(LOG_TAG, "URLAsync preExec: " + station.toString());
+        Log.d(LOG_TAG, "URLAsync preExec: " + station.toString());
         if (!station.isWellDefined()) {
-            Log.e(LOG_TAG, "Station not well defined. Updating. Stat: " + station.toString());
+            Log.d(LOG_TAG, "Station not well defined. Updating. Stat: " + station.toString());
             url = GeocodingQuery.genGeocodingQuery(station.get_address());
         }
     }
@@ -69,7 +69,7 @@ class UpdateStationGeoTask extends AsyncTask<Void, Void, String> {
             station.set_latitude(latLng.latitude);
             station.set_longitude(latLng.longitude);
             db.updateStation(station);
-            Log.e(LOG_TAG, "Station updated: " + station.toString());
+            Log.d(LOG_TAG, "Station updated: " + station.toString());
         }
     }
 }

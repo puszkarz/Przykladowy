@@ -67,7 +67,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public Station getStation(int station_id) {
         SQLiteDatabase db = this.getReadableDatabase();
         String selectQuery = StationSQL.getSelectSingleQuery(station_id);
-        Log.e(LOG, selectQuery);
+        Log.d(LOG, selectQuery);
         Cursor c = db.rawQuery(selectQuery, null);
         Station station = null;
         if (c != null) {
@@ -83,7 +83,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public ArrayList<Station> getAllStations() {
         ArrayList<Station> stations = new ArrayList<>();
         String selectQuery = StationSQL.getSelectAllQuery();
-        Log.e(LOG, selectQuery);
+        Log.d(LOG, selectQuery);
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor c = db.rawQuery(selectQuery, null);
         // looping through all rows and adding to list
@@ -131,7 +131,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public User getUser(long user_id) {
         SQLiteDatabase db = this.getReadableDatabase();
         String selectQuery = UserSQL.getSelectSingleQuery(user_id);
-        Log.e(LOG, selectQuery);
+        Log.d(LOG, selectQuery);
         Cursor c = db.rawQuery(selectQuery, null);
         User user = null;
         if (c != null) {
@@ -147,7 +147,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public List<User> getAllUsers() {
         List<User> users = new ArrayList<>();
         String selectQuery = UserSQL.getSelectAllQuery();
-        Log.e(LOG, selectQuery);
+        Log.d(LOG, selectQuery);
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor c = db.rawQuery(selectQuery, null);
         // looping through all rows and adding to list
@@ -205,7 +205,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public Donation getDonation(long donation_id) {
         SQLiteDatabase db = this.getReadableDatabase();
         String selectQuery = DonationSQL.getSelectSingleQuery(donation_id);
-        Log.e(LOG, selectQuery);
+        Log.d(LOG, selectQuery);
         Cursor c = db.rawQuery(selectQuery, null);
         Donation donation = null;
         if (c != null) {
@@ -221,7 +221,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public List<Donation> getAllDonations() {
         List<Donation> donations = new ArrayList<>();
         String selectQuery = DonationSQL.getSelectAllQuery();
-        Log.e(LOG, selectQuery);
+        Log.d(LOG, selectQuery);
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor c = db.rawQuery(selectQuery, null);
         // looping through all rows and adding to list
