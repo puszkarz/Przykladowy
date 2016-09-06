@@ -80,7 +80,7 @@ public class ManageDonationsActivity extends AppCompatActivity implements androi
                 setContentView(R.layout.activity_manage_stations);
                 return true;
             case R.id.manage_users:
-                setContentView(R.layout.activity_manage_users);
+                setContentView(R.layout.settings);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

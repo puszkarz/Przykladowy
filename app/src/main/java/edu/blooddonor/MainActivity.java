@@ -76,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
                 setContentView(edu.blooddonor.R.layout.activity_manage_stations);
                 return true;
             case edu.blooddonor.R.id.manage_users: //TODO: dać jako settings
-                setContentView(edu.blooddonor.R.layout.activity_manage_users);
+                setContentView(edu.blooddonor.R.layout.settings);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -113,20 +113,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void onClick_addUser(View v) {
-        DatabaseHelper db = new DatabaseHelper(getApplicationContext());
-        TextView tv1 = (TextView) findViewById( edu.blooddonor.R.id.MSL_f_addStationName);
-        TextView tv2 = (TextView) findViewById( edu.blooddonor.R.id.typefield );
-        if (tv1 != null && tv2 != null) {
-            CharSequence nick = tv1.getText();
-            CharSequence type = tv2.getText();
-            db.insertUser(new User(nick.toString(), type.toString()));
-
-            tv1.setText(edu.blooddonor.R.string.debugOK);
-            tv2.setText(edu.blooddonor.R.string.debugOK);
-            logListUsers(db);
-        }
-    }
 
     public void onClick_deleteUser(View v) {
         DatabaseHelper db = new DatabaseHelper(getApplicationContext());

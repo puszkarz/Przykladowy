@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="10"
+        android:id="@+id/MDL_f_delStationId"
+        android:text="id"
+        android:layout_above="@+id/but_delUser"
+        android:layout_alignParentEnd="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="DELETE USER"
+        android:id="@+id/but_delUser"
+        android:onClick="onClick_deleteUser"
+        android:layout_alignBaseline="@+id/but_usersToMain"
+        android:layout_alignBottom="@+id/but_usersToMain"
+        android:layout_toEndOf="@+id/but_usersToMain" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="BACK TO MAIN"
+        android:id="@+id/but_usersToMain"
+        android:onClick="onClick_backToMain"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/MUL_updateNick"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/but_updateNick_label"
+        android:id="@+id/but_updateNick"
+        android:layout_below="@+id/MUL_updateNick"
+        android:layout_alignStart="@+id/but_usersToMain"
+        android:onClick="onClick_UpdateNick" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/but_updateBloodType_label"
+        android:id="@+id/but_updateBloodType"
+        android:layout_below="@+id/but_updateNick"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="65dp" />
+
+</RelativeLayout>
