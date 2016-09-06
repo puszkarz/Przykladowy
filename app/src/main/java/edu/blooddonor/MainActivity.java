@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import edu.blooddonor.geoAPI.DistanceListActivity;
 import edu.blooddonor.geoAPI.MapsActivity;
 import edu.blooddonor.sqliteDB.DatabaseHelper;
 import edu.blooddonor.model.Station;
@@ -78,6 +79,11 @@ public class MainActivity extends AppCompatActivity {
     public void onClick_showStations(View v) {
         Intent stationsActivity = new Intent(getApplicationContext(), StationsListActivity.class);
         startActivity(stationsActivity );
+    }
+
+    public void onClick_showDistList(View v) {
+        Intent distActivity = new Intent(getApplicationContext(), DistanceListActivity.class);
+        startActivity(distActivity);
     }
 
     public void onClick_showMaps(View v) {

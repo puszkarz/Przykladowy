@@ -47,6 +47,7 @@
     <string name="ZeroPlus">0+</string>
     <string name="ZeroMinus">0-</string>
     <string name="but_pickDate_label">Pick date</string>
+    <string name="but_showDistList">Show distance list</string>
 
 </resources>
 
