@@ -6,6 +6,12 @@
     <item android:id="@+id/show_stations"
         android:title="@string/but_showStations"
         />
+    <item android:id="@+id/show_map"
+        android:title="@string/but_showMap"
+        />
+    <item android:id="@+id/show_distance"
+        android:title="@string/but_showDistList"
+        />
     <item android:id="@+id/manage_users"
         android:title="@string/but_manage_users"
         />

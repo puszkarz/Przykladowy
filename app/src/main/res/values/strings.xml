@@ -3,7 +3,7 @@
 
     <string name="but_showDonations">Click me to see list of donations! :)</string>
     <string name="but_showStations">Click me to see list of stations! :)</string>
-    <string name="but_showMaps">Click me to see a map! :)</string>
+    <string name="but_showMap">Click me to see a map! :)</string>
 
     <string name="listDist_welcome">Distance to Stations list is will appear below</string>
 

@@ -49,23 +49,32 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        Intent activity;
         switch (item.getItemId()) {
             case edu.blooddonor.R.id.show_donations:
-                Intent donationsActivity = new Intent(getApplicationContext(), DonationsListActivity.class);
-                startActivity(donationsActivity);
+                activity = new Intent(getApplicationContext(), DonationsListActivity.class);
+                startActivity(activity);
                 return true;
             case edu.blooddonor.R.id.show_stations:
-                Intent stationsActivity = new Intent(getApplicationContext(), StationsListActivity.class);
-                startActivity(stationsActivity);
+                activity = new Intent(getApplicationContext(), StationsListActivity.class);
+                startActivity(activity);
+                return true;
+            case R.id.show_map:
+                activity = new Intent(getApplicationContext(), MapsActivity.class);
+                startActivity(activity);
+                return true;
+            case R.id.show_distance:
+                activity = new Intent(getApplicationContext(), DistanceListActivity.class);
+                startActivity(activity);
                 return true;
             case edu.blooddonor.R.id.manage_donations:
-                Intent manageDonationsActivity = new Intent(getApplicationContext(), ManageDonationsActivity.class);
-                startActivity(manageDonationsActivity);
+                activity = new Intent(getApplicationContext(), ManageDonationsActivity.class);
+                startActivity(activity);
                 return true;
-            case edu.blooddonor.R.id.manage_stations:
+            case edu.blooddonor.R.id.manage_stations: //TODO: chyba wywalić
                 setContentView(edu.blooddonor.R.layout.activity_manage_stations);
                 return true;
-            case edu.blooddonor.R.id.manage_users:
+            case edu.blooddonor.R.id.manage_users: //TODO: dać jako settings
                 setContentView(edu.blooddonor.R.layout.activity_manage_users);
                 return true;
             default:
