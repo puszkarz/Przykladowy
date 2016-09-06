@@ -26,7 +26,7 @@ import info.sqlite.model.Station;
 
 import com.google.android.gms.maps.model.LatLng;
 
-public class DistanceMatrixTask extends AsyncTask<LatLng, Void, String> {
+class DistanceMatrixTask extends AsyncTask<LatLng, Void, String> {
 
     private static final String LOG_TAG = "DistMatrix: ";
     private static final String DIST_MATRIX_URL = "https://maps.googleapis.com/maps/api/distancematrix/json?";

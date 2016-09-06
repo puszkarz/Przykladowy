@@ -30,7 +30,7 @@ import java.net.URLEncoder;
  * Geocoding task sends queries to Google Maps Geocoding API and retrives points coordinates basing on addresses.
  */
 
-public class GeocodingTask extends AsyncTask<String, Void, String> {
+class GeocodingTask extends AsyncTask<String, Void, String> {
 
     private static final String LOG_TAG = "GeoLoc: ";
     private static final String GEO_URL = "https://maps.googleapis.com/maps/api/geocode/json?";
