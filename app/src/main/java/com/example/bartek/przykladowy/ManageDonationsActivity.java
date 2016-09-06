@@ -6,6 +6,7 @@ import android.app.PendingIntent;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.*;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -13,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.*;
 import android.widget.DatePicker;
+import android.widget.PopupMenu;
 
 import java.util.Calendar;
 import java.util.List;
@@ -23,7 +25,7 @@ import info.sqlite.model.Donation;
 /**
  * Created by magda on 05.09.16.
  */
-public class ManageDonationsActivity extends AppCompatActivity{
+public class ManageDonationsActivity extends AppCompatActivity implements android.support.v7.widget.PopupMenu.OnMenuItemClickListener {
     Calendar calendar = Calendar.getInstance();
     int _year = 0;
     int _month = 0;
@@ -87,6 +89,20 @@ public class ManageDonationsActivity extends AppCompatActivity{
         }
     }
 
+
+    public void onClick_showPopUpDonationsTypes(View v) {
+        android.support.v7.widget.PopupMenu popup = new android.support.v7.widget.PopupMenu(this, v);
+        popup.setOnMenuItemClickListener(ManageDonationsActivity.this);
+        MenuInflater inflater = popup.getMenuInflater();
+        inflater.inflate(R.menu.donationtype_menu, popup.getMenu());
+        popup.show();
+    }
+
+    @Override
+    public boolean onMenuItemClick(MenuItem item) {
+        return false;
+    }
+
     public void onClick_addDonation(View v) {
         Calendar calendar = Calendar.getInstance();
         calendar.set(_year, _month+1, _day);
@@ -107,7 +123,7 @@ public class ManageDonationsActivity extends AppCompatActivity{
             CharSequence userId = tv1.getText();
             CharSequence stationId = tv2.getText();
             String dateInString = _year + "/" + _month + "/" + _day;
-            db.insertDonation(new Donation(dateInString, "type", 0, Integer.parseInt(userId.toString()), Integer.parseInt(stationId.toString())));
+            db.insertDonation(new Donation(dateInString, "type", 0, 0, Integer.parseInt(userId.toString()), Integer.parseInt(stationId.toString())));
 
             tv1.setText(R.string.debugOK);
             tv2.setText(R.string.debugOK);
@@ -141,10 +157,6 @@ public class ManageDonationsActivity extends AppCompatActivity{
             logListDonations(db);
         }
 
-    }
-
-    public void onClick_endThisActivity(View v) {
-        finish();
     }
 
 }

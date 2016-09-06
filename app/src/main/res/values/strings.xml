@@ -42,7 +42,13 @@
     <string name="ZeroPlus">0+</string>
     <string name="ZeroMinus">0-</string>
 
-    <string name="but_pickDate_label">Pick date</string>
+    <string name="but_pickDate_label">Date</string>
+    <string name="but_pickDonationType_label">Donation type</string>
+    <string name="but_whole_blood">Whole blood</string>
+    <string name="but_blood_plasma">Blood plasma</string>
+    <string name="but_blood_cells">Blood cells</string>
+    <string name="but_red_cells">Red cells</string>
+    <string name="but_white_cells">White cells</string>
 
 </resources>
 

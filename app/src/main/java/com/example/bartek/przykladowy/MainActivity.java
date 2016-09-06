@@ -26,14 +26,16 @@ public class MainActivity extends AppCompatActivity {
         logListUsers(db);
         setContentView(R.layout.activity_main);
         if (noUser == 0 ) {
-            setContentView(R.layout.activity_main);
             Intent firstActivity = new Intent(getApplicationContext(), FirstLoginActivity.class);
             startActivity(firstActivity);
         }
+        else {
+            TextView textView = (TextView) findViewById(R.id.ML_txt_mainWelcome);
+            User user = db.getUser(1);
+            textView.setText("Welcome " + user.get_nick() + "!");
+        }
         logListUsers(db);
-        TextView textView = (TextView) findViewById(R.id.ML_txt_mainWelcome);
-        User user = db.getUser(1);
-        textView.setText("Welcome " + user.get_nick() + "!");
+
 
     }
 
