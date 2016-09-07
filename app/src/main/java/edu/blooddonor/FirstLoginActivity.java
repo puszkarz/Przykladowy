@@ -15,7 +15,6 @@ import edu.blooddonor.geoAPI.DistanceListActivity;
 import edu.blooddonor.geoAPI.MapsActivity;
 import edu.blooddonor.sqliteDB.DatabaseHelper;
 import edu.blooddonor.model.User;
-import edu.blooddonor.sqliteDB.SettingsActivity;
 
 public class FirstLoginActivity extends AppCompatActivity implements PopupMenu.OnMenuItemClickListener {
 

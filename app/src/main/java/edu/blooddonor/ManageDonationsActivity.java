@@ -6,7 +6,6 @@ import android.app.PendingIntent;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.*;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -14,7 +13,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.*;
 import android.widget.DatePicker;
-import android.widget.PopupMenu;
 
 import java.util.Calendar;
 import java.util.List;
@@ -23,7 +21,6 @@ import edu.blooddonor.geoAPI.DistanceListActivity;
 import edu.blooddonor.geoAPI.MapsActivity;
 import edu.blooddonor.sqliteDB.DatabaseHelper;
 import edu.blooddonor.model.Donation;
-import edu.blooddonor.sqliteDB.SettingsActivity;
 
 public class ManageDonationsActivity extends AppCompatActivity implements android.support.v7.widget.PopupMenu.OnMenuItemClickListener {
     Calendar calendar = Calendar.getInstance();

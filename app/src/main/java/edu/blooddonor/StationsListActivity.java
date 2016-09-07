@@ -17,7 +17,6 @@ import edu.blooddonor.geoAPI.DistanceListActivity;
 import edu.blooddonor.geoAPI.MapsActivity;
 import edu.blooddonor.sqliteDB.DatabaseHelper;
 import edu.blooddonor.model.Station;
-import edu.blooddonor.sqliteDB.SettingsActivity;
 
 public class StationsListActivity extends AppCompatActivity {
 

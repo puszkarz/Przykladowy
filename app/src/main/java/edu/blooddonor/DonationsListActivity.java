@@ -17,7 +17,6 @@ import edu.blooddonor.geoAPI.DistanceListActivity;
 import edu.blooddonor.geoAPI.MapsActivity;
 import edu.blooddonor.sqliteDB.DatabaseHelper;
 import edu.blooddonor.model.Donation;
-import edu.blooddonor.sqliteDB.SettingsActivity;
 
 public class DonationsListActivity extends AppCompatActivity {
 

@@ -1,4 +1,4 @@
-package edu.blooddonor.sqliteDB;
+package edu.blooddonor;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,13 +13,10 @@ import android.widget.TextView;
 import java.util.List;
 import android.util.Log;
 
-import edu.blooddonor.DonationsListActivity;
-import edu.blooddonor.ManageDonationsActivity;
-import edu.blooddonor.R;
-import edu.blooddonor.StationsListActivity;
 import edu.blooddonor.geoAPI.DistanceListActivity;
 import edu.blooddonor.geoAPI.MapsActivity;
 import edu.blooddonor.model.User;
+import edu.blooddonor.sqliteDB.DatabaseHelper;
 
 /**
  * Created by magda on 07.09.16.
