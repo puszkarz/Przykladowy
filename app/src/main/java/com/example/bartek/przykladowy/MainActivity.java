@@ -36,7 +36,25 @@ public class MainActivity extends AppCompatActivity {
         }
         logListUsers(db);
 
+    }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        DatabaseHelper db = new DatabaseHelper(getApplicationContext());
+        int noUser = db.getUsersCount();
+        logListUsers(db);
+        setContentView(R.layout.activity_main);
+        if (noUser == 0 ) {
+            Intent firstActivity = new Intent(getApplicationContext(), FirstLoginActivity.class);
+            startActivity(firstActivity);
+        }
+        else {
+            TextView textView = (TextView) findViewById(R.id.ML_txt_mainWelcome);
+            User user = db.getUser(1);
+            textView.setText("Welcome " + user.get_nick() + "!");
+        }
+        logListUsers(db);
     }
 
     @Override
@@ -65,7 +83,8 @@ public class MainActivity extends AppCompatActivity {
                 setContentView(R.layout.activity_manage_stations);
                 return true;
             case R.id.manage_users:
-                setContentView(R.layout.activity_manage_users);
+                Intent settingsActivity = new Intent(getApplicationContext(),SettingsActivity.class);
+                startActivity(settingsActivity);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -102,32 +121,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void onClick_addUser(View v) {
-        DatabaseHelper db = new DatabaseHelper(getApplicationContext());
-        TextView tv1 = (TextView) findViewById( R.id.MSL_f_addStationName);
-        TextView tv2 = (TextView) findViewById( R.id.typefield );
-        if (tv1 != null && tv2 != null) {
-            CharSequence nick = tv1.getText();
-            CharSequence type = tv2.getText();
-            db.insertUser(new User(nick.toString(), type.toString()));
-
-            tv1.setText(R.string.debugOK);
-            tv2.setText(R.string.debugOK);
-            logListUsers(db);
-        }
-    }
-
-    public void onClick_deleteUser(View v) {
-        DatabaseHelper db = new DatabaseHelper(getApplicationContext());
-        TextView tv1 = (TextView) findViewById( R.id.MDL_f_delStationId);
-        if (tv1 != null) {
-            CharSequence users_id = tv1.getText();
-            db.deleteUser(Integer.parseInt(users_id.toString()));
-
-            tv1.setText(R.string.debugOK);
-            logListUsers(db);
-        }
-    }
 
 
     // Writing Stations to Log
