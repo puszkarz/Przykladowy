@@ -9,23 +9,6 @@
         android:layout_height="wrap_content"
         android:inputType="number"
         android:ems="10"
-        android:id="@+id/MDL_f_stationId"
-        android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/MDL_but_addDonation" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="@string/stationId_label"
-        android:id="@+id/MDL_fDesc_stationId"
-        android:layout_toStartOf="@+id/MDL_f_stationId" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="number"
-        android:ems="10"
         android:id="@+id/MDL_f_delStationId"
         android:layout_above="@+id/MDL_but_delDonation"
         android:layout_alignParentEnd="true" />
@@ -36,8 +19,8 @@
         android:text="@string/but_addDonation_label"
         android:id="@+id/MDL_but_addDonation"
         android:onClick="onClick_addDonation"
-        android:layout_below="@+id/MDL_but_pickDonationType"
-        android:layout_alignStart="@+id/MDL_f_delStationId" />
+        android:layout_centerVertical="true"
+        android:layout_toEndOf="@+id/MDL_fDesc_delStationId" />
 
     <Button
         android:layout_width="wrap_content"
@@ -64,19 +47,18 @@
         android:layout_height="wrap_content"
         android:text="@string/but_pickDate_label"
         android:id="@+id/MDL_but_pickDate"
-        android:layout_below="@+id/MDL_f_stationId"
-        android:layout_alignStart="@+id/MDL_but_addDonation"
-        android:layout_marginTop="48dp" />
+        android:layout_above="@+id/MDL_but_pickDonationType"
+        android:layout_alignStart="@+id/MDL_but_pickDonationType" />
 
     <Button
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/MDL_but_pickDonationType"
-        android:layout_below="@+id/MDL_but_pickDate"
-        android:layout_toEndOf="@+id/MDL_fDesc_stationId"
         android:text="@string/but_pickDonationType_label"
-        android:onClick="onClick_showPopUpDonationsTypes" />
+        android:onClick="onClick_showPopUpDonationsTypes"
+        android:layout_above="@+id/MDL_but_addDonation"
+        android:layout_toEndOf="@+id/MDL_fDesc_delStationId" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -84,8 +66,8 @@
         android:inputType="number"
         android:ems="10"
         android:id="@+id/MDL_f_addVolume"
-        android:layout_below="@+id/MDL_f_stationId"
-        android:layout_alignStart="@+id/MDL_f_stationId" />
+        android:layout_above="@+id/MDL_but_pickDate"
+        android:layout_toEndOf="@+id/MDL_fDesc_delStationId" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -93,7 +75,16 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="@string/volume_label"
         android:id="@+id/MDL_fDesc_Volume"
-        android:layout_below="@+id/MDL_f_stationId"
-        android:layout_toStartOf="@+id/MDL_f_stationId" />
+        android:layout_above="@+id/MDL_but_pickDate"
+        android:layout_alignEnd="@+id/MDL_fDesc_delStationId" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/but_pickStation_label"
+        android:id="@+id/MDL_but_pickStation"
+        android:layout_above="@+id/MDL_fDesc_Volume"
+        android:layout_alignStart="@+id/MDL_f_addVolume"
+        android:onClick="onClick_pickStation" />
 
 </RelativeLayout>

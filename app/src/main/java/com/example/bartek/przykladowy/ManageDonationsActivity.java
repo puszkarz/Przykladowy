@@ -19,6 +19,7 @@ import java.util.List;
 
 import info.sqlite.helper.DatabaseHelper;
 import info.sqlite.model.Donation;
+import info.sqlite.model.Station;
 
 /**
  * Created by magda on 05.09.16.
@@ -30,6 +31,8 @@ public class ManageDonationsActivity extends AppCompatActivity implements androi
     int _day = 0;
 
     String _donationsType = "";
+
+    Station _station;
 
     DatePickerDialog.OnDateSetListener listener = new DatePickerDialog.OnDateSetListener(){
         @Override
@@ -141,25 +144,25 @@ public class ManageDonationsActivity extends AppCompatActivity implements androi
 
         DatabaseHelper db = new DatabaseHelper(getApplicationContext());
         TextView tv_volume = (TextView) findViewById( R.id.MDL_f_addVolume);
-        TextView tv_stationId = (TextView) findViewById( R.id.MDL_f_stationId);
-        if ((tv_volume != null) && (tv_stationId != null) && (_year != 0)
-                && (_month != 0) && (_day != 0) && !_donationsType.equals("")) {
+
+        if ((tv_volume != null)  && (_year != 0) && (_month != 0) && (_day != 0) && !_donationsType.equals("") && _station!= null) {
             CharSequence volume = tv_volume.getText();
-            CharSequence stationId =  tv_stationId.getText();
+
             String dateInString = _year + "/" + _month + "/" + _day;
 
             int blood_volume =  computeVolume(_donationsType, Integer.parseInt(volume.toString()));
-            Donation donation = new Donation(dateInString, _donationsType, Integer.parseInt(volume.toString()), blood_volume, 1, Integer.parseInt(stationId.toString()));
+            Donation donation = new Donation(dateInString, _donationsType, Integer.parseInt(volume.toString()), blood_volume, 1, _station.get_id());
             db.insertDonation(donation);
 
             tv_volume.setText(R.string.debugOK);
-            tv_stationId.setText(R.string.debugOK);
+
             logListDonations(db);
 
             _year = 0;
             _month = 0;
             _day = 0;
             _donationsType = "";
+            _station = null;
 
             logListDonations(db);
         }
@@ -181,6 +184,13 @@ public class ManageDonationsActivity extends AppCompatActivity implements androi
 
         }
         return 0;
+    }
+
+
+    public void onClick_pickStation(View v){
+        Intent stationsActivity = new Intent(getApplicationContext(), StationsListActivity.class);
+        startActivity(stationsActivity);
+        _station = StationsListActivity.get_pickedStation();
     }
 
     // Writing Donations to Log
