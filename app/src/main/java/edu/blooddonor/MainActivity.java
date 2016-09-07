@@ -23,21 +23,29 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        printWelcomeOrLogin();
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        printWelcomeOrLogin();
+    }
+
+    private void printWelcomeOrLogin(){
         DatabaseHelper db = new DatabaseHelper(getApplicationContext());
         int noUser = db.getUsersCount();
-        logListUsers(db);
         setContentView(R.layout.activity_main);
         if (noUser == 0 ) {
             Intent firstActivity = new Intent(getApplicationContext(), FirstLoginActivity.class);
             startActivity(firstActivity);
         }
-        else {
-            TextView textView = (TextView) findViewById(R.id.ML_txt_mainWelcome);
-            User user = db.getUser(1);
+        TextView textView = (TextView) findViewById(R.id.ML_txt_mainWelcome);
+        User user = db.getUser(1);
+        if (textView != null && user != null)
             textView.setText("Welcome " + user.get_nick() + "!");
-        }
         logListUsers(db);
-
     }
 
     @Override
