@@ -3,10 +3,12 @@ package com.example.bartek.przykladowy;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -17,6 +19,11 @@ import info.sqlite.helper.DatabaseHelper;
 import info.sqlite.model.Donation;
 
 public class DonationsListActivity extends AppCompatActivity {
+
+    List<Donation> donations;
+    ArrayList<String> donations_string = new ArrayList<>();
+    ArrayAdapter<String> listViewAdapter;
+    ListView myListView;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -55,19 +62,44 @@ public class DonationsListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_donations_list);
-        presentAllDonatons();
+        DatabaseHelper db = new DatabaseHelper(getApplicationContext());
+        donations = db.getAllDonations();
+        donations_string = donListToString(donations);
+        presentAllDonations();
     }
 
-//    public void presentAllDonatons(View v) {
-    public void presentAllDonatons() {
-        DatabaseHelper db = new DatabaseHelper(getApplicationContext());
-        List<Donation> donations = db.getAllDonations();
-
-        ListView myListView = (ListView) findViewById(R.id.DLAL_listView);
-        ArrayAdapter<String> listViewAdapter = new ArrayAdapter<>(this,
-                android.R.layout.simple_list_item_1, donListToString(donations));
+//    public void presentAllDonations(View v) {
+    public void presentAllDonations() {
+        myListView = (ListView) findViewById(R.id.DLAL_listView);
+        listViewAdapter = new ArrayAdapter<>(this,
+                android.R.layout.simple_list_item_1, donations_string);
         if (myListView != null) {
             myListView.setAdapter(listViewAdapter);
+        }
+
+        registerForContextMenu(myListView);
+    }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.delete_donation_menu, menu);
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        DatabaseHelper db = new DatabaseHelper(getApplicationContext());
+        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+        switch(item.getItemId()){
+            case R.id.delete:
+                Donation donation = donations.get(info.position);
+                db.deleteDonation(donation.get_id());
+                donations_string.remove(info.position);
+                listViewAdapter.notifyDataSetChanged();
+                return true;
+            default:
+                return super.onContextItemSelected(item);
         }
     }
 
