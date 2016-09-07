@@ -104,6 +104,7 @@ public class DonationsListActivity extends AppCompatActivity {
         switch(item.getItemId()){
             case R.id.delete:
                 Donation donation = donations.get(info.position);
+                donations.remove(info.position);
                 db.deleteDonation(donation.get_id());
                 donations_string.remove(info.position);
                 listViewAdapter.notifyDataSetChanged();

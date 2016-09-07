@@ -254,6 +254,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 String.valueOf(donation_id), null);
     }
 
+    public void deleteAllDonations(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("DROP TABLE IF EXISTS " + DonationSQL.getTableName());
+        db.execSQL(DonationSQL.createTable());
+    }
+
     /** Getting donations Count */
     public int getDonationsCount() {
         String countQuery = DonationSQL.getSelectAllQuery();

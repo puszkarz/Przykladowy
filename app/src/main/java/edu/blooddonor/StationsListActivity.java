@@ -3,12 +3,15 @@ package edu.blooddonor;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,64 +23,56 @@ import edu.blooddonor.model.Station;
 
 public class StationsListActivity extends AppCompatActivity {
 
+    List<Station> stations;
+    ArrayList<String> stations_string = new ArrayList<>();
+    ArrayAdapter<String> listViewAdapter;
+    ListView myListView;
+
+    static Station _pickedStation;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(edu.blooddonor.R.layout.activity_stations_list);
+        setContentView(R.layout.activity_stations_list);
+        DatabaseHelper db = new DatabaseHelper(getApplicationContext());
+        stations = db.getAllStations();
+        stations_string = statListToString(stations);
         presentAllStations();
     }
 
-
-    //@TODO tutaj chyba nie będzie tego menu
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.actionbar_menu, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        Intent activity;
-        switch (item.getItemId()) {
-            case edu.blooddonor.R.id.show_donations:
-                activity = new Intent(getApplicationContext(), DonationsListActivity.class);
-                startActivity(activity);
-                return true;
-            case edu.blooddonor.R.id.show_stations:
-                activity = new Intent(getApplicationContext(), StationsListActivity.class);
-                startActivity(activity);
-                return true;
-            case R.id.show_map:
-                activity = new Intent(getApplicationContext(), MapsActivity.class);
-                startActivity(activity);
-                return true;
-            case R.id.show_distance:
-                activity = new Intent(getApplicationContext(), DistanceListActivity.class);
-                startActivity(activity);
-                return true;
-            case edu.blooddonor.R.id.manage_donations:
-                activity = new Intent(getApplicationContext(), ManageDonationsActivity.class);
-                startActivity(activity);
-                return true;
-            case edu.blooddonor.R.id.manage_users:
-                activity = new Intent(getApplicationContext(), SettingsActivity.class);
-                startActivity(activity);
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
+    public static Station get_pickedStation() {
+        return _pickedStation;
     }
 
     public void presentAllStations() {
-        DatabaseHelper db = new DatabaseHelper(getApplicationContext());
-        List<Station> stations = db.getAllStations();
-
-        ListView myListView = (ListView) findViewById(edu.blooddonor.R.id.SLAL_listView);
-        ArrayAdapter<String> listViewAdapter = new ArrayAdapter<>(this,
-                android.R.layout.simple_list_item_1, statListToString(stations));
+        myListView = (ListView) findViewById(R.id.SLAL_listView);
+        listViewAdapter = new ArrayAdapter<>(this,
+                android.R.layout.simple_list_item_1, stations_string);
         if (myListView != null) {
             myListView.setAdapter(listViewAdapter);
+        }
+
+        registerForContextMenu(myListView);
+    }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.pick_station_menu, menu);
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+        switch(item.getItemId()){
+            case R.id.pick:
+                _pickedStation = stations.get(info.position);
+                Toast.makeText(getBaseContext(), "You selected" + _pickedStation.get_name(), Toast.LENGTH_SHORT).show();
+                finish();
+                return true;
+            default:
+                return super.onContextItemSelected(item);
         }
     }
 

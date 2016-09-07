@@ -155,6 +155,7 @@ public class SettingsActivity extends AppCompatActivity implements PopupMenu.OnM
     public void onClick_deleteUser(View v) {
         DatabaseHelper db = new DatabaseHelper(getApplicationContext());
         db.deleteUser(1);
+        db.deleteAllDonations();
         logListUsers(db);
         finish();
     }
