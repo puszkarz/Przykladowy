@@ -13,8 +13,11 @@ import android.widget.ListView;
 import java.util.ArrayList;
 import java.util.List;
 
+import edu.blooddonor.geoAPI.DistanceListActivity;
+import edu.blooddonor.geoAPI.MapsActivity;
 import edu.blooddonor.sqliteDB.DatabaseHelper;
 import edu.blooddonor.model.Donation;
+import edu.blooddonor.sqliteDB.SettingsActivity;
 
 public class DonationsListActivity extends AppCompatActivity {
 
@@ -27,24 +30,31 @@ public class DonationsListActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        Intent activity;
         switch (item.getItemId()) {
-            case R.id.show_donations:
-                Intent donationsActivity = new Intent(getApplicationContext(), DonationsListActivity.class);
-                startActivity(donationsActivity);
+            case edu.blooddonor.R.id.show_donations:
+                activity = new Intent(getApplicationContext(), DonationsListActivity.class);
+                startActivity(activity);
                 return true;
-            case R.id.show_stations:
-                Intent stationsActivity = new Intent(getApplicationContext(), StationsListActivity.class);
-                startActivity(stationsActivity);
+            case edu.blooddonor.R.id.show_stations:
+                activity = new Intent(getApplicationContext(), StationsListActivity.class);
+                startActivity(activity);
                 return true;
-            case R.id.manage_donations:
-                Intent manageDonationsActivity = new Intent(getApplicationContext(), ManageDonationsActivity.class);
-                startActivity(manageDonationsActivity);
+            case R.id.show_map:
+                activity = new Intent(getApplicationContext(), MapsActivity.class);
+                startActivity(activity);
                 return true;
-            case R.id.manage_stations:
-                setContentView(R.layout.activity_manage_stations);
+            case R.id.show_distance:
+                activity = new Intent(getApplicationContext(), DistanceListActivity.class);
+                startActivity(activity);
                 return true;
-            case R.id.manage_users:
-                setContentView(R.layout.activity_manage_users);
+            case edu.blooddonor.R.id.manage_donations:
+                activity = new Intent(getApplicationContext(), ManageDonationsActivity.class);
+                startActivity(activity);
+                return true;
+            case edu.blooddonor.R.id.manage_users:
+                activity = new Intent(getApplicationContext(), SettingsActivity.class);
+                startActivity(activity);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

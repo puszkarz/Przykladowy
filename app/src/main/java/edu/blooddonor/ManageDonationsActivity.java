@@ -19,8 +19,11 @@ import android.widget.PopupMenu;
 import java.util.Calendar;
 import java.util.List;
 
+import edu.blooddonor.geoAPI.DistanceListActivity;
+import edu.blooddonor.geoAPI.MapsActivity;
 import edu.blooddonor.sqliteDB.DatabaseHelper;
 import edu.blooddonor.model.Donation;
+import edu.blooddonor.sqliteDB.SettingsActivity;
 
 public class ManageDonationsActivity extends AppCompatActivity implements android.support.v7.widget.PopupMenu.OnMenuItemClickListener {
     Calendar calendar = Calendar.getInstance();
@@ -28,15 +31,7 @@ public class ManageDonationsActivity extends AppCompatActivity implements androi
     int _month = 0;
     int _day = 0;
 
-    DatePickerDialog.OnDateSetListener listener = new DatePickerDialog.OnDateSetListener(){
-        @Override
-        public void onDateSet(DatePicker view, int year, int month, int day) {
-            Toast.makeText(getBaseContext(), "Selected date:" + month + "/" + day + "/" + year, Toast.LENGTH_LONG).show();
-            _year = year;
-            _month = month;
-            _day = day;
-        }
-    };
+    String _donationsType = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +48,16 @@ public class ManageDonationsActivity extends AppCompatActivity implements androi
         });
     }
 
+    DatePickerDialog.OnDateSetListener listener = new DatePickerDialog.OnDateSetListener(){
+        @Override
+        public void onDateSet(DatePicker view, int year, int month, int day) {
+            Toast.makeText(getBaseContext(), "Selected date:" + month + "/" + day + "/" + year, Toast.LENGTH_LONG).show();
+            _year = year;
+            _month = month;
+            _day = day;
+        }
+    };
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -62,24 +67,31 @@ public class ManageDonationsActivity extends AppCompatActivity implements androi
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        Intent activity;
         switch (item.getItemId()) {
-            case R.id.show_donations:
-                Intent donationsActivity = new Intent(getApplicationContext(), DonationsListActivity.class);
-                startActivity(donationsActivity);
+            case edu.blooddonor.R.id.show_donations:
+                activity = new Intent(getApplicationContext(), DonationsListActivity.class);
+                startActivity(activity);
                 return true;
-            case R.id.show_stations:
-                Intent stationsActivity = new Intent(getApplicationContext(), StationsListActivity.class);
-                startActivity(stationsActivity);
+            case edu.blooddonor.R.id.show_stations:
+                activity = new Intent(getApplicationContext(), StationsListActivity.class);
+                startActivity(activity);
                 return true;
-            case R.id.manage_donations:
-                Intent manageDonationsActivity = new Intent(getApplicationContext(), ManageDonationsActivity.class);
-                startActivity(manageDonationsActivity);
+            case R.id.show_map:
+                activity = new Intent(getApplicationContext(), MapsActivity.class);
+                startActivity(activity);
                 return true;
-            case R.id.manage_stations:
-                setContentView(R.layout.activity_manage_stations);
+            case R.id.show_distance:
+                activity = new Intent(getApplicationContext(), DistanceListActivity.class);
+                startActivity(activity);
                 return true;
-            case R.id.manage_users:
-                setContentView(R.layout.activity_manage_users);
+            case edu.blooddonor.R.id.manage_donations:
+                activity = new Intent(getApplicationContext(), ManageDonationsActivity.class);
+                startActivity(activity);
+                return true;
+            case edu.blooddonor.R.id.manage_users:
+                activity = new Intent(getApplicationContext(), SettingsActivity.class);
+                startActivity(activity);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -97,7 +109,30 @@ public class ManageDonationsActivity extends AppCompatActivity implements androi
 
     @Override
     public boolean onMenuItemClick(MenuItem item) {
-        return false;
+        switch (item.getItemId()) {
+            case R.id.whole_blood:
+                _donationsType = "whole_blood";
+                Toast.makeText(getBaseContext(), "You selected Whole Blood", Toast.LENGTH_SHORT).show();
+                return true;
+            case R.id.blood_plasma:
+                _donationsType = "blood_plasma";
+                Toast.makeText(getBaseContext(), "You selected Blood Plasma", Toast.LENGTH_SHORT).show();
+                return true;
+            case R.id.blood_cells:
+                _donationsType = "blood_cells";
+                Toast.makeText(getBaseContext(), "You selected Blood Cells", Toast.LENGTH_SHORT).show();
+                return true;
+            case R.id.red_cells:
+                _donationsType = "red_cells";
+                Toast.makeText(getBaseContext(), "You selected Red Cells", Toast.LENGTH_SHORT).show();
+                return true;
+            case R.id.white_cells:
+                _donationsType = "white_cells";
+                Toast.makeText(getBaseContext(), "You selected White Cells", Toast.LENGTH_SHORT).show();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     public void onClick_addDonation(View v) {
@@ -114,22 +149,48 @@ public class ManageDonationsActivity extends AppCompatActivity implements androi
 
 
         DatabaseHelper db = new DatabaseHelper(getApplicationContext());
-        TextView tv1 = (TextView) findViewById( edu.blooddonor.R.id.MDL_f_userId);
-        TextView tv2 = (TextView) findViewById( edu.blooddonor.R.id.MDL_f_stationId);
-        if (tv1 != null && tv2 != null &&  _year != 0 && _month != 0 && _day !=0) {
-            CharSequence userId = tv1.getText();
-            CharSequence stationId = tv2.getText();
+        TextView tv_volume = (TextView) findViewById( R.id.MDL_f_addVolume);
+        TextView tv_stationId = (TextView) findViewById( R.id.MDL_f_stationId);
+        if ((tv_volume != null) && (tv_stationId != null) && (_year != 0)
+                && (_month != 0) && (_day != 0) && !_donationsType.equals("")) {
+            CharSequence volume = tv_volume.getText();
+            CharSequence stationId =  tv_stationId.getText();
             String dateInString = _year + "/" + _month + "/" + _day;
-            db.insertDonation(new Donation(dateInString, "type", 0, 0, Integer.parseInt(userId.toString()), Integer.parseInt(stationId.toString())));
 
-            tv1.setText(edu.blooddonor.R.string.debugOK);
-            tv2.setText(edu.blooddonor.R.string.debugOK);
+            int blood_volume =  computeVolume(_donationsType, Integer.parseInt(volume.toString()));
+            Donation donation = new Donation(dateInString, _donationsType, Integer.parseInt(volume.toString()), blood_volume, 1, Integer.parseInt(stationId.toString()));
+            db.insertDonation(donation);
+
+            tv_volume.setText(R.string.debugOK);
+            tv_stationId.setText(R.string.debugOK);
             logListDonations(db);
 
             _year = 0;
             _month = 0;
             _day = 0;
+            _donationsType = "";
+
+            logListDonations(db);
         }
+    }
+
+
+    //@TODO ogarnac jak sie przelicza
+    private int computeVolume(String donationsType, int volume) {
+        switch (donationsType) {
+            case "whole_blood":
+                return volume;
+            case "blood_plasma":
+                return volume;
+            case "blood_cells":
+                return volume;
+            case "red_cells":
+                return volume;
+            case "white_cells":
+                return volume;
+
+        }
+        return 0;
     }
 
     // Writing Donations to Log
@@ -137,7 +198,7 @@ public class ManageDonationsActivity extends AppCompatActivity implements androi
         Log.d("Reading: ", "Reading all donations..");
         List<Donation> donations = db.getAllDonations();
         for (Donation cn : donations) {
-            String log = "Id: " + cn.get_id() + " , St id: " + cn.get_station_id() + " , Us id: " + cn.get_user_id() + " , Date: " + cn.get_date();
+            String log = "Id: " + cn.get_id() + " , St id: " + cn.get_station_id() + " , Us id: " + cn.get_user_id() + " , Date: " + cn.get_date() + " , Volume: " + cn.get_volume();
             Log.d("Name: ", log);
         }
         Log.e("Donation Count", "donation count " + db.getDonationsCount());

@@ -17,6 +17,7 @@ import edu.blooddonor.geoAPI.MapsActivity;
 import edu.blooddonor.sqliteDB.DatabaseHelper;
 import edu.blooddonor.model.Station;
 import edu.blooddonor.model.User;
+import edu.blooddonor.sqliteDB.SettingsActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -79,11 +80,9 @@ public class MainActivity extends AppCompatActivity {
                 activity = new Intent(getApplicationContext(), ManageDonationsActivity.class);
                 startActivity(activity);
                 return true;
-            case edu.blooddonor.R.id.manage_stations: //TODO: chyba wywalić
-                setContentView(edu.blooddonor.R.layout.activity_manage_stations);
-                return true;
-            case edu.blooddonor.R.id.manage_users: //TODO: dać jako settings
-                setContentView(edu.blooddonor.R.layout.activity_manage_users);
+            case edu.blooddonor.R.id.manage_users:
+                activity = new Intent(getApplicationContext(), SettingsActivity.class);
+                startActivity(activity);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

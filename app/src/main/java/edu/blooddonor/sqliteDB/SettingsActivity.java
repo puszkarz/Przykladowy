@@ -1,36 +1,40 @@
-package edu.blooddonor;
+package edu.blooddonor.sqliteDB;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.PopupMenu;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.TextView;
+import android.widget.PopupMenu;
 import android.widget.Toast;
+import android.widget.TextView;
+import java.util.List;
+import android.util.Log;
 
+import edu.blooddonor.DonationsListActivity;
+import edu.blooddonor.ManageDonationsActivity;
+import edu.blooddonor.R;
+import edu.blooddonor.StationsListActivity;
 import edu.blooddonor.geoAPI.DistanceListActivity;
 import edu.blooddonor.geoAPI.MapsActivity;
-import edu.blooddonor.sqliteDB.DatabaseHelper;
 import edu.blooddonor.model.User;
-import edu.blooddonor.sqliteDB.SettingsActivity;
 
-public class FirstLoginActivity extends AppCompatActivity implements PopupMenu.OnMenuItemClickListener {
-
-    private String _bloodType = "";
-
+/**
+ * Created by magda on 07.09.16.
+ */
+public class SettingsActivity extends AppCompatActivity implements PopupMenu.OnMenuItemClickListener{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(edu.blooddonor.R.layout.activity_first_login);
+        setContentView(R.layout.activity_settings);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.actionbar_menu, menu);
+        inflater.inflate(edu.blooddonor.R.menu.actionbar_menu, menu);
         return true;
     }
 
@@ -67,11 +71,35 @@ public class FirstLoginActivity extends AppCompatActivity implements PopupMenu.O
         }
     }
 
-    public void onClick_showPopUpBloodTypes(View v) {
+    public void onClick_UpdateNick(View v) {
+        DatabaseHelper db = new DatabaseHelper(getApplicationContext());
+        TextView tv_nick = (TextView) findViewById( R.id.MUL_updateNick);
+        if (tv_nick != null) {
+            CharSequence nick = tv_nick.getText();
+            User user = db.getUser(1);
+            user.set_nick(nick.toString());
+            db.updateUser(user);
+
+            tv_nick.setText(R.string.debugOK);
+            logListUsers(db);
+        }
+    }
+
+    // Writing Users to Log
+    private void logListUsers(DatabaseHelper db) {
+        Log.d("Reading: ", "Reading all users..");
+        List<User> users = db.getAllUsers();
+        for (User cn : users) {
+            String log = "Id: " + cn.get_id() + " ,Nick: " + cn.get_nick() + " ,Blood type:" + cn.get_bloodType();
+            Log.d("Name: ", log);
+        }
+    }
+
+    public void onClick_showUpdatePopUpBloodTypes(View v) {
         PopupMenu popup = new PopupMenu(this, v);
-        popup.setOnMenuItemClickListener(FirstLoginActivity.this);
+        popup.setOnMenuItemClickListener(SettingsActivity.this);
         MenuInflater inflater = popup.getMenuInflater();
-        inflater.inflate(edu.blooddonor.R.menu.bloodtype_menu, popup.getMenu());
+        inflater.inflate(R.menu.bloodtype_menu, popup.getMenu());
         popup.show();
 
     }
@@ -79,54 +107,58 @@ public class FirstLoginActivity extends AppCompatActivity implements PopupMenu.O
     @Override
     public boolean onMenuItemClick(MenuItem item) {
         switch (item.getItemId()){
-            case edu.blooddonor.R.id.APlus:
+            case R.id.APlus:
                 Toast.makeText(getBaseContext(), "You selected A+", Toast.LENGTH_SHORT).show();
-                _bloodType = "A+";
+                updateBloodType("A+");
                 return true;
-            case edu.blooddonor.R.id.AMinus:
+            case R.id.AMinus:
                 Toast.makeText(getBaseContext(), "You selected A-", Toast.LENGTH_SHORT).show();
-                _bloodType = "A-";
+                updateBloodType("A-");
                 return true;
-            case edu.blooddonor.R.id.BPlus:
+            case R.id.BPlus:
                 Toast.makeText(getBaseContext(), "You selected B+", Toast.LENGTH_SHORT).show();
-                _bloodType = "B+";
+                updateBloodType("B+");
                 return true;
-            case edu.blooddonor.R.id.BMinus:
+            case R.id.BMinus:
                 Toast.makeText(getBaseContext(), "You selected B-", Toast.LENGTH_SHORT).show();
-                _bloodType = "B-";
+                updateBloodType("B-");
                 return true;
-            case edu.blooddonor.R.id.ABPlus:
+            case R.id.ABPlus:
                 Toast.makeText(getBaseContext(), "You selected AB+", Toast.LENGTH_SHORT).show();
-                _bloodType = "AB+";
+                updateBloodType("AB+");
                 return true;
-            case edu.blooddonor.R.id.ABMinus:
+            case R.id.ABMinus:
                 Toast.makeText(getBaseContext(), "You selected AB-", Toast.LENGTH_SHORT).show();
-                _bloodType = "AB-";
+                updateBloodType("AB-");
                 return true;
-            case edu.blooddonor.R.id.ZeroPlus:
+            case R.id.ZeroPlus:
                 Toast.makeText(getBaseContext(), "You selected 0+", Toast.LENGTH_SHORT).show();
-                _bloodType = "0+";
+                updateBloodType("0+");
                 return true;
-            case edu.blooddonor.R.id.ZeroMinus:
+            case R.id.ZeroMinus:
                 Toast.makeText(getBaseContext(), "You selected 0-", Toast.LENGTH_SHORT).show();
-                _bloodType = "0-";
+                updateBloodType("0-");
                 return true;
             default:
                 return false;
         }
     }
 
-    public void onClick_addUser(View v){
+    private void updateBloodType(String s) {
         DatabaseHelper db = new DatabaseHelper(getApplicationContext());
-        TextView tv1 = (TextView) findViewById( edu.blooddonor.R.id.FLL_f_addNick);
+        User user = db.getUser(1);
+        user.set_bloodType(s);
+        db.updateUser(user);
+    }
 
-        if (tv1 != null && !_bloodType.equalsIgnoreCase("")) {
-            CharSequence nick = tv1.getText();
-            db.insertUser(new User(nick.toString(), _bloodType));
-            _bloodType = "";
-            tv1.setText(edu.blooddonor.R.string.debugOK);
+    public void onClick_endSettingsActivity(View v) {
+        finish();
+    }
 
-        }
+    public void onClick_deleteUser(View v) {
+        DatabaseHelper db = new DatabaseHelper(getApplicationContext());
+        db.deleteUser(1);
+        logListUsers(db);
         finish();
     }
 }
