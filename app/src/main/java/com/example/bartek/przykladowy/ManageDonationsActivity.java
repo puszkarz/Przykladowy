@@ -103,18 +103,23 @@ public class ManageDonationsActivity extends AppCompatActivity implements androi
         switch (item.getItemId()) {
             case R.id.whole_blood:
                 _donationsType = "whole_blood";
+                Toast.makeText(getBaseContext(), "You selected Whole Blood", Toast.LENGTH_SHORT).show();
                 return true;
             case R.id.blood_plasma:
                 _donationsType = "blood_plasma";
+                Toast.makeText(getBaseContext(), "You selected Blood Plasma", Toast.LENGTH_SHORT).show();
                 return true;
             case R.id.blood_cells:
                 _donationsType = "blood_cells";
+                Toast.makeText(getBaseContext(), "You selected Blood Cells", Toast.LENGTH_SHORT).show();
                 return true;
             case R.id.red_cells:
                 _donationsType = "red_cells";
+                Toast.makeText(getBaseContext(), "You selected Red Cells", Toast.LENGTH_SHORT).show();
                 return true;
             case R.id.white_cells:
                 _donationsType = "white_cells";
+                Toast.makeText(getBaseContext(), "You selected White Cells", Toast.LENGTH_SHORT).show();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -183,7 +188,7 @@ public class ManageDonationsActivity extends AppCompatActivity implements androi
         Log.d("Reading: ", "Reading all donations..");
         List<Donation> donations = db.getAllDonations();
         for (Donation cn : donations) {
-            String log = "Id: " + cn.get_id() + " , St id: " + cn.get_station_id() + " , Us id: " + cn.get_user_id() + " , Date: " + cn.get_date() + " , Volume" + cn.get_volume();
+            String log = "Id: " + cn.get_id() + " , St id: " + cn.get_station_id() + " , Us id: " + cn.get_user_id() + " , Date: " + cn.get_date() + " , Volume: " + cn.get_volume();
             Log.d("Name: ", log);
         }
         Log.e("Donation Count", "donation count " + db.getDonationsCount());
