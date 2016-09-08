@@ -65,11 +65,6 @@ abstract class DonationSQL {
         return "SELECT  * FROM " + TABLE_DONATION;
     }
 
-    public static String getSelectSingleQuery(long donation_id) {
-        return "SELECT  * FROM " + TABLE_DONATION + " WHERE "
-                + KEY_ID + " = " + donation_id;
-    }
-
     public static String getTableName() {
         return TABLE_DONATION;
     }
