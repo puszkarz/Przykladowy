@@ -17,7 +17,7 @@ import edu.blooddonor.model.User;
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     // Logcat tag
-    private static final String LOG = "DatabaseHelper";
+    private static final String LOG_TAG = "DatabaseHelper";
 
     // Database Version
     private static final int DATABASE_VERSION = 28;
@@ -49,40 +49,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     // ------------------------ "station" table methods ----------------//
-    /** Inserting a station */
-    public long insertStation(Station station) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        long out = insertStation(db, station);
-        db.close();
-        return out;
-    }
-
     /** Inserting a station (static) */
     public static long insertStation(SQLiteDatabase db, Station station) {
         return db.insert(StationSQL.getTableName(), null, StationSQL.toContentValue(station));
-    }
-
-    /** Get a single station */
-    public Station getStation(int station_id) {
-        SQLiteDatabase db = this.getReadableDatabase();
-        String selectQuery = StationSQL.getSelectSingleQuery(station_id);
-        Log.d(LOG, selectQuery);
-        Cursor c = db.rawQuery(selectQuery, null);
-        Station station = null;
-        if (c != null) {
-            c.moveToFirst();
-            station = StationSQL.getStation(c);
-            c.close();
-        }
-        db.close();
-        return station;
     }
 
     /** getting all the stations */
     public ArrayList<Station> getAllStations() {
         ArrayList<Station> stations = new ArrayList<>();
         String selectQuery = StationSQL.getSelectAllQuery();
-        Log.d(LOG, selectQuery);
+        Log.d(LOG_TAG, selectQuery);
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor c = db.rawQuery(selectQuery, null);
         // looping through all rows and adding to list
@@ -107,15 +83,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return ret;
     }
 
-    /** Deleting a station */
-    public void deleteStation(long station_id) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        db.delete(StationSQL.getTableName(),
-                StationSQL.getKeyId() + " = " + String.valueOf(station_id), null);
-        db.close();
-    }
-
-
     // ------------------------ "user" table methods ----------------//
     /** Creating a user */
     public long insertUser(User user) {
@@ -130,7 +97,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public User getUser(long user_id) {
         SQLiteDatabase db = this.getReadableDatabase();
         String selectQuery = UserSQL.getSelectSingleQuery(user_id);
-        Log.d(LOG, selectQuery);
+        Log.d(LOG_TAG, selectQuery);
         Cursor c = db.rawQuery(selectQuery, null);
         User user = null;
         if (c != null) {
@@ -146,7 +113,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public List<User> getAllUsers() {
         List<User> users = new ArrayList<>();
         String selectQuery = UserSQL.getSelectAllQuery();
-        Log.d(LOG, selectQuery);
+        Log.d(LOG_TAG, selectQuery);
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor c = db.rawQuery(selectQuery, null);
         // looping through all rows and adding to list
@@ -186,9 +153,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(countQuery, null);
         int ret = cursor.getCount();
         cursor.close();
+        db.close();
         return ret;
     }
-
 
     // ------------------------ "donation" table methods ----------------//
     /** Inserting a donation */
@@ -200,27 +167,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return donation_id;
     }
 
-    /** Get a single donation */
-    public Donation getDonation(long donation_id) {
-        SQLiteDatabase db = this.getReadableDatabase();
-        String selectQuery = DonationSQL.getSelectSingleQuery(donation_id);
-        Log.d(LOG, selectQuery);
-        Cursor c = db.rawQuery(selectQuery, null);
-        Donation donation = null;
-        if (c != null) {
-            c.moveToFirst();
-            donation = DonationSQL.getDonation(c);
-            c.close();
-        }
-        db.close();
-        return donation;
-    }
-
     /** getting all the donations */
     public List<Donation> getAllDonations() {
         List<Donation> donations = new ArrayList<>();
         String selectQuery = DonationSQL.getSelectAllQuery();
-        Log.d(LOG, selectQuery);
+        Log.d(LOG_TAG, selectQuery);
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor c = db.rawQuery(selectQuery, null);
         // looping through all rows and adding to list
@@ -235,28 +186,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return donations;
     }
 
-    /** Updating a donation */
-    public int updateDonation(Donation donation) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues values = DonationSQL.toContentValue(donation);
-        // updating row
-        int ret = db.update(DonationSQL.getTableName(), values,
-                DonationSQL.getKeyId() + " = " + String.valueOf(donation.get_id()), null);
-        db.close();
-        return ret;
-    }
-
     /** Deleting a donation */
     public void deleteDonation(long donation_id) {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(DonationSQL.getTableName(), DonationSQL.getKeyId() + " = " +
                 String.valueOf(donation_id), null);
+        db.close();
     }
 
     public void deleteAllDonations(){
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL("DROP TABLE IF EXISTS " + DonationSQL.getTableName());
         db.execSQL(DonationSQL.createTable());
+        db.close();
     }
 
     /** Getting donations Count */
@@ -266,13 +208,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(countQuery, null);
         int ret = cursor.getCount();
         cursor.close();
+        db.close();
         return ret;
     }
 
-    /** closing database */
-    public void closeDB() {
-        SQLiteDatabase db = this.getReadableDatabase();
-        if (db != null && db.isOpen())
-            db.close();
-    }
 }
