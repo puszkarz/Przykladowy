@@ -76,13 +76,11 @@ class MapMarkAddressTask extends AsyncTask<String, Void, String> {
             JSONObject res = jsonObj.getJSONArray("results").getJSONObject(0);
             JSONObject loc = res.getJSONObject("geometry").getJSONObject("location");
             LatLng latLng = new LatLng(loc.getDouble("lat"), loc.getDouble("lng"));
-            String formattedAddress = res.getString("formatted_address");
-            CameraPosition cameraPosition = new CameraPosition.Builder()
-                    .target(latLng).zoom(13).build();
-            mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+
+            MapsActivity.moveCamera(mMap, latLng);
             mMap.addMarker(new MarkerOptions()
                     .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE))
-                    .title(formattedAddress)
+                    .title("Blood Donation Center")
                     .position(latLng));
         } catch (JSONException e) {
             Log.e(LOG_TAG, "Error processing JSON", e);
