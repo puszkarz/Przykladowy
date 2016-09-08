@@ -19,8 +19,8 @@
     <string name="but_bloodTypesPopUp_label">Blood Type</string>
     <string name="userNick_label">Your name</string>
     <string name="but_addUser_label">Done</string>
-    <string name="but_updateNick_label">Update Nick - Apply</string>
-    <string name="but_updateBloodType_label">Update Blood Type - Apply</string>
+    <string name="but_updateNick_label">Apply</string>
+    <string name="but_updateBloodType_label">New Blood Type</string>
 
     <string name="debugOK">" "</string>
     <string name="title_activity_maps">Map</string>
@@ -47,7 +47,10 @@
     <string name="but_white_cells">White cells</string>
     <string name="volume_label">Volume/Unit</string>
 
+    <string name="instructionDelete_label">Hold and press a donation to delete.</string>
+
     <string name="but_delUser_label">Delete User</string>
+    <string name="MUL_f_updateNick">New nick</string>
     <!--<string name="but_finishSettings_label">finish Settings</string>-->
     <!--<string name="pick_label">Pick</string>-->
 

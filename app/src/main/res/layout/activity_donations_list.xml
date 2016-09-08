@@ -18,4 +18,13 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="@string/instructionDelete_label"
+        android:id="@+id/instructionDelete"
+        android:layout_below="@+id/text_listD_welcome"
+        android:layout_centerHorizontal="true" />
+
 </RelativeLayout>
