@@ -142,21 +142,25 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onLocationChanged(Location location) {
         Log.d(LOG_TAG, "Location has changed, adding new marker.");
         if (location != null) {
-            addPosMarker(new LatLng(location.getLatitude(), location.getLongitude()),
-                    HERE_TXT);
+            LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
+            addPosMarker(mMap, latLng, HERE_TXT);
+            moveCamera(mMap, latLng);
         } else {
             Log.d(LOG_TAG, "Location jest nullem :(");
         }
     }
 
-    public void addPosMarker(LatLng latLng, String title) {
-            CameraPosition cameraPosition = new CameraPosition.Builder()
-                    .target(latLng).zoom(13).build();
-            mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+    public static void addPosMarker(GoogleMap mMap, LatLng latLng, String title) {
             mMap.addMarker(new MarkerOptions()
                     .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_CYAN))
                     .title(title)
                     .position(latLng));
+    }
+
+    public static void moveCamera(GoogleMap mMap, LatLng latLng) {
+        CameraPosition cameraPosition = new CameraPosition.Builder()
+                .target(latLng).zoom(13).build();
+        mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
     }
 
     @Override
