@@ -37,15 +37,15 @@ public class ManageDonationsActivity extends AppCompatActivity implements androi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(edu.blooddonor.R.layout.activity_manage_donations);
-
-
         Button dateButton = (Button)findViewById(edu.blooddonor.R.id.MDL_but_pickDate);
-        dateButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                new DatePickerDialog(ManageDonationsActivity.this,listener,calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show();
-            }
-        });
+        if (dateButton != null) {
+            dateButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    new DatePickerDialog(ManageDonationsActivity.this,listener,calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show();
+                }
+            });
+        }
     }
 
     DatePickerDialog.OnDateSetListener listener = new DatePickerDialog.OnDateSetListener(){
@@ -186,13 +186,13 @@ public class ManageDonationsActivity extends AppCompatActivity implements androi
             case "whole_blood":
                 return volume;
             case "blood_plasma":
-                return volume;
+                return volume/2;
             case "blood_cells":
-                return volume;
+                return volume/3;
             case "red_cells":
-                return volume;
+                return volume*2;
             case "white_cells":
-                return volume;
+                return volume/2;
 
         }
         return 0;
