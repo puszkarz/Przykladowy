@@ -24,6 +24,7 @@
 
     <string name="debugOK">" "</string>
     <string name="title_activity_maps">Map</string>
+    <string name="helloDonor_label">Hello Donor!</string>
 
     <string name="APlus">A+</string>
     <string name="AMinus">A-</string>

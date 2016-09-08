@@ -35,7 +35,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(StationSQL.createTable());
         db.execSQL(UserSQL.createTable());
         db.execSQL(DonationSQL.createTable());
-
         InitialContent.stationsInit(db);
     }
 
