@@ -78,14 +78,14 @@ public class DonationsListActivity extends AppCompatActivity {
     }
 
     public void presentAllDonations() {
-    myListView = (ListView) findViewById(R.id.DLAL_listView);
-    listViewAdapter = new ArrayAdapter<>(this,
-            android.R.layout.simple_list_item_1, donations_string);
-    if (myListView != null) {
-        myListView.setAdapter(listViewAdapter);
-        registerForContextMenu(myListView);
+        myListView = (ListView) findViewById(R.id.DLAL_listView);
+        listViewAdapter = new ArrayAdapter<>(this,
+                android.R.layout.simple_list_item_1, donations_string);
+        if (myListView != null) {
+            myListView.setAdapter(listViewAdapter);
+            registerForContextMenu(myListView);
+        }
     }
-}
 
     private ArrayList<String> donListToString(List<Donation> donations ) {
         ArrayList<String> out = new ArrayList<>();

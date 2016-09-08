@@ -51,7 +51,8 @@ public class ManageDonationsActivity extends AppCompatActivity implements androi
     DatePickerDialog.OnDateSetListener listener = new DatePickerDialog.OnDateSetListener(){
         @Override
         public void onDateSet(DatePicker view, int year, int month, int day) {
-            Toast.makeText(getBaseContext(), "Selected date:" + month + "/" + day + "/" + year, Toast.LENGTH_LONG).show();
+            Toast.makeText(getBaseContext(), "Selected date:" + month + "/" + day + "/" + year + ".",
+                    Toast.LENGTH_LONG).show();
             _year = year;
             _month = month;
             _day = day;
@@ -112,23 +113,23 @@ public class ManageDonationsActivity extends AppCompatActivity implements androi
         switch (item.getItemId()) {
             case R.id.whole_blood:
                 _donationsType = "whole_blood";
-                Toast.makeText(getBaseContext(), "You selected Whole Blood", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getBaseContext(), "You selected Whole Blood.", Toast.LENGTH_SHORT).show();
                 return true;
             case R.id.blood_plasma:
                 _donationsType = "blood_plasma";
-                Toast.makeText(getBaseContext(), "You selected Blood Plasma", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getBaseContext(), "You selected Blood Plasma.", Toast.LENGTH_SHORT).show();
                 return true;
             case R.id.blood_cells:
                 _donationsType = "blood_cells";
-                Toast.makeText(getBaseContext(), "You selected Blood Cells", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getBaseContext(), "You selected Blood Cells.", Toast.LENGTH_SHORT).show();
                 return true;
             case R.id.red_cells:
                 _donationsType = "red_cells";
-                Toast.makeText(getBaseContext(), "You selected Red Cells", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getBaseContext(), "You selected Red Cells.", Toast.LENGTH_SHORT).show();
                 return true;
             case R.id.white_cells:
                 _donationsType = "white_cells";
-                Toast.makeText(getBaseContext(), "You selected White Cells", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getBaseContext(), "You selected White Cells.", Toast.LENGTH_SHORT).show();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -138,8 +139,8 @@ public class ManageDonationsActivity extends AppCompatActivity implements androi
     public void onClick_addDonation(View v) {
         Calendar calendar = Calendar.getInstance();
         calendar.set(_year, _month+1, _day);
-        calendar.set(Calendar.HOUR_OF_DAY, 8);
-        calendar.set(Calendar.MINUTE, 35);
+        calendar.set(Calendar.HOUR_OF_DAY, 10);
+        calendar.set(Calendar.MINUTE, 0);
         calendar.set(Calendar.SECOND, 0);
 
         Intent intent = new Intent(getApplicationContext(), NotificationReceiver.class);
@@ -147,31 +148,29 @@ public class ManageDonationsActivity extends AppCompatActivity implements androi
         AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
         alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
 
-
-        DatabaseHelper db = new DatabaseHelper(getApplicationContext());
         TextView tv_volume = (TextView) findViewById( R.id.MDL_f_addVolume);
 
-        if ((tv_volume != null)  && (_year != 0) && (_month != 0) && (_day != 0) && !_donationsType.equals("") && _station!= null) {
+        if ((tv_volume != null)  && (_year != 0) && (_month != 0) && (_day != 0)
+                && !_donationsType.equals("") && _station!= null) {
+            DatabaseHelper db = new DatabaseHelper(getApplicationContext());
             CharSequence volume = tv_volume.getText();
-
             String dateInString = _year + "/" + _month + "/" + _day;
-
             double blood_volume =  computeVolume(_donationsType, Integer.parseInt(volume.toString()));
             Donation donation = new Donation(dateInString, _donationsType, Integer.parseInt(volume.toString()), blood_volume, 1, _station.get_id());
             db.insertDonation(donation);
-
             tv_volume.setText(R.string.debugOK);
-
             logListDonations(db);
-
             _year = 0;
             _month = 0;
             _day = 0;
             _donationsType = "";
             _station = null;
-
             logListDonations(db);
+            finish();
+        } else {
+            Toast.makeText(getBaseContext(), "Please fill remaining fields.", Toast.LENGTH_SHORT).show();
         }
+
     }
 
     public void onClick_pickStation(View v){
@@ -189,11 +188,11 @@ public class ManageDonationsActivity extends AppCompatActivity implements androi
             case "blood_plasma":
                 return volDouble/3.0;
             case "blood_cells":
-                return volDouble/2.0;
+                return volDouble/2.0*1000.0;
             case "red_cells":
-                return volDouble*2.0;
+                return volDouble*2.0*1000.0;
             case "white_cells":
-                return volDouble/2.0;
+                return volDouble/2.0*1000.0;
 
         }
         return 0;

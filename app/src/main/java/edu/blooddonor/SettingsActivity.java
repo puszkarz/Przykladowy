@@ -102,35 +102,35 @@ public class SettingsActivity extends AppCompatActivity implements PopupMenu.OnM
     public boolean onMenuItemClick(MenuItem item) {
         switch (item.getItemId()){
             case R.id.APlus:
-                Toast.makeText(getBaseContext(), "You selected A+", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getBaseContext(), "You selected A+.", Toast.LENGTH_SHORT).show();
                 updateBloodType("A+");
                 return true;
             case R.id.AMinus:
-                Toast.makeText(getBaseContext(), "You selected A-", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getBaseContext(), "You selected A-.", Toast.LENGTH_SHORT).show();
                 updateBloodType("A-");
                 return true;
             case R.id.BPlus:
-                Toast.makeText(getBaseContext(), "You selected B+", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getBaseContext(), "You selected B+.", Toast.LENGTH_SHORT).show();
                 updateBloodType("B+");
                 return true;
             case R.id.BMinus:
-                Toast.makeText(getBaseContext(), "You selected B-", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getBaseContext(), "You selected B-.", Toast.LENGTH_SHORT).show();
                 updateBloodType("B-");
                 return true;
             case R.id.ABPlus:
-                Toast.makeText(getBaseContext(), "You selected AB+", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getBaseContext(), "You selected AB+.", Toast.LENGTH_SHORT).show();
                 updateBloodType("AB+");
                 return true;
             case R.id.ABMinus:
-                Toast.makeText(getBaseContext(), "You selected AB-", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getBaseContext(), "You selected AB-.", Toast.LENGTH_SHORT).show();
                 updateBloodType("AB-");
                 return true;
             case R.id.ZeroPlus:
-                Toast.makeText(getBaseContext(), "You selected 0+", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getBaseContext(), "You selected 0+.", Toast.LENGTH_SHORT).show();
                 updateBloodType("0+");
                 return true;
             case R.id.ZeroMinus:
-                Toast.makeText(getBaseContext(), "You selected 0-", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getBaseContext(), "You selected 0-.", Toast.LENGTH_SHORT).show();
                 updateBloodType("0-");
                 return true;
             default:
