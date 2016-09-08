@@ -213,17 +213,4 @@ public class ManageDonationsActivity extends AppCompatActivity implements androi
         Log.d("Donation Count", "donation count " + db.getDonationsCount());
     }
 
-    public void onClick_deleteDonation(View v) {
-        DatabaseHelper db = new DatabaseHelper(getApplicationContext());
-        TextView tv1 = (TextView) findViewById( edu.blooddonor.R.id.MDL_f_delStationId);
-        if (tv1 != null) {
-            CharSequence donation_id = tv1.getText();
-            db.deleteDonation(Integer.parseInt(donation_id.toString()));
-
-            tv1.setText(edu.blooddonor.R.string.debugOK);
-            logListDonations(db);
-        }
-
-    }
-
 }

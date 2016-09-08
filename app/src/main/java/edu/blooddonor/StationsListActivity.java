@@ -1,12 +1,7 @@
 package edu.blooddonor;
 
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.ContextMenu;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -16,8 +11,6 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
-import edu.blooddonor.geoAPI.DistanceListActivity;
-import edu.blooddonor.geoAPI.MapsActivity;
 import edu.blooddonor.sqliteDB.DatabaseHelper;
 import edu.blooddonor.model.Station;
 
@@ -56,7 +49,7 @@ public class StationsListActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 _pickedStation = stations.get(position);
-                Toast.makeText(getBaseContext(), "You selected" + _pickedStation.get_name(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getBaseContext(), "You selected " + _pickedStation.get_name(), Toast.LENGTH_SHORT).show();
                 finish();
             }
         });
