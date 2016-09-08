@@ -59,4 +59,9 @@
     <string name="but_white_cells">White cells</string>
     <string name="volume_label">Volume/Unit</string>
 
+    <string name="but_delUser_label">delete user</string>
+    <string name="but_finishSettings_label">finish Settings</string>
+
+    <string name="pick_label">Pick</string>
+
 </resources>
