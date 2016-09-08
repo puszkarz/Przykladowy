@@ -84,7 +84,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
         DatabaseHelper db = new DatabaseHelper(getApplicationContext());
-        List<Station> stations = db.getAllStations();
         // Updating and Marking several addresses on map
         checkUpdateAndMarkStations(mMap, new DatabaseHelper(getApplicationContext()));
     }

@@ -50,6 +50,7 @@ public class DistanceListActivity extends AppCompatActivity implements
     private static final String LOG_TAG = "DistActivity: ";
 
     private GoogleApiClient mGoogleApiClient;
+    private DatabaseHelper db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,8 +64,8 @@ public class DistanceListActivity extends AppCompatActivity implements
         }
         super.onCreate(savedInstanceState);
         setContentView(edu.blooddonor.R.layout.activity_distance_list);
-
-        DistanceListActivity.checkAndUpdateStations(new DatabaseHelper(getApplicationContext()));
+        db = new DatabaseHelper(getApplicationContext());
+        checkAndUpdateStations(db);
     }
 
     @Override
@@ -110,13 +111,16 @@ public class DistanceListActivity extends AppCompatActivity implements
     private static void checkAndUpdateStations(DatabaseHelper db) {
         List<Station> stations =  db.getAllStations();
         for (Station st : stations) {
-            Log.d(LOG_TAG, st.toString());
-            new UpdateStationGeoTask(st, db).execute();
+            if (!st.isWellDefined()) {
+                Log.d(LOG_TAG, st.toString());
+                new UpdateStationGeoTask(st, db).execute();
+            }
         }
     }
 
     @Override
     public void onLocationChanged(Location location) {
+        checkAndUpdateStations(db);
         Log.d(LOG_TAG, "Location has changed, adding new marker.");
         if (location != null) {
             ListView targetListView = (ListView) findViewById(R.id.DLAL_listView);
