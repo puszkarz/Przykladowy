@@ -1,6 +1,7 @@
 package edu.blooddonor.geoAPI;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.support.annotation.NonNull;
@@ -8,6 +9,9 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.ListView;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -19,7 +23,11 @@ import com.google.android.gms.maps.model.LatLng;
 
 import java.util.List;
 
+import edu.blooddonor.DonationsListActivity;
+import edu.blooddonor.ManageDonationsActivity;
 import edu.blooddonor.R;
+import edu.blooddonor.SettingsActivity;
+import edu.blooddonor.StationsListActivity;
 import edu.blooddonor.model.Station;
 import edu.blooddonor.sqliteDB.DatabaseHelper;
 
@@ -57,6 +65,46 @@ public class DistanceListActivity extends AppCompatActivity implements
         setContentView(edu.blooddonor.R.layout.activity_distance_list);
 
         DistanceListActivity.checkAndUpdateStations(new DatabaseHelper(getApplicationContext()));
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.actionbar_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        Intent activity;
+        switch (item.getItemId()) {
+            case edu.blooddonor.R.id.show_donations:
+                activity = new Intent(getApplicationContext(), DonationsListActivity.class);
+                startActivity(activity);
+                return true;
+            case edu.blooddonor.R.id.show_stations:
+                activity = new Intent(getApplicationContext(), StationsListActivity.class);
+                startActivity(activity);
+                return true;
+            case R.id.show_map:
+                activity = new Intent(getApplicationContext(), MapsActivity.class);
+                startActivity(activity);
+                return true;
+            case R.id.show_distance:
+                activity = new Intent(getApplicationContext(), DistanceListActivity.class);
+                startActivity(activity);
+                return true;
+            case edu.blooddonor.R.id.manage_donations:
+                activity = new Intent(getApplicationContext(), ManageDonationsActivity.class);
+                startActivity(activity);
+                return true;
+            case edu.blooddonor.R.id.manage_users:
+                activity = new Intent(getApplicationContext(), SettingsActivity.class);
+                startActivity(activity);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     private static void checkAndUpdateStations(DatabaseHelper db) {
