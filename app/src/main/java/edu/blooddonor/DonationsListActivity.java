@@ -121,7 +121,4 @@ public class DonationsListActivity extends AppCompatActivity {
         menuInflater.inflate(R.menu.delete_donation_menu, menu);
     }
 
-    public void onClick_endThisActivity(View v) {
-        finish();
-    }
 }

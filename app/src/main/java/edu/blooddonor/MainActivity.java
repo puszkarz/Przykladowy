@@ -3,6 +3,7 @@ package edu.blooddonor;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -14,6 +15,8 @@ import edu.blooddonor.sqliteDB.DatabaseHelper;
 import edu.blooddonor.model.User;
 
 public class MainActivity extends AppCompatActivity {
+
+    private static final String LOG_TAG = "MainActivity: ";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,18 +34,19 @@ public class MainActivity extends AppCompatActivity {
     private void printWelcomeOrLogin(){
         DatabaseHelper db = new DatabaseHelper(getApplicationContext());
         int noUser = db.getUsersCount();
-        setContentView(R.layout.activity_main);
         if (noUser == 0 ) {
             Intent firstActivity = new Intent(getApplicationContext(), FirstLoginActivity.class);
             startActivity(firstActivity);
-        }
-        TextView textView = (TextView) findViewById(R.id.ML_txt_mainWelcome);
-        User user = db.getUser(1);
-        if (textView != null && user != null) {
-            String nick = user.get_nick();
-            if (nick != null) {
-                String welcomeTxt = "Welcome " + nick + "!";
-                textView.setText(welcomeTxt);
+        } else {
+            setContentView(R.layout.activity_main);
+            TextView textView = (TextView) findViewById(R.id.ML_txt_mainWelcome);
+            User user = db.getUser(1);
+            if (textView != null && user != null) {
+                String nick = user.get_nick();
+                if (nick != null) {
+                    String welcomeTxt = "Welcome " + nick + "!";
+                    textView.setText(welcomeTxt);
+                }
             }
         }
     }
