@@ -38,20 +38,4 @@
         android:layout_marginTop="90dp"
         android:layout_gravity="center_horizontal" />
 
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="0.24">
-
-    </LinearLayout>
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/but_finishSettings_label"
-        android:id="@+id/but_usersToMain"
-        android:onClick="onClick_endSettingsActivity"
-        android:layout_gravity="center_horizontal" />
-
 </LinearLayout>

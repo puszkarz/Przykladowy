@@ -18,9 +18,6 @@ import edu.blooddonor.geoAPI.MapsActivity;
 import edu.blooddonor.model.User;
 import edu.blooddonor.sqliteDB.DatabaseHelper;
 
-/**
- * Created by magda on 07.09.16.
- */
 public class SettingsActivity extends AppCompatActivity implements PopupMenu.OnMenuItemClickListener{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
