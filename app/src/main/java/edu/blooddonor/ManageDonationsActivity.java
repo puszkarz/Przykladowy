@@ -156,7 +156,7 @@ public class ManageDonationsActivity extends AppCompatActivity implements androi
 
             String dateInString = _year + "/" + _month + "/" + _day;
 
-            int blood_volume =  computeVolume(_donationsType, Integer.parseInt(volume.toString()));
+            double blood_volume =  computeVolume(_donationsType, Integer.parseInt(volume.toString()));
             Donation donation = new Donation(dateInString, _donationsType, Integer.parseInt(volume.toString()), blood_volume, 1, _station.get_id());
             db.insertDonation(donation);
 
@@ -181,18 +181,19 @@ public class ManageDonationsActivity extends AppCompatActivity implements androi
     }
 
     //@TODO ogarnac jak sie przelicza
-    private int computeVolume(String donationsType, int volume) {
+    private double computeVolume(String donationsType, int volume) {
+        double volDouble = (double) volume;
         switch (donationsType) {
             case "whole_blood":
-                return volume;
+                return volDouble;
             case "blood_plasma":
-                return volume/3;
+                return volDouble/3.0;
             case "blood_cells":
-                return volume/2;
+                return volDouble/2.0;
             case "red_cells":
-                return volume*2;
+                return volDouble*2.0;
             case "white_cells":
-                return volume/2;
+                return volDouble/2.0;
 
         }
         return 0;
@@ -203,10 +204,13 @@ public class ManageDonationsActivity extends AppCompatActivity implements androi
         Log.d("Reading: ", "Reading all donations..");
         List<Donation> donations = db.getAllDonations();
         for (Donation cn : donations) {
-            String log = "Id: " + cn.get_id() + " , St id: " + cn.get_station_id() + " , Us id: " + cn.get_user_id() + " , Date: " + cn.get_date() + " , Volume: " + cn.get_volume();
+            String log = "Id: " + cn.get_id() + ", St id: " + cn.get_station_id()
+                    + ", Us id: " + cn.get_user_id() + ", Date: " + cn.get_date()
+                    + ", Type: " + cn.get_type() + ", Volume: " + cn.get_volume()
+                    + ", Blood Volume: " + cn.get_blood_volume();
             Log.d("Name: ", log);
         }
-        Log.e("Donation Count", "donation count " + db.getDonationsCount());
+        Log.d("Donation Count", "donation count " + db.getDonationsCount());
     }
 
     public void onClick_deleteDonation(View v) {

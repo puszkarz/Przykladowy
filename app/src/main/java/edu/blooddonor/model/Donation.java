@@ -6,7 +6,7 @@ public class Donation {
     private String _date; //@TODO date
     private String _type;
     private int _volume;
-    private int _blood_volume;
+    private double _blood_volume;
     private int _user_id;
     private int _station_id;
 
@@ -14,7 +14,7 @@ public class Donation {
 
     }
 
-    public Donation(String date, String type, int volume, int blood_volume, int user_id, int station_id) {
+    public Donation(String date, String type, int volume, double blood_volume, int user_id, int station_id) {
         this._date = date;
         this._type = type;
         this._volume = volume;
@@ -40,7 +40,7 @@ public class Donation {
         this._volume = _volume;
     }
 
-    public void set_blood_volume(int _blood_volume) { this._blood_volume = _blood_volume; }
+    public void set_blood_volume(double _blood_volume) { this._blood_volume = _blood_volume; }
 
     public void set_user_id(int _user_id) { this._user_id = _user_id; }
 
@@ -63,7 +63,7 @@ public class Donation {
         return _volume;
     }
 
-    public int get_blood_volume() { return _blood_volume; }
+    public double get_blood_volume() { return _blood_volume; }
 
     public int get_user_id() { return _user_id; }
 
