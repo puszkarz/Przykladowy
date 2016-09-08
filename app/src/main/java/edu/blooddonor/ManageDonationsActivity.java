@@ -186,9 +186,9 @@ public class ManageDonationsActivity extends AppCompatActivity implements androi
             case "whole_blood":
                 return volume;
             case "blood_plasma":
-                return volume/2;
-            case "blood_cells":
                 return volume/3;
+            case "blood_cells":
+                return volume/2;
             case "red_cells":
                 return volume*2;
             case "white_cells":
