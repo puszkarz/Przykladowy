@@ -4,7 +4,6 @@
     android:layout_height="match_parent"
     android:id="@+id/se">
 
-
     <Button
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
@@ -12,7 +11,6 @@
         android:id="@+id/MDL_but_pickDonationType"
         android:text="@string/but_pickDonationType_label"
         android:onClick="onClick_showPopUpDonationsTypes"
-
         android:layout_centerHorizontal="true"
         android:layout_marginTop="50dp" />
 
@@ -62,12 +60,9 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="@string/volume_label"
         android:id="@+id/MDL_fDesc_Volume"
-
         android:layout_alignBottom="@+id/MDL_f_addVolume"
         android:layout_toStartOf="@+id/MDL_f_addVolume"
         android:layout_marginEnd="5dp"
         android:layout_marginBottom="7dp" />
-
-
 
 </RelativeLayout>

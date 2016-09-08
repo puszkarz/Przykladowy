@@ -18,7 +18,7 @@ public class NotificationReceiver extends BroadcastReceiver {
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context)
                 .setSmallIcon(android.R.drawable.arrow_up_float)
                 .setContentIntent(pendingIntent)
-                .setContentTitle("A remainder")
+                .setContentTitle("Blood donation - remainder")
                 .setContentText("You can now make another donation!")
                 .setAutoCancel(true);
 
