@@ -3,7 +3,10 @@ package edu.blooddonor.geoAPI;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -31,19 +34,24 @@ class UpdateStationGeoTask extends AsyncTask<Void, Void, String> {
     private Station station;
     private DatabaseHelper db;
     private URL url;
+    private GoogleMap mMap;
 
     public UpdateStationGeoTask(Station station, DatabaseHelper db) {
         this.station = station;
         this.db = db;
         this.url = null;
+        this.mMap = null;
+
+    }
+
+    public UpdateStationGeoTask(GoogleMap mMap, Station station, DatabaseHelper db) {
+        this(station, db);
+        this.mMap = mMap;
     }
 
     @Override
     protected void onPreExecute () {
-        if (!station.isWellDefined()) {
-            Log.d(LOG_TAG, "Station not well defined. Updating. Stat: " + station.toString());
-            url = GeocodingQuery.genGeocodingQuery(station.get_address());
-        }
+        url = GeocodingQuery.genGeocodingQuery(station.get_address());
     }
 
     @Override
@@ -82,6 +90,15 @@ class UpdateStationGeoTask extends AsyncTask<Void, Void, String> {
                     station.set_longitude(latLng.longitude);
                     db.updateStation(station);
                     Log.d(LOG_TAG, "Station updated: " + station.toString());
+
+                    if (mMap!=null) {
+                        mMap.addMarker(new MarkerOptions()
+                                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE))
+                                .title(station.get_name())
+                                .position(latLng));
+                        Log.d(LOG_TAG, "Marker added: " + station.get_name());
+                    }
+
                 } else {
                     Log.e(LOG_TAG, "Wrong JSON output for Station " + station.toString());
                 }

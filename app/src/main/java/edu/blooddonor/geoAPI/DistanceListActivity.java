@@ -55,7 +55,11 @@ public class DistanceListActivity extends AppCompatActivity implements
         }
         super.onCreate(savedInstanceState);
         setContentView(edu.blooddonor.R.layout.activity_distance_list);
-        DatabaseHelper db = new DatabaseHelper(getApplicationContext());
+
+        DistanceListActivity.checkAndUpdateStations(new DatabaseHelper(getApplicationContext()));
+    }
+
+    private static void checkAndUpdateStations(DatabaseHelper db) {
         List<Station> stations =  db.getAllStations();
         for (Station st : stations) {
             Log.d(LOG_TAG, st.toString());

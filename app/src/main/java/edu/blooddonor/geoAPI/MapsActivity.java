@@ -85,10 +85,24 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap = googleMap;
         DatabaseHelper db = new DatabaseHelper(getApplicationContext());
         List<Station> stations = db.getAllStations();
-        // Marking several addresses on map
-        // TODO: pass a list
+        // Updating and Marking several addresses on map
+        checkUpdateAndMarkStations(mMap, new DatabaseHelper(getApplicationContext()));
+    }
+
+    private static void checkUpdateAndMarkStations(GoogleMap mMap, DatabaseHelper db) {
+        List<Station> stations =  db.getAllStations();
         for (Station st : stations) {
-            new MapMarkAddressTask(mMap).execute(st.get_address());
+            if (!st.isWellDefined()) {
+                Log.d(LOG_TAG, "Station not well defined. Updating. Stat: " + st.toString());
+                Log.d(LOG_TAG, st.toString());
+                new UpdateStationGeoTask(mMap, st, db).execute();
+            } else {
+                mMap.addMarker(new MarkerOptions()
+                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE))
+                        .title(st.get_name())
+                        .position(new LatLng(st.get_latitude(), st.get_longitude())));
+                Log.d(LOG_TAG, "Marker added: " + st.get_name());
+            }
         }
     }
 
