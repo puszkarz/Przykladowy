@@ -52,29 +52,17 @@ public class StationsListActivity extends AppCompatActivity {
             myListView.setAdapter(listViewAdapter);
         }
 
-        registerForContextMenu(myListView);
-    }
-
-    @Override
-    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
-        super.onCreateContextMenu(menu, v, menuInfo);
-        MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.pick_station_menu, menu);
-    }
-
-    @Override
-    public boolean onContextItemSelected(MenuItem item) {
-        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
-        switch(item.getItemId()){
-            case R.id.pick:
-                _pickedStation = stations.get(info.position);
+        myListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                _pickedStation = stations.get(position);
                 Toast.makeText(getBaseContext(), "You selected" + _pickedStation.get_name(), Toast.LENGTH_SHORT).show();
                 finish();
-                return true;
-            default:
-                return super.onContextItemSelected(item);
-        }
+            }
+        });
+
     }
+
 
     private static ArrayList<String> statListToString(List<Station> stations) {
         ArrayList<String> out = new ArrayList<>();
@@ -82,9 +70,5 @@ public class StationsListActivity extends AppCompatActivity {
             out.add(st.toString());
         }
         return out;
-    }
-
-    public void onClick_endThisActivity(View v) {
-        finish();
     }
 }

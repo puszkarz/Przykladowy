@@ -18,21 +18,11 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/but_finishSLA_label"
-        android:id="@+id/SLAL_b_backToMain"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:onClick="onClick_endThisActivity" />
-
     <ListView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/SLAL_listView"
         android:layout_below="@+id/text_listS_welcome"
-        android:layout_centerHorizontal="true"
-        android:layout_above="@+id/SLAL_b_backToMain" />
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>
