@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
             if (textView != null && user != null) {
                 String nick = user.get_nick();
                 if (nick != null) {
-                    String welcomeTxt = "Welcome " + nick + "!";
+                    String welcomeTxt = "Welcome " + nick + "!" + Double.toString(db.getBloodVolumeSum());
                     textView.setText(welcomeTxt);
                 }
             }

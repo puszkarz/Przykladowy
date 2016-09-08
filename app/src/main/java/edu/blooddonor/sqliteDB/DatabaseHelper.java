@@ -194,7 +194,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.close();
     }
 
-    public void deleteAllDonations(){
+    public void deleteAllDonations() {
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL("DROP TABLE IF EXISTS " + DonationSQL.getTableName());
         db.execSQL(DonationSQL.createTable());
@@ -207,6 +207,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(countQuery, null);
         int ret = cursor.getCount();
+        cursor.close();
+        db.close();
+        return ret;
+    }
+
+    public double getBloodVolumeSum() {
+        String countQuery = DonationSQL.getSumBloodVolumeQuery();
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(countQuery, null);
+        double ret = 0.0;
+        if (cursor.moveToFirst()) {
+          ret = cursor.getDouble(0);
+        }
         cursor.close();
         db.close();
         return ret;

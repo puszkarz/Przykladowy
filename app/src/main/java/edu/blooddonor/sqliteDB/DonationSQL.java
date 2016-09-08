@@ -78,4 +78,8 @@ abstract class DonationSQL {
         return KEY_ID;
     }
 
+    public static String getSumBloodVolumeQuery() {
+        return "SELECT SUM(_blood_volume) FROM " + TABLE_DONATION;
+    }
+
 }
