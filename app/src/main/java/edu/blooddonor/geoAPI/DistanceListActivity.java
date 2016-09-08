@@ -23,6 +23,17 @@ import edu.blooddonor.R;
 import edu.blooddonor.model.Station;
 import edu.blooddonor.sqliteDB.DatabaseHelper;
 
+/**
+ * Activity displaying list of Stations with relative distances (wrt. current position).
+ *
+ * This activity is used to display list of Stations with relative distances
+ * wrt. current position of the app user. Current location is determined using
+ * Google LocationServices API.
+ *
+ * @author puszkarz
+ *
+ */
+
 public class DistanceListActivity extends AppCompatActivity implements
         LocationListener,
         GoogleApiClient.ConnectionCallbacks,
@@ -76,7 +87,28 @@ public class DistanceListActivity extends AppCompatActivity implements
         super.onStop();
     }
 
-    protected void startLocationUpdates() {
+    @Override
+    public void onConnected(Bundle connectionHint) {
+        if (ActivityCompat.checkSelfPermission(this,
+                android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
+                ActivityCompat.checkSelfPermission(this,
+                        android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            Log.d(LOG_TAG, "Polaczylem sie, pytam o permission");
+            // Ostatni argument jest intem i jest dziwny, ale musi być, w przykładzie stała o nazwie MY_PERMISSIONS_REQUEST_READ_CONTACTS);
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, 5);
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 7);
+        }
+        startLocationUpdates();
+        // performing onLocationChanged task with last (old) location
+        Location mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
+        if (mLastLocation != null) {
+            onLocationChanged(mLastLocation);
+        }
+    }
+
+    private void startLocationUpdates() {
         LocationRequest mLocationRequest = new LocationRequest();
         mLocationRequest.setInterval(10000);
         mLocationRequest.setFastestInterval(5000);
@@ -89,25 +121,6 @@ public class DistanceListActivity extends AppCompatActivity implements
                 mGoogleApiClient, mLocationRequest, this);
     }
 
-    @Override
-    public void onConnected(Bundle connectionHint) {
-        Log.d(LOG_TAG, "Polaczylem sie, pytam o permission");
-        if (ActivityCompat.checkSelfPermission(this,
-                android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
-                ActivityCompat.checkSelfPermission(this,
-                        android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            Log.d(LOG_TAG, "Pragne zgody!");
-            // Ostatni argument jest intem i jest dziwny, ale musi być, w przykładzie stała o nazwie MY_PERMISSIONS_REQUEST_READ_CONTACTS);
-            ActivityCompat.requestPermissions(this,
-                    new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, 5);
-            ActivityCompat.requestPermissions(this,
-                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 7);
-        }
-
-        Log.d(LOG_TAG, "Permission jest.");
-        startLocationUpdates();
-
-    }
 
     @Override
     public void onConnectionSuspended(int i) {

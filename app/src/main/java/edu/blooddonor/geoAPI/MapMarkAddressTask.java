@@ -19,7 +19,13 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 /**
- * Geocoding task sends queries to Google Maps Geocoding API and retrives points coordinates basing on addresses.
+ * Async Task marks on a map positions of stations basing on addresses (using Google Maps Geocoding API).
+ *
+ * This asynchronous task gets latitude and longitude of stations basing on addresses.
+ * Uses queries to Google Maps Geocoding API. Sets markers on a map using obtained coordinates.
+ *
+ * @author puszkarz
+ *
  */
 
 class MapMarkAddressTask extends AsyncTask<String, Void, String> {

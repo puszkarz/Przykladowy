@@ -28,6 +28,17 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import edu.blooddonor.sqliteDB.DatabaseHelper;
 import edu.blooddonor.model.Station;
 
+/**
+ * Activity displaying map (Google Maps API) with Stations and current position marked.
+ *
+ * This activity is used to display map (Google Maps API) with marked stations and
+ * current position of the app user. Each marker of particular station
+ * has name of a station as label. Current location is determined using Google LocationServices API.
+ *
+ * @author puszkarz
+ *
+ */
+
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback,
         GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener,
@@ -38,7 +49,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     private GoogleMap mMap;
     private GoogleApiClient mGoogleApiClient;
-    private Location mLastLocation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,36 +106,26 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     @Override
     public void onConnected(Bundle connectionHint) {
-        Log.d(LOG_TAG, "Polaczylem sie, ale pytam o permission");
         if (ActivityCompat.checkSelfPermission(this,
                 android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
                 ActivityCompat.checkSelfPermission(this,
                         android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            Log.d(LOG_TAG, "Pragne zgody!");
+            Log.d(LOG_TAG, "Polaczylem sie, ale pytam o permission");
             // Ostatni argument jest intem i jest dziwny, ale musi być, w przykładzie stała o nazwie MY_PERMISSIONS_REQUEST_READ_CONTACTS);
             ActivityCompat.requestPermissions(this,
                     new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, 5);
             ActivityCompat.requestPermissions(this,
                     new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 7);
         }
-
         startLocationUpdates();
-
-        mLastLocation = LocationServices.FusedLocationApi.getLastLocation(
-                mGoogleApiClient);
-
-        Log.d("Location: ", "On connect: Uzyskalem lokalizację.");
+        // performing onLocationChanged task with last (old) location
+        Location mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
         if (mLastLocation != null) {
-            Log.d(LOG_TAG, "Nie jest nullem! :)");
-            addPosMarker(new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude()),
-                    HERE_TXT);
-        } else {
-            Log.d(LOG_TAG, "Location jest nullem :(");
+            onLocationChanged(mLastLocation);
         }
-
     }
 
-    protected void startLocationUpdates() {
+    private void startLocationUpdates() {
         LocationRequest mLocationRequest = new LocationRequest();
         mLocationRequest.setInterval(10000);
         mLocationRequest.setFastestInterval(5000);
@@ -140,10 +140,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     @Override
     public void onLocationChanged(Location location) {
-        mLastLocation  = location;
         Log.d(LOG_TAG, "Location has changed, adding new marker.");
-        if (mLastLocation != null) {
-            addPosMarker(new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude()),
+        if (location != null) {
+            addPosMarker(new LatLng(location.getLatitude(), location.getLongitude()),
                     HERE_TXT);
         } else {
             Log.d(LOG_TAG, "Location jest nullem :(");

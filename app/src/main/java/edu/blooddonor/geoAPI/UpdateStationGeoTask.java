@@ -13,6 +13,17 @@ import java.net.URL;
 import edu.blooddonor.model.Station;
 import edu.blooddonor.sqliteDB.DatabaseHelper;
 
+/**
+ * Async Task updating database Stations entries in case of geographical coordinates missing (using queries to Google Maps Geocoding API).
+ *
+ * This asynchronous task checks database looking for not well defined Stations table entries.
+ * Then gets latitude and longitude of stations basing on addresses using queries to Google Maps Geocoding API.
+ * Finally updates database.
+ *
+ * @author puszkarz
+ *
+ */
+
 class UpdateStationGeoTask extends AsyncTask<Void, Void, String> {
 
     private static String LOG_TAG = "UpdateStatGeo: ";
@@ -65,7 +76,6 @@ class UpdateStationGeoTask extends AsyncTask<Void, Void, String> {
     protected void onPostExecute(String json) {
         if (json != null) {
             if (!json.equals("")) {
-                Log.d(LOG_TAG, "JSON not null: " + json + " koniec. ");
                 LatLng latLng = GeocodingQuery.getLatLngFromJSON(json);
                 if (latLng != null) {
                     station.set_latitude(latLng.latitude);

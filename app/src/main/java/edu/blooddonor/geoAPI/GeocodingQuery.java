@@ -14,6 +14,17 @@ import java.net.URLEncoder;
 
 import edu.blooddonor.model.Station;
 
+/**
+ * Collection pf static methods used to communicate with Google Maps APIs.
+ *
+ * Collection pf static methods used to communicate with Google Maps APIs:
+ * Google Maps Distance Matrix API
+ * Google Maps Geocoding API
+ *
+ * @author puszkarz
+ *
+ */
+
 abstract class GeocodingQuery {
 
     private static final String LOG_TAG = "GeocodingQuery: ";

@@ -23,6 +23,17 @@ import edu.blooddonor.model.Station;
 
 import com.google.android.gms.maps.model.LatLng;
 
+/**
+ * Async Task getting distances between Stations and given location of user (using Google Maps Distance Matrix API).
+ *
+ * This asynchronous task gets distances between Stations and given location of user.
+ * Uses queries to Google Maps Distance Matrix API. Updates a list view with concatenated
+ * names of station and distances [sorted by distance].
+ *
+ * @author puszkarz
+ *
+ */
+
 class DistanceMatrixTask extends AsyncTask<LatLng, Void, Map<Station, String>> {
 
     private static final String LOG_TAG = "DistMatrix: ";
