@@ -38,13 +38,16 @@ public class MainActivity extends AppCompatActivity {
             startActivity(firstActivity);
         } else {
             setContentView(R.layout.activity_main);
-            TextView textView = (TextView) findViewById(R.id.ML_txt_mainWelcome);
             User user = db.getUser(1);
-            if (textView != null && user != null) {
+            TextView textView = (TextView) findViewById(R.id.ML_txt_mainNick);
+            TextView textViewNum = (TextView) findViewById(R.id.ML_txt_youDonatedNum);
+            if (textView != null && textViewNum != null && user != null) {
                 String nick = user.get_nick();
                 if (nick != null) {
-                    String welcomeTxt = "Welcome " + nick + "!" + Double.toString(db.getBloodVolumeSum());
+                    String welcomeTxt = "Welcome " + nick + "!";
                     textView.setText(welcomeTxt);
+                    String donatedBloodNumTxt = Double.toString(db.getBloodVolumeSum()) + " ml.";
+                    textViewNum.setText(donatedBloodNumTxt);
                 }
             }
         }

@@ -8,8 +8,8 @@
         android:title="@string/but_showMap" />
     <item android:id="@+id/show_distance"
         android:title="@string/but_showDistList" />
-    <item android:id="@+id/manage_users"
-        android:title="@string/but_manage_users" />
     <item android:id="@+id/manage_donations"
         android:title="@string/but_manage_donations" />
+    <item android:id="@+id/manage_users"
+        android:title="@string/but_manage_users" />
 </menu>

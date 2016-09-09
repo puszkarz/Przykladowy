@@ -2,16 +2,12 @@
     <string name="app_name">Blood Donor</string>
 
     <string name="but_showDonations">Your donations</string>
-
+    <string name="listD_welcome">Your donations</string>
+    <string name="but_showMap">Map of Donation Centers</string>
     <string name="but_showStations">Blood Donation Centers</string>
     <string name="listS_welcome">Blood Donation Centers</string>
-
-    <string name="but_showMap">Map of Donation Centers</string>
-
     <string name="listDist_welcome">Closest Donation Centers</string>
     <string name="but_showDistList">Closest Donation Centers</string>
-
-    <string name="listD_welcome">Your donations</string>
 
     <string name="but_manage_users">Settings</string>
     <string name="but_manage_donations">Add donation</string>
@@ -26,6 +22,9 @@
     <string name="title_activity_maps">Map</string>
     <string name="helloDonor_label">Hello Donor!</string>
 
+    <string name="youDonatedTxt">You donated:</string>
+
+
     <string name="APlus">A+</string>
     <string name="AMinus">A-</string>
     <string name="BPlus">B+</string>
@@ -34,7 +33,6 @@
     <string name="ABMinus">AB-</string>
     <string name="ZeroPlus">0+</string>
     <string name="ZeroMinus">0-</string>
-
 
     <string name="but_pickDate_label">Date</string>
     <string name="but_pickDonationType_label">Donation type</string>
@@ -48,9 +46,11 @@
     <string name="volume_label">Volume/Unit</string>
 
     <string name="instructionDelete_label">Hold and press a donation to delete.</string>
-
     <string name="but_delUser_label">Delete User</string>
+
     <string name="MUL_f_updateNick">New nick</string>
+
+
     <!--<string name="but_finishSettings_label">finish Settings</string>-->
     <!--<string name="pick_label">Pick</string>-->
 
