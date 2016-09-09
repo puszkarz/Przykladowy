@@ -44,7 +44,6 @@ public class StationsListActivity extends AppCompatActivity {
         if (myListView != null) {
             myListView.setAdapter(listViewAdapter);
         }
-
         myListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -53,9 +52,7 @@ public class StationsListActivity extends AppCompatActivity {
                 finish();
             }
         });
-
     }
-
 
     private static ArrayList<String> statListToString(List<Station> stations) {
         ArrayList<String> out = new ArrayList<>();

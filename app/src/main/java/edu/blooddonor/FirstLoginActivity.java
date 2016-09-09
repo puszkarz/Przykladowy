@@ -74,13 +74,11 @@ public class FirstLoginActivity extends AppCompatActivity implements PopupMenu.O
     public void onClick_addUser(View v){
         DatabaseHelper db = new DatabaseHelper(getApplicationContext());
         TextView tv1 = (TextView) findViewById( edu.blooddonor.R.id.FLL_f_addNick);
-
         if (tv1 != null && !_bloodType.equalsIgnoreCase("")) {
             CharSequence nick = tv1.getText();
             db.insertUser(new User(nick.toString(), _bloodType));
             _bloodType = "";
             tv1.setText(edu.blooddonor.R.string.debugOK);
-
         }
         finish();
     }

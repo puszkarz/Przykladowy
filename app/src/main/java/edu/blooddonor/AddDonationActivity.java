@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,8 +16,6 @@ import android.widget.DatePicker;
 import java.util.Calendar;
 import java.util.List;
 
-import edu.blooddonor.geoAPI.DistanceListActivity;
-import edu.blooddonor.geoAPI.MapsActivity;
 import edu.blooddonor.model.Station;
 import edu.blooddonor.sqliteDB.DatabaseHelper;
 import edu.blooddonor.model.Donation;
@@ -36,7 +33,7 @@ public class AddDonationActivity extends AppCompatActivity implements android.su
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(edu.blooddonor.R.layout.activity_manage_donations);
+        setContentView(edu.blooddonor.R.layout.activity_add_donation);
         Button dateButton = (Button)findViewById(edu.blooddonor.R.id.MDL_but_pickDate);
         if (dateButton != null) {
             dateButton.setOnClickListener(new View.OnClickListener() {
@@ -58,47 +55,6 @@ public class AddDonationActivity extends AppCompatActivity implements android.su
             _day = day;
         }
     };
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.actionbar_menu, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        Intent activity;
-        switch (item.getItemId()) {
-            case edu.blooddonor.R.id.show_donations:
-                activity = new Intent(getApplicationContext(), DonationsListActivity.class);
-                startActivity(activity);
-                return true;
-            case edu.blooddonor.R.id.show_stations:
-                activity = new Intent(getApplicationContext(), StationsListActivity.class);
-                startActivity(activity);
-                return true;
-            case R.id.show_map:
-                activity = new Intent(getApplicationContext(), MapsActivity.class);
-                startActivity(activity);
-                return true;
-            case R.id.show_distance:
-                activity = new Intent(getApplicationContext(), DistanceListActivity.class);
-                startActivity(activity);
-                return true;
-            case edu.blooddonor.R.id.manage_donations:
-                activity = new Intent(getApplicationContext(), AddDonationActivity.class);
-                startActivity(activity);
-                return true;
-            case edu.blooddonor.R.id.manage_users:
-                activity = new Intent(getApplicationContext(), SettingsActivity.class);
-                startActivity(activity);
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
-
 
     public void onClick_showPopUpDonationsTypes(View v) {
         android.support.v7.widget.PopupMenu popup = new android.support.v7.widget.PopupMenu(this, v);
