@@ -45,8 +45,7 @@ public class DonationsListActivity extends AppCompatActivity {
                 startActivity(activity);
                 return true;
             case edu.blooddonor.R.id.show_stations:
-                activity = new Intent(getApplicationContext(), StationsListActivity.class);
-                startActivity(activity);
+                setContentView(R.layout.activity_stations_list);
                 return true;
             case R.id.show_map:
                 activity = new Intent(getApplicationContext(), MapsActivity.class);
