@@ -178,6 +178,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         if (c.moveToFirst()) {
             do {
                 Donation donation = DonationSQL.getDonation(c);
+                Log.d(LOG_TAG, donation.toString());
                 donations.add(donation);
             } while (c.moveToNext());
         }

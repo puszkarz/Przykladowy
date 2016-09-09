@@ -53,7 +53,7 @@ public class SettingsActivity extends AppCompatActivity implements PopupMenu.OnM
                 startActivity(activity);
                 return true;
             case edu.blooddonor.R.id.manage_donations:
-                activity = new Intent(getApplicationContext(), ManageDonationsActivity.class);
+                activity = new Intent(getApplicationContext(), AddDonationActivity.class);
                 startActivity(activity);
                 return true;
             case edu.blooddonor.R.id.manage_users:

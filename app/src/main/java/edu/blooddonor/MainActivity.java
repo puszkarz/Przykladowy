@@ -3,7 +3,6 @@ package edu.blooddonor;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -79,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(activity);
                 return true;
             case edu.blooddonor.R.id.manage_donations:
-                activity = new Intent(getApplicationContext(), ManageDonationsActivity.class);
+                activity = new Intent(getApplicationContext(), AddDonationActivity.class);
                 startActivity(activity);
                 return true;
             case edu.blooddonor.R.id.manage_users:

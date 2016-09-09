@@ -27,7 +27,7 @@
         <activity android:name=".DonationsListActivity" />
         <activity android:name=".FirstLoginActivity" />
         <activity android:name=".StationsListActivity"/>
-        <activity android:name=".ManageDonationsActivity"/>
+        <activity android:name=".AddDonationActivity"/>
         <activity android:name=".SettingsActivity"/>
         <activity android:name=".geoAPI.MapsActivity"
             android:label="@string/title_activity_maps" />

@@ -23,7 +23,7 @@ import edu.blooddonor.model.Station;
 import edu.blooddonor.sqliteDB.DatabaseHelper;
 import edu.blooddonor.model.Donation;
 
-public class ManageDonationsActivity extends AppCompatActivity implements android.support.v7.widget.PopupMenu.OnMenuItemClickListener {
+public class AddDonationActivity extends AppCompatActivity implements android.support.v7.widget.PopupMenu.OnMenuItemClickListener {
     Calendar calendar = Calendar.getInstance();
     int _year = 0;
     int _month = 0;
@@ -42,7 +42,7 @@ public class ManageDonationsActivity extends AppCompatActivity implements androi
             dateButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    new DatePickerDialog(ManageDonationsActivity.this,listener,calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show();
+                    new DatePickerDialog(AddDonationActivity.this,listener,calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show();
                 }
             });
         }
@@ -87,7 +87,7 @@ public class ManageDonationsActivity extends AppCompatActivity implements androi
                 startActivity(activity);
                 return true;
             case edu.blooddonor.R.id.manage_donations:
-                activity = new Intent(getApplicationContext(), ManageDonationsActivity.class);
+                activity = new Intent(getApplicationContext(), AddDonationActivity.class);
                 startActivity(activity);
                 return true;
             case edu.blooddonor.R.id.manage_users:
@@ -102,7 +102,7 @@ public class ManageDonationsActivity extends AppCompatActivity implements androi
 
     public void onClick_showPopUpDonationsTypes(View v) {
         android.support.v7.widget.PopupMenu popup = new android.support.v7.widget.PopupMenu(this, v);
-        popup.setOnMenuItemClickListener(ManageDonationsActivity.this);
+        popup.setOnMenuItemClickListener(AddDonationActivity.this);
         MenuInflater inflater = popup.getMenuInflater();
         inflater.inflate(R.menu.donationtype_menu, popup.getMenu());
         popup.show();
@@ -179,7 +179,6 @@ public class ManageDonationsActivity extends AppCompatActivity implements androi
         _station = StationsListActivity.get_pickedStation();
     }
 
-    //@TODO ogarnac jak sie przelicza
     private double computeVolume(String donationsType, int volume) {
         double volDouble = (double) volume;
         switch (donationsType) {

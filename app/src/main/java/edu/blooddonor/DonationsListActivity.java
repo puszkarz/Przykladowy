@@ -2,7 +2,7 @@ package edu.blooddonor;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -21,6 +21,8 @@ import edu.blooddonor.sqliteDB.DatabaseHelper;
 import edu.blooddonor.model.Donation;
 
 public class DonationsListActivity extends AppCompatActivity {
+
+    private static final String LOG_TAG = "DonListAct: ";
 
     List<Donation> donations;
     ArrayList<String> donations_string = new ArrayList<>();
@@ -55,7 +57,7 @@ public class DonationsListActivity extends AppCompatActivity {
                 startActivity(activity);
                 return true;
             case edu.blooddonor.R.id.manage_donations:
-                activity = new Intent(getApplicationContext(), ManageDonationsActivity.class);
+                activity = new Intent(getApplicationContext(), AddDonationActivity.class);
                 startActivity(activity);
                 return true;
             case edu.blooddonor.R.id.manage_users:
@@ -68,17 +70,19 @@ public class DonationsListActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    protected void onResume() {
+        super.onResume();
         setContentView(R.layout.activity_donations_list);
         DatabaseHelper db = new DatabaseHelper(getApplicationContext());
         donations = db.getAllDonations();
         donations_string = donListToString(donations);
+        Log.d(LOG_TAG,  "onResume Donations");
         presentAllDonations();
     }
 
     public void presentAllDonations() {
         myListView = (ListView) findViewById(R.id.DLAL_listView);
+        Log.d(LOG_TAG,  "presenting all");
         listViewAdapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_list_item_1, donations_string);
         if (myListView != null) {

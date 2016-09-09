@@ -24,7 +24,7 @@ import com.google.android.gms.maps.model.LatLng;
 import java.util.List;
 
 import edu.blooddonor.DonationsListActivity;
-import edu.blooddonor.ManageDonationsActivity;
+import edu.blooddonor.AddDonationActivity;
 import edu.blooddonor.R;
 import edu.blooddonor.SettingsActivity;
 import edu.blooddonor.StationsListActivity;
@@ -96,7 +96,7 @@ public class DistanceListActivity extends AppCompatActivity implements
                 startActivity(activity);
                 return true;
             case edu.blooddonor.R.id.manage_donations:
-                activity = new Intent(getApplicationContext(), ManageDonationsActivity.class);
+                activity = new Intent(getApplicationContext(), AddDonationActivity.class);
                 startActivity(activity);
                 return true;
             case edu.blooddonor.R.id.manage_users:
