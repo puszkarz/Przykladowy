@@ -90,7 +90,6 @@ class UpdateStationGeoTask extends AsyncTask<Void, Void, String> {
                     station.set_longitude(latLng.longitude);
                     db.updateStation(station);
                     Log.d(LOG_TAG, "Station updated: " + station.toString());
-
                     if (mMap!=null) {
                         mMap.addMarker(new MarkerOptions()
                                 .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE))
@@ -98,12 +97,11 @@ class UpdateStationGeoTask extends AsyncTask<Void, Void, String> {
                                 .position(latLng));
                         Log.d(LOG_TAG, "Marker added: " + station.get_name());
                     }
-
                 } else {
                     Log.e(LOG_TAG, "Wrong JSON output for Station " + station.toString());
                 }
             }
         }
-
     }
+
 }

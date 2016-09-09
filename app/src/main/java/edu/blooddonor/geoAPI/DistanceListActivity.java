@@ -177,7 +177,6 @@ public class DistanceListActivity extends AppCompatActivity implements
                 mGoogleApiClient, mLocationRequest, this);
     }
 
-
     @Override
     public void onConnectionSuspended(int i) {
         Log.d("Location: ", "onConnectionSuspended :(");

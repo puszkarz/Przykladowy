@@ -60,15 +60,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     .addApi(LocationServices.API)
                     .build();
         }
-
         super.onCreate(savedInstanceState);
         setContentView(edu.blooddonor.R.layout.activity_maps);
-
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(edu.blooddonor.R.id.map);
         mapFragment.getMapAsync(this);
-
     }
 
     /**

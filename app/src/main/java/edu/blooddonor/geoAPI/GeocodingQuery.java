@@ -35,7 +35,6 @@ abstract class GeocodingQuery {
 
     public static LatLng getLatLngFromJSON(String json) {
         try {
-            Log.d(LOG_TAG, "JSON jest taki: " + json);
             JSONObject jsonObj = new JSONObject(json);
             JSONObject res = jsonObj.getJSONArray("results").getJSONObject(0);
             JSONObject loc = res.getJSONObject("geometry").getJSONObject("location");
@@ -45,7 +44,6 @@ abstract class GeocodingQuery {
             return null;
         }
     }
-
 
     public static Integer getDistanceFromJSON(String json) {
         try {
@@ -83,17 +81,10 @@ abstract class GeocodingQuery {
         }
     }
 
-
-    //useful links
-    //http://stackoverflow.com/questions/29724192/using-json-for-android-maps-api-markers-not-showing-up
-    //https://maps.googleapis.com/maps/api/geocode/json?address=Winnetka&key=AIzaSyAXsltmnu0OEc_UMgthhZ7BDiiajeVD_JI
-    //https://maps.googleapis.com/maps/api/geocode/json?address=Czerwonego+Krzyza+5,+Wroclaw&region=pl&key=AIzaSyAXsltmnu0OEc_UMgthhZ7BDiiajeVD_JI
-
     /** Generation of query to Google Maps Geocoding API basing on address */
     public static URL genGeocodingQuery(String address) {
         String addressEnc = null;
         try {
-            Log.d(LOG_TAG, "Query address " + address);
             addressEnc = URLEncoder.encode(address, "UTF-8"); //Zamiast "UTF-8" mogłoby być java.nio.charset.StandardCharsets.UTF_8.toString()
             Log.d(LOG_TAG, "Encoded address: " + addressEnc);
         } catch (UnsupportedEncodingException e) {
@@ -108,32 +99,20 @@ abstract class GeocodingQuery {
         return urlQuery; //TODO: null handling
     }
 
-
-
-
-
-    //        https://maps.googleapis.com/maps/api/distancematrix/json?
-    //        origins=41.43206,-81.38992|-33.86748,151.20699
-    //        &destinations=40.6905615,-73.9976592|40.6905615,-73.9976592
-    //        &key=YOUR_API_KEY
     public static URL genDistanceMatrixQuery(Station station, LatLng userLatLng) {
-
         if (!station.isWellDefined()) {
             return null;
         }
-
         String stLatLngString =
                 Double.toString(station.get_latitude()) + "," + Double.toString(station.get_longitude());
         String userLatLngString =
                 Double.toString(userLatLng.latitude) + "," + Double.toString(userLatLng.longitude);
-
         try {
             stLatLngString = URLEncoder.encode(stLatLngString, "UTF-8");
             userLatLngString = URLEncoder.encode(userLatLngString, "UTF-8");
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace(); //TODO: exception handling
         }
-
         URL urlQuery = null;
         try {
             urlQuery = new URL(DIST_MATRIX_URL +
