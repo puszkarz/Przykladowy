@@ -122,7 +122,7 @@ public class AddDonationActivity extends AppCompatActivity implements android.su
             double blood_volume =  computeVolume(_donationsType, Integer.parseInt(volume.toString()));
             Donation donation = new Donation(dateInString, _donationsType, Integer.parseInt(volume.toString()), blood_volume, 1, _station.get_id());
             db.insertDonation(donation);
-            tv_volume.setText(null);
+            tv_volume.setText("");
             logListDonations(db);
             _year = 0;
             _month = 0;
