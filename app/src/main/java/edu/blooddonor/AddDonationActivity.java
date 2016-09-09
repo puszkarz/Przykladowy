@@ -22,12 +22,10 @@ import edu.blooddonor.model.Donation;
 
 public class AddDonationActivity extends AppCompatActivity implements android.support.v7.widget.PopupMenu.OnMenuItemClickListener {
     Calendar calendar = Calendar.getInstance();
-    int _year = 0;
-    int _month = 0;
-    int _day = 0;
-
-    String _donationsType = "";
-
+    int _year;
+    int _month;
+    int _day;
+    String _donationsType;
     Station _station;
 
     @Override
@@ -43,6 +41,16 @@ public class AddDonationActivity extends AppCompatActivity implements android.su
                 }
             });
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        _year = 0;
+        _month = 0;
+        _day = 0;
+        _donationsType = "";
+        _station = null;
     }
 
     DatePickerDialog.OnDateSetListener listener = new DatePickerDialog.OnDateSetListener(){
