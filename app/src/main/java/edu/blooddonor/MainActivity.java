@@ -32,12 +32,12 @@ public class MainActivity extends AppCompatActivity {
         DatabaseHelper db = new DatabaseHelper(getApplicationContext());
         double progress = db.getBloodVolumeSum();
         double goal;
-        if (progress < 6)
-            goal = 6;
-        else if (progress < 12)
-            goal = 12;
+        if (progress < 6000)
+            goal = 6000;
+        else if (progress < 12000)
+            goal = 12000;
         else
-            goal = 18;
+            goal = 18000;
         int percentage = (int) (progress/goal*100);
         if (progressBar != null) {
             progressBar.setProgress(percentage);
