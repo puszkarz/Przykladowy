@@ -73,8 +73,13 @@ public class Donation {
         String str = "Date: " + get_date() + "\nType: " + get_type() +"\nVolume: " + get_volume();
         if (get_type().equalsIgnoreCase("Whole blood") || get_type().equalsIgnoreCase("Blood plasma") )
             str = str + " ml.";
-        else
-            str = str + " units.";
+        else {
+            if (get_volume() == 1) {
+                str = str + " unit.";
+            } else {
+                str = str + " units.";
+            }
+        }
         return str;
     }
 }

@@ -22,13 +22,11 @@ import edu.blooddonor.model.Donation;
 
 public class AddDonationActivity extends AppCompatActivity implements android.support.v7.widget.PopupMenu.OnMenuItemClickListener {
 
-
     Calendar calendar = Calendar.getInstance();
     int _year;
     int _month;
     int _day;
     String _donationsType;
-//    Station _station;
 
     private static Station _chosenStation;
 
@@ -46,11 +44,6 @@ public class AddDonationActivity extends AppCompatActivity implements android.su
             });
         }
         _chosenStation = null;
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
         _year = 0;
         _month = 0;
         _day = 0;
@@ -113,15 +106,6 @@ public class AddDonationActivity extends AppCompatActivity implements android.su
         Calendar now = Calendar.getInstance();
 
         TextView tv_volume = (TextView) findViewById( R.id.MDL_f_addVolume);
-
-        if (tv_volume != null)
-            Log.d("Bug :", tv_volume.getText().toString() + " " + Integer.toString(_year) +" " + Integer.toString(_month)+ " " + Integer.toString(_day ));
-        else
-            Log.d("Bug :", "null");
-        if (_chosenStation != null)
-            Log.d("Bug :", _chosenStation.toString());
-        else
-            Log.d("Bug :", "null");
 
         if ((tv_volume != null)  && (_year != 0) && (_month != 0) && (_day != 0)
                 && !_donationsType.equals("") && _chosenStation!= null) {
