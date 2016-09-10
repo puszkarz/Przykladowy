@@ -35,4 +35,22 @@
         android:layout_below="@+id/ML_txt_youDonated"
         android:textSize="30sp" />
 
+    <ProgressBar
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/ML_progressBar"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="140dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:id="@+id/ML_txt_youAchieved"
+        android:layout_marginTop="43dp"
+        android:layout_alignTop="@+id/ML_progressBar"
+        android:layout_centerHorizontal="true" />
+
 </RelativeLayout>

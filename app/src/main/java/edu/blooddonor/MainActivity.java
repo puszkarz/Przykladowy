@@ -1,11 +1,13 @@
 package edu.blooddonor;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import edu.blooddonor.geoAPI.DistanceListActivity;
@@ -20,14 +22,34 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        printWelcomeOrLogin();
-
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         printWelcomeOrLogin();
+        ProgressBar progressBar = (ProgressBar) findViewById(R.id.ML_progressBar);
+        DatabaseHelper db = new DatabaseHelper(getApplicationContext());
+        double progress = db.getBloodVolumeSum();
+        double goal;
+        if (progress < 6)
+            goal = 6;
+        else if (progress < 12)
+            goal = 12;
+        else
+            goal = 18;
+        int percentage = (int) (progress/goal*100);
+        if (progressBar != null) {
+            progressBar.setProgress(percentage);
+            progressBar.setScaleY(3f);
+            progressBar.getProgressDrawable().setColorFilter(
+                    Color.RED, android.graphics.PorterDuff.Mode.SRC_IN);
+        }
+        TextView textViewPercent = (TextView) findViewById(R.id.ML_txt_youAchieved);
+        String achievementTxt = "You achieved " + percentage + "% towards your next badge!";
+        if (textViewPercent != null)
+            textViewPercent.setText(achievementTxt);
+
     }
 
     private void printWelcomeOrLogin(){
