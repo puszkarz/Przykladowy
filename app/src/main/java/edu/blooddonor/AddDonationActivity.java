@@ -21,12 +21,16 @@ import edu.blooddonor.sqliteDB.DatabaseHelper;
 import edu.blooddonor.model.Donation;
 
 public class AddDonationActivity extends AppCompatActivity implements android.support.v7.widget.PopupMenu.OnMenuItemClickListener {
+
+
     Calendar calendar = Calendar.getInstance();
     int _year;
     int _month;
     int _day;
     String _donationsType;
-    Station _station;
+//    Station _station;
+
+    private static Station _chosenStation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +45,7 @@ public class AddDonationActivity extends AppCompatActivity implements android.su
                 }
             });
         }
+        _chosenStation = null;
     }
 
     @Override
@@ -50,7 +55,6 @@ public class AddDonationActivity extends AppCompatActivity implements android.su
         _month = 0;
         _day = 0;
         _donationsType = "";
-        _station = null;
     }
 
     DatePickerDialog.OnDateSetListener listener = new DatePickerDialog.OnDateSetListener(){
@@ -110,13 +114,22 @@ public class AddDonationActivity extends AppCompatActivity implements android.su
 
         TextView tv_volume = (TextView) findViewById( R.id.MDL_f_addVolume);
 
+        if (tv_volume != null)
+            Log.d("Bug :", tv_volume.getText().toString() + " " + Integer.toString(_year) +" " + Integer.toString(_month)+ " " + Integer.toString(_day ));
+        else
+            Log.d("Bug :", "null");
+        if (_chosenStation != null)
+            Log.d("Bug :", _chosenStation.toString());
+        else
+            Log.d("Bug :", "null");
+
         if ((tv_volume != null)  && (_year != 0) && (_month != 0) && (_day != 0)
-                && !_donationsType.equals("") && _station!= null) {
+                && !_donationsType.equals("") && _chosenStation!= null) {
             DatabaseHelper db = new DatabaseHelper(getApplicationContext());
             CharSequence volume = tv_volume.getText();
             String dateInString = _year + "/" + _month + "/" + _day;
             double blood_volume =  computeVolume(_donationsType, Integer.parseInt(volume.toString()));
-            Donation donation = new Donation(dateInString, _donationsType, Integer.parseInt(volume.toString()), blood_volume, 1, _station.get_id());
+            Donation donation = new Donation(dateInString, _donationsType, Integer.parseInt(volume.toString()), blood_volume, 1, _chosenStation.get_id());
             db.insertDonation(donation);
             if (calendar.after(now)) {
                 Intent intent = new Intent(getApplicationContext(), NotificationReceiver.class);
@@ -130,7 +143,7 @@ public class AddDonationActivity extends AppCompatActivity implements android.su
             _month = 0;
             _day = 0;
             _donationsType = "";
-            _station = null;
+            _chosenStation = null;
             finish();
         } else {
             Toast.makeText(getBaseContext(), "Please fill remaining fields.", Toast.LENGTH_SHORT).show();
@@ -141,7 +154,6 @@ public class AddDonationActivity extends AppCompatActivity implements android.su
     public void onClick_pickStation(View v){
         Intent stationsActivity = new Intent(getApplicationContext(), StationsListActivity.class);
         startActivity(stationsActivity);
-        _station = StationsListActivity.get_pickedStation();
     }
 
     private double computeVolume(String donationsType, int volume) {
@@ -174,6 +186,10 @@ public class AddDonationActivity extends AppCompatActivity implements android.su
             Log.d("Name: ", log);
         }
         Log.d("Donation Count", "donation count " + db.getDonationsCount());
+    }
+
+    public static void set_chosenStation(Station station) {
+        _chosenStation = station;
     }
 
 }

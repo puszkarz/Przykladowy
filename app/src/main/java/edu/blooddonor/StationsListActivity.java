@@ -22,8 +22,6 @@ public class StationsListActivity extends AppCompatActivity {
     ArrayAdapter<String> listViewAdapter;
     ListView myListView;
 
-    static Station _pickedStation;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,10 +30,6 @@ public class StationsListActivity extends AppCompatActivity {
         stations = db.getAllStations();
         stations_string = statListToString(stations);
         presentAllStations();
-    }
-
-    public static Station get_pickedStation() {
-        return _pickedStation;
     }
 
     public void presentAllStations() {
@@ -48,8 +42,9 @@ public class StationsListActivity extends AppCompatActivity {
         myListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                _pickedStation = stations.get(position);
+                Station _pickedStation = stations.get(position);
                 Toast.makeText(getBaseContext(), "You selected " + _pickedStation.get_name(), Toast.LENGTH_SHORT).show();
+                AddDonationActivity.set_chosenStation(_pickedStation);
                 finish();
             }
         });

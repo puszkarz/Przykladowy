@@ -70,11 +70,11 @@ public class Donation {
     public int get_station_id() { return _station_id; }
 
     public String toString() {
-        String str = get_date() + "\n" + get_type() +"\n" + get_volume();
+        String str = "Date: " + get_date() + "\nType: " + get_type() +"\nVolume: " + get_volume();
         if (get_type().equalsIgnoreCase("Whole blood") || get_type().equalsIgnoreCase("Blood plasma") )
-            str = str + "ml";
+            str = str + " ml.";
         else
-            str = str + "units";
+            str = str + " units.";
         return str;
     }
 }
