@@ -52,6 +52,6 @@
         android:layout_marginTop="43dp"
         android:layout_alignTop="@+id/ML_progressBar"
         android:layout_centerHorizontal="true"
-        android:textSize="30sp"/>
+        android:textSize="20sp"/>
 
 </RelativeLayout>
