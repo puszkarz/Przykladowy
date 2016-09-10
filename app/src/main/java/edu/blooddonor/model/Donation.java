@@ -70,8 +70,11 @@ public class Donation {
     public int get_station_id() { return _station_id; }
 
     public String toString() {
-        return "Donation id: " + Integer.toString(get_id())
-                + ", stID: " + Integer.toString(get_station_id())
-                + ", uID: " + Integer.toString(get_user_id());
+        String str = get_date() + "\n" + get_type() +"\n" + get_volume();
+        if (get_type().equalsIgnoreCase("Whole blood") || get_type().equalsIgnoreCase("Blood plasma") )
+            str = str + "ml";
+        else
+            str = str + "units";
+        return str;
     }
 }

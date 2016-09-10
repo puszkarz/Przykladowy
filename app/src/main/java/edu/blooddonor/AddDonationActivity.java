@@ -76,23 +76,23 @@ public class AddDonationActivity extends AppCompatActivity implements android.su
     public boolean onMenuItemClick(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.whole_blood:
-                _donationsType = "whole_blood";
+                _donationsType = "Whole blood";
                 Toast.makeText(getBaseContext(), "You selected Whole Blood.", Toast.LENGTH_SHORT).show();
                 return true;
             case R.id.blood_plasma:
-                _donationsType = "blood_plasma";
+                _donationsType = "Blood plasma";
                 Toast.makeText(getBaseContext(), "You selected Blood Plasma.", Toast.LENGTH_SHORT).show();
                 return true;
             case R.id.blood_cells:
-                _donationsType = "blood_cells";
+                _donationsType = "Blood cells";
                 Toast.makeText(getBaseContext(), "You selected Blood Cells.", Toast.LENGTH_SHORT).show();
                 return true;
             case R.id.red_cells:
-                _donationsType = "red_cells";
+                _donationsType = "Red cells";
                 Toast.makeText(getBaseContext(), "You selected Red Cells.", Toast.LENGTH_SHORT).show();
                 return true;
             case R.id.white_cells:
-                _donationsType = "white_cells";
+                _donationsType = "White cells";
                 Toast.makeText(getBaseContext(), "You selected White Cells.", Toast.LENGTH_SHORT).show();
                 return true;
             default:
