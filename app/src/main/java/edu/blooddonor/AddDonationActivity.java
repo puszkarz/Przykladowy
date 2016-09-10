@@ -106,11 +106,7 @@ public class AddDonationActivity extends AppCompatActivity implements android.su
         calendar.set(Calendar.HOUR_OF_DAY, 10);
         calendar.set(Calendar.MINUTE, 0);
         calendar.set(Calendar.SECOND, 0);
-
-        Intent intent = new Intent(getApplicationContext(), NotificationReceiver.class);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(), 100, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-        alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
+        Calendar now = Calendar.getInstance();
 
         TextView tv_volume = (TextView) findViewById( R.id.MDL_f_addVolume);
 
@@ -122,6 +118,12 @@ public class AddDonationActivity extends AppCompatActivity implements android.su
             double blood_volume =  computeVolume(_donationsType, Integer.parseInt(volume.toString()));
             Donation donation = new Donation(dateInString, _donationsType, Integer.parseInt(volume.toString()), blood_volume, 1, _station.get_id());
             db.insertDonation(donation);
+            if (calendar.after(now)) {
+                Intent intent = new Intent(getApplicationContext(), NotificationReceiver.class);
+                PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(), 100, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+                AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+                alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
+            }
             tv_volume.setText("");
             logListDonations(db);
             _year = 0;
@@ -129,7 +131,6 @@ public class AddDonationActivity extends AppCompatActivity implements android.su
             _day = 0;
             _donationsType = "";
             _station = null;
-            logListDonations(db);
             finish();
         } else {
             Toast.makeText(getBaseContext(), "Please fill remaining fields.", Toast.LENGTH_SHORT).show();
