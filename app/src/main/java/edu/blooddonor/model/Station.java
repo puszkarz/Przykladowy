@@ -77,11 +77,6 @@ public class Station {
     }
 
     public String toString() {
-        return get_name();
-//        return "St.id: " + Integer.toString(get_id())
-//                + ", n: " + get_name()
-//                + ", a: " + get_address()
-//                + ", lat: " + get_latitude()
-//                + ", long: " + get_longitude();
+        return get_name() + ",\n" + get_address();
     }
 }

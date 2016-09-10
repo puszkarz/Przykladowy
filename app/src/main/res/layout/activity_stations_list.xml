@@ -16,6 +16,7 @@
         android:text="@string/listS_welcome"
         android:id="@+id/text_listS_welcome"
         android:layout_alignParentTop="true"
+        android:layout_marginBottom="10dp"
         android:layout_centerHorizontal="true" />
 
     <ListView

@@ -99,11 +99,10 @@ class DistanceMatrixTask extends AsyncTask<LatLng, Void, Map<Station, String>> {
 
     @Override
     protected void onPostExecute(Map<Station, String> jsonMap) {
-        Map<Station, Integer> distanceMap = new HashMap<>();
+        Map<Station, DistancePack> distanceMap = new HashMap<>();
         for (Map.Entry<Station, String> entry : jsonMap.entrySet()) {
-            Integer distance = GeocodingQuery.getDistanceFromJSON(entry.getValue());
-            if (distance!=null) {
-                Log.d(LOG_TAG, "Found: " + distance.toString() + " " + entry.getKey().toString());
+            if (entry.getValue() != null) {
+                DistancePack distance = new DistancePack(entry.getValue());
                 distanceMap.put(entry.getKey(), distance);
             }
         }
@@ -114,22 +113,46 @@ class DistanceMatrixTask extends AsyncTask<LatLng, Void, Map<Station, String>> {
         }
     }
 
-    private static List<String> statListToString(Map<Station, Integer> distanceMap) {
+    private static List<String> statListToString(Map<Station, DistancePack> distanceMap) {
         // Sort by the distance
-        List<Map.Entry<Station, Integer>> listStatDist =
+        List<Map.Entry<Station, DistancePack>> listStatDist =
                 new LinkedList<>( distanceMap.entrySet() );
         Collections.sort( listStatDist,
-                new Comparator<Map.Entry<Station, Integer>>() {
-                    public int compare( Map.Entry<Station, Integer> o1, Map.Entry<Station, Integer> o2 ) {
-                        return (o1.getValue()).compareTo( o2.getValue() );
+                new Comparator<Map.Entry<Station, DistancePack>>() {
+                    public int compare( Map.Entry<Station, DistancePack> o1, Map.Entry<Station, DistancePack> o2 ) {
+                        return (o1.getValue().getDistance()).compareTo(o2.getValue().getDistance());
                     }
                 } );
         // Make list of strings
         List<String> out = new ArrayList<>();
-        for (Map.Entry<Station, Integer> entry : listStatDist) {
-            out.add(entry.getKey().toString() + ", " + entry.getValue().toString());
+        for (Map.Entry<Station, DistancePack> entry : listStatDist) {
+            out.add(entry.getKey().toString() + ",\n" + entry.getValue().toString());
         }
         return out;
     }
 
+    private class DistancePack  {
+
+        private Integer distance;
+        private String distTxt;
+        private String timeTxt;
+
+        public DistancePack(String json) {
+            this.distance = GeocodingQuery.getDistanceFromJSON(json);
+            this.distTxt = GeocodingQuery.getDistanceTxtFromJSON(json);
+            this.timeTxt = GeocodingQuery.getDurationFromJSON(json);
+        }
+
+        public Integer getDistance() {
+            return this.distance;
+        }
+
+        public String toString () {
+            return distTxt + ", " + timeTxt;
+        }
+
+    }
+
 }
+
+

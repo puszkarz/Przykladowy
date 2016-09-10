@@ -95,8 +95,9 @@ public class DistanceListActivity extends AppCompatActivity implements
                 startActivity(activity);
                 return true;
             case edu.blooddonor.R.id.show_stations:
-                activity = new Intent(getApplicationContext(), StationsListActivity.class);
-                startActivity(activity);
+                setContentView(R.layout.activity_stations_list);
+                StationsListActivity.presentAllStations(new DatabaseHelper(getApplicationContext()),
+                        this, (ListView) findViewById(R.id.SLAL_listView));
                 return true;
             case R.id.show_map:
                 activity = new Intent(getApplicationContext(), MapsActivity.class);

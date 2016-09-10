@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ListView;
 import android.widget.PopupMenu;
 import android.widget.Toast;
 import android.widget.TextView;
@@ -42,6 +43,8 @@ public class SettingsActivity extends AppCompatActivity implements PopupMenu.OnM
                 return true;
             case edu.blooddonor.R.id.show_stations:
                 setContentView(R.layout.activity_stations_list);
+                StationsListActivity.presentAllStations(new DatabaseHelper(getApplicationContext()),
+                        this, (ListView) findViewById(R.id.SLAL_listView));
                 return true;
             case R.id.show_map:
                 activity = new Intent(getApplicationContext(), MapsActivity.class);

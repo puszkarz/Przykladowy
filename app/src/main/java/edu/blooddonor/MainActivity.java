@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -16,8 +17,6 @@ import edu.blooddonor.sqliteDB.DatabaseHelper;
 import edu.blooddonor.model.User;
 
 public class MainActivity extends AppCompatActivity {
-
-    private static final String LOG_TAG = "MainActivity: ";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,6 +95,8 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             case edu.blooddonor.R.id.show_stations:
                 setContentView(R.layout.activity_stations_list);
+                StationsListActivity.presentAllStations(new DatabaseHelper(getApplicationContext()),
+                        this, (ListView) findViewById(R.id.SLAL_listView));
                 return true;
             case R.id.show_map:
                 activity = new Intent(getApplicationContext(), MapsActivity.class);

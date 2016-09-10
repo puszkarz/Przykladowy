@@ -1,5 +1,6 @@
 package edu.blooddonor;
 
+import android.app.Activity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -61,4 +62,14 @@ public class StationsListActivity extends AppCompatActivity {
         }
         return out;
     }
+
+    public static void presentAllStations(DatabaseHelper db, Activity activity, ListView myListView) {
+        List<Station> stations = db.getAllStations();
+        ArrayAdapter<String> listViewAdapter = new ArrayAdapter<>(activity,
+                android.R.layout.simple_list_item_1, statListToString(stations));
+        if (myListView != null) {
+            myListView.setAdapter(listViewAdapter);
+        }
+    }
+
 }
