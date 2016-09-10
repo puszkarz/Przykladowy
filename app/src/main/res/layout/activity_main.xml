@@ -47,11 +47,11 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="20sp"
         android:id="@+id/ML_txt_youAchieved"
         android:gravity="center"
         android:layout_marginTop="43dp"
         android:layout_alignTop="@+id/ML_progressBar"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:textSize="20sp"/>
 
 </RelativeLayout>
