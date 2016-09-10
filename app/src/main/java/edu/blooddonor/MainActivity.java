@@ -46,7 +46,11 @@ public class MainActivity extends AppCompatActivity {
                     Color.RED, android.graphics.PorterDuff.Mode.SRC_IN);
         }
         TextView textViewPercent = (TextView) findViewById(R.id.ML_txt_youAchieved);
-        String achievementTxt = "You achieved " + percentage + "% towards your next badge!";
+        String achievementTxt;
+        if (progress< 18000)
+            achievementTxt = "You achieved " + percentage + "% towards your next badge!";
+        else
+            achievementTxt = "You collected all of the badges!";
         if (textViewPercent != null)
             textViewPercent.setText(achievementTxt);
 
