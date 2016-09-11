@@ -12,6 +12,17 @@ import android.widget.Toast;
 import edu.blooddonor.sqliteDB.DatabaseHelper;
 import edu.blooddonor.model.User;
 
+/**
+ * Activity adding a single user to the database.
+ *
+ * This activity is used to add a new, single user to the database.
+ * There can only be one single user. The activity is used only for the first login.
+ * User has to choose a nick and his blood type to continue.
+ *
+ * @author madasionka
+ *
+ */
+
 public class FirstLoginActivity extends AppCompatActivity implements PopupMenu.OnMenuItemClickListener {
 
     private String _bloodType = "";

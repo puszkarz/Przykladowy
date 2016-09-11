@@ -20,6 +20,16 @@ import edu.blooddonor.geoAPI.MapsActivity;
 import edu.blooddonor.sqliteDB.DatabaseHelper;
 import edu.blooddonor.model.Donation;
 
+/**
+ * Activity displaying list of Donations.
+ *
+ * This activity is used to display list of all user's Donations.
+ * By long pressing an element of the list the user can choose from a pop up menu to delete an donation.
+ *
+ * @author madasionka
+ *
+ */
+
 public class DonationsListActivity extends AppCompatActivity {
 
     private static final String LOG_TAG = "DonListAct: ";

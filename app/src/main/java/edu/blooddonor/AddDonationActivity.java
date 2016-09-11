@@ -20,6 +20,17 @@ import edu.blooddonor.model.Station;
 import edu.blooddonor.sqliteDB.DatabaseHelper;
 import edu.blooddonor.model.Donation;
 
+/**
+ * Activity adding a new donation to the database.
+ *
+ * This activity is used to create a new object of class Donation to add it to the SQLite database.
+ * Upon creating the object it also makes a notification for a month later to remind the user
+ * that he can make another donation.
+ *
+ * @author madasionka
+ *
+ */
+
 public class AddDonationActivity extends AppCompatActivity implements android.support.v7.widget.PopupMenu.OnMenuItemClickListener {
 
     Calendar calendar = Calendar.getInstance();
@@ -29,6 +40,14 @@ public class AddDonationActivity extends AppCompatActivity implements android.su
     String _donationsType;
 
     private static Station _chosenStation;
+
+    public final static int REQUEST_CODE = 100;
+
+    final String whole_blood = "Whole blood";
+    final String blood_plasma = "Blood plasma";
+    final String blood_cells = "Blood cells";
+    final String red_cells = "Red cells";
+    final String white_cells = "White cells";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,23 +92,23 @@ public class AddDonationActivity extends AppCompatActivity implements android.su
     public boolean onMenuItemClick(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.whole_blood:
-                _donationsType = "Whole blood";
+                _donationsType = whole_blood;
                 Toast.makeText(getBaseContext(), "You selected Whole Blood.", Toast.LENGTH_SHORT).show();
                 return true;
             case R.id.blood_plasma:
-                _donationsType = "Blood plasma";
+                _donationsType = blood_plasma;
                 Toast.makeText(getBaseContext(), "You selected Blood Plasma.", Toast.LENGTH_SHORT).show();
                 return true;
             case R.id.blood_cells:
-                _donationsType = "Blood cells";
+                _donationsType = blood_cells;
                 Toast.makeText(getBaseContext(), "You selected Blood Cells.", Toast.LENGTH_SHORT).show();
                 return true;
             case R.id.red_cells:
-                _donationsType = "Red cells";
+                _donationsType = red_cells;
                 Toast.makeText(getBaseContext(), "You selected Red Cells.", Toast.LENGTH_SHORT).show();
                 return true;
             case R.id.white_cells:
-                _donationsType = "White cells";
+                _donationsType = white_cells;
                 Toast.makeText(getBaseContext(), "You selected White Cells.", Toast.LENGTH_SHORT).show();
                 return true;
             default:
@@ -117,7 +136,7 @@ public class AddDonationActivity extends AppCompatActivity implements android.su
             db.insertDonation(donation);
             if (calendar.after(now)) {
                 Intent intent = new Intent(getApplicationContext(), NotificationReceiver.class);
-                PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(), 100, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+                PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(), REQUEST_CODE, intent, PendingIntent.FLAG_UPDATE_CURRENT);
                 AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
                 alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
             }
@@ -143,15 +162,15 @@ public class AddDonationActivity extends AppCompatActivity implements android.su
     private double computeVolume(String donationsType, int volume) {
         double volDouble = (double) volume;
         switch (donationsType) {
-            case "whole_blood":
+            case whole_blood:
                 return volDouble;
-            case "blood_plasma":
+            case blood_plasma:
                 return volDouble/3.0;
-            case "blood_cells":
+            case blood_cells:
                 return volDouble/2.0*1000.0;
-            case "red_cells":
+            case red_cells:
                 return volDouble/2.0*1000.0;
-            case "white_cells":
+            case white_cells:
                 return volDouble*2.0*1000.0;
 
         }

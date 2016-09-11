@@ -19,6 +19,16 @@ import edu.blooddonor.geoAPI.MapsActivity;
 import edu.blooddonor.model.User;
 import edu.blooddonor.sqliteDB.DatabaseHelper;
 
+/**
+ * Activity updating user's information.
+ *
+ * Activity is used to update user's nick and bloodtype.
+ * The user can also delete his account and by doing so all of his donations.
+ *
+ * @author madasionka
+ *
+ */
+
 public class SettingsActivity extends AppCompatActivity implements PopupMenu.OnMenuItemClickListener{
     @Override
     protected void onCreate(Bundle savedInstanceState) {

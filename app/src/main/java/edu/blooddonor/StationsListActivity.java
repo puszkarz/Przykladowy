@@ -15,6 +15,16 @@ import java.util.List;
 import edu.blooddonor.sqliteDB.DatabaseHelper;
 import edu.blooddonor.model.Station;
 
+/**
+ * Activity displaying the list of Stations.
+ *
+ * Activity is used to pick a Station from the list whilst making a new donation.
+ * When the Station is picked a static field _chosenStation of AddDonationActivity class is set.
+ *
+ * @author madasionka
+ *
+ */
+
 public class StationsListActivity extends AppCompatActivity {
 
     List<Station> stations;

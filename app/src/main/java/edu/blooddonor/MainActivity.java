@@ -16,6 +16,16 @@ import edu.blooddonor.geoAPI.MapsActivity;
 import edu.blooddonor.sqliteDB.DatabaseHelper;
 import edu.blooddonor.model.User;
 
+/**
+ * Activity displaying the main screen of the application.
+ *
+ * This activity is used to display a welcome message, total number of ml of blood donated so far,
+ * progress bar which displays the ratio of donated blood to the amount needed to gain another badge.
+ *
+ * @author madasionka
+ *
+ */
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -27,10 +37,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         printWelcomeOrLogin();
+        printProgress();
+    }
+
+    private void printProgress(){
         ProgressBar progressBar = (ProgressBar) findViewById(R.id.ML_progressBar);
-        if (progressBar != null) {
-            progressBar.invalidate();
-        }
         DatabaseHelper db = new DatabaseHelper(getApplicationContext());
         double progress = db.getBloodVolumeSum();
         double goal;
@@ -48,9 +59,6 @@ public class MainActivity extends AppCompatActivity {
                     Color.RED, android.graphics.PorterDuff.Mode.SRC_IN);
         }
         TextView textViewPercent = (TextView) findViewById(R.id.ML_txt_youAchieved);
-        if (textViewPercent != null) {
-            textViewPercent.invalidate();
-        }
         String achievementTxt;
         if (progress< 18000)
             achievementTxt = "You achieved " + percentage + "% towards your next badge!";
@@ -58,7 +66,6 @@ public class MainActivity extends AppCompatActivity {
             achievementTxt = "You collected all of the badges!";
         if (textViewPercent != null)
             textViewPercent.setText(achievementTxt);
-
     }
 
     private void printWelcomeOrLogin(){
