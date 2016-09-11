@@ -28,6 +28,9 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
         printWelcomeOrLogin();
         ProgressBar progressBar = (ProgressBar) findViewById(R.id.ML_progressBar);
+        if (progressBar != null) {
+            progressBar.invalidate();
+        }
         DatabaseHelper db = new DatabaseHelper(getApplicationContext());
         double progress = db.getBloodVolumeSum();
         double goal;
@@ -45,6 +48,9 @@ public class MainActivity extends AppCompatActivity {
                     Color.RED, android.graphics.PorterDuff.Mode.SRC_IN);
         }
         TextView textViewPercent = (TextView) findViewById(R.id.ML_txt_youAchieved);
+        if (textViewPercent != null) {
+            textViewPercent.invalidate();
+        }
         String achievementTxt;
         if (progress< 18000)
             achievementTxt = "You achieved " + percentage + "% towards your next badge!";
@@ -65,7 +71,13 @@ public class MainActivity extends AppCompatActivity {
             setContentView(R.layout.activity_main);
             User user = db.getUser(1);
             TextView textView = (TextView) findViewById(R.id.ML_txt_mainNick);
+            if (textView != null) {
+                textView.invalidate();
+            }
             TextView textViewNum = (TextView) findViewById(R.id.ML_txt_youDonatedNum);
+            if (textViewNum != null) {
+                textViewNum.invalidate();
+            }
             if (textView != null && textViewNum != null && user != null) {
                 String nick = user.get_nick();
                 if (nick != null) {
