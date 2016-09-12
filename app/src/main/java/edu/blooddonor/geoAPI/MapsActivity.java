@@ -34,6 +34,7 @@ import edu.blooddonor.model.Station;
  * This activity is used to display map (Google Maps API) with marked stations and
  * current position of the app user. Each marker of particular station
  * has name of a station as label. Current location is determined using Google LocationServices API.
+ * Each time location is changed, new marker is added.
  *
  * @author puszkarz
  *

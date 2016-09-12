@@ -21,7 +21,7 @@ import edu.blooddonor.model.Station;
  * Activity is used to pick a Station from the list whilst making a new donation.
  * When the Station is picked a static field _chosenStation of AddDonationActivity class is set.
  *
- * @author madasionka
+ * @author madasionka puszkarz
  *
  */
 

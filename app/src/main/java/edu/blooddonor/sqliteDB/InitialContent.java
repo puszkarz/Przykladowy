@@ -8,6 +8,9 @@ import edu.blooddonor.model.Station;
 
 /**
  * Methods adding initial content to database.
+ *
+ * @author puszkarz
+ *
  */
 abstract class InitialContent {
 

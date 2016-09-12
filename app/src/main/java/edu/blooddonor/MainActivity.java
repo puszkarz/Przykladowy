@@ -22,7 +22,7 @@ import edu.blooddonor.model.User;
  * This activity is used to display a welcome message, total number of ml of blood donated so far,
  * progress bar which displays the ratio of donated blood to the amount needed to gain another badge.
  *
- * @author madasionka
+ * @author madasionka puszkarz
  *
  */
 

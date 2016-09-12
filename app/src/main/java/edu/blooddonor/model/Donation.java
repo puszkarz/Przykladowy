@@ -1,9 +1,22 @@
 package edu.blooddonor.model;
 
+/**
+ * Donation class represents a blood donation of various types with date, volume and station id.
+ *
+ * Donation class represents a blood donation of various types
+ * (whole blood, blood plasma, blood cells, red cells, white cells).
+ * For each donation its date, type and volume is stored. Moreover
+ * volume is recalculated to common measure (blood_volume) allowing to
+ * add all donation volumes up. As station_id the id of blood donation center is understood.
+ *
+ * @author madasionka
+ *
+ */
+
 public class Donation {
 
     private int _id;
-    private String _date; //@TODO date
+    private String _date;
     private String _type;
     private int _volume;
     private double _blood_volume;
@@ -82,4 +95,5 @@ public class Donation {
         }
         return str;
     }
+
 }

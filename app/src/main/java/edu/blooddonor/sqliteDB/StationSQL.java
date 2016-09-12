@@ -6,7 +6,10 @@ import android.database.Cursor;
 import edu.blooddonor.model.Station;
 
 /**
- * Set of methods supporting SQLite access for Station model
+ * Set of methods supporting SQLite access for Station model.
+ *
+ * @author puszkarz madasionka
+ *
  */
 abstract class StationSQL {
 

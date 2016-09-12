@@ -1,5 +1,14 @@
 package edu.blooddonor.model;
 
+/**
+ * Station class represents a blood donation center with its geo coordinates.
+ *
+ * Station class represents a blood donation center basing on its name,
+ * address, and geographical coordinates.
+ *
+ * @author puszkarz
+ *
+ */
 public class Station {
 
     private static double NOT_A_COORDINATE = 1000.0;

@@ -36,7 +36,8 @@ import edu.blooddonor.sqliteDB.DatabaseHelper;
  *
  * This activity is used to display list of Stations with relative distances
  * wrt. current position of the app user. Current location is determined using
- * Google LocationServices API.
+ * Google LocationServices API. Location of Stations is obtained from database.
+ * In case of missing values, UpdateStationGeoTask is called.
  *
  * @author puszkarz
  *
