@@ -19,9 +19,10 @@ import edu.blooddonor.sqliteDB.DatabaseHelper;
 /**
  * Async Task updating database Stations entries in case of geographical coordinates missing (using queries to Google Maps Geocoding API).
  *
- * This asynchronous task checks database looking for not well defined Stations table entries.
+ * This asynchronous task determines location of Stations basing of their addresses and saves it to database.
  * Then gets latitude and longitude of stations basing on addresses using queries to Google Maps Geocoding API.
- * Finally updates database.
+ * Finally updates database. Depending on which constructor is called, it may additionally mark those objects
+ * on a map (Google Maps API).
  *
  * @author puszkarz
  *

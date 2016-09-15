@@ -15,11 +15,11 @@ import java.net.URLEncoder;
 import edu.blooddonor.model.Station;
 
 /**
- * Collection pf static methods used to communicate with Google Maps APIs.
+ * Collection of static methods used to communicate with Google Maps APIs, parsing JSON responses.
  *
- * Collection pf static methods used to communicate with Google Maps APIs:
- * Google Maps Distance Matrix API
- * Google Maps Geocoding API
+ * Collection of static methods used to communicate with Google Maps APIs:
+ * There are included here methods generating queries to Google Maps Distance Matrix API
+ * and Google Maps Geocoding API. Moreover JSON responses from those APIs are parsed here.
  *
  * @author puszkarz
  *
@@ -96,7 +96,7 @@ abstract class GeocodingQuery {
         } catch (MalformedURLException e) {
             e.printStackTrace(); //TODO: exception handling
         }
-        return urlQuery; //TODO: null handling
+        return urlQuery;
     }
 
     public static URL genDistanceMatrixQuery(Station station, LatLng userLatLng) {
@@ -123,7 +123,7 @@ abstract class GeocodingQuery {
         } catch (MalformedURLException e) {
             e.printStackTrace(); //TODO: exception handling
         }
-        return urlQuery; //TODO: null handling
+        return urlQuery;
     }
 
 }

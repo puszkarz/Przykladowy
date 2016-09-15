@@ -6,7 +6,10 @@ import android.database.Cursor;
 import edu.blooddonor.model.User;
 
 /**
- * Set of methods supporting SQLite access for User model
+ * Set of methods supporting SQLite access for User model.
+ *
+ * @author puszkarz madasionka
+ *
  */
 abstract class UserSQL {
 

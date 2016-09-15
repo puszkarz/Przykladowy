@@ -24,11 +24,11 @@ import edu.blooddonor.model.Station;
 import com.google.android.gms.maps.model.LatLng;
 
 /**
- * Async Task getting distances between Stations and given location of user (using Google Maps Distance Matrix API).
+ * Async Task getting distances and travel times between Stations and given location of user (using Google Maps Distance Matrix API).
  *
  * This asynchronous task gets distances between Stations and given location of user.
  * Uses queries to Google Maps Distance Matrix API. Updates a list view with concatenated
- * names of station and distances [sorted by distance].
+ * names of station, distances (in km) and travel time [sorted by distance].
  *
  * @author puszkarz
  *

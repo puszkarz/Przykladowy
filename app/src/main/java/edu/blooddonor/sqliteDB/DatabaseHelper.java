@@ -14,6 +14,16 @@ import edu.blooddonor.model.Donation;
 import edu.blooddonor.model.Station;
 import edu.blooddonor.model.User;
 
+/**
+ * DatabaseHelper class is an access point to sqlite database. Provides methods to create, update and modify it.
+ *
+ * DatabaseHelper class is an access point to sqlite database. Provides methods to create and upgrade it.
+ * Furthermore, for each class of model provides methods of data management in respective tables.
+ *
+ * @author madasionka puszkarz
+ *
+ */
+
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     // Logcat tag

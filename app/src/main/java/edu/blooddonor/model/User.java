@@ -1,5 +1,11 @@
 package edu.blooddonor.model;
 
+/**
+ * User class contains nick and blood type of user.
+ *
+ * @author madasionka puszkarz
+ */
+
 public class User {
 
     private int _id;

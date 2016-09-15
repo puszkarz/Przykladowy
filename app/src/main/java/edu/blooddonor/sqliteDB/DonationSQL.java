@@ -7,6 +7,8 @@ import edu.blooddonor.model.Donation;
 
 /**
  * Set of methods supporting SQLite access for Donation model
+ *
+ * @author puszkarz madasionka
  */
 abstract class DonationSQL {
 
